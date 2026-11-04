@@ -1,40 +1,184 @@
-@font-face { font-family:'Workshop Space'; src:url('/fonts/space-grotesk-bold.woff2') format('woff2'); font-style:normal; font-weight:700; font-display:swap; }
-@font-face { font-family:'Workshop Outfit'; src:url('/fonts/outfit-bold.woff2') format('woff2'); font-style:normal; font-weight:700; font-display:swap; }
-@font-face { font-family:'Workshop Bricolage'; src:url('/fonts/bricolage-bold.woff2') format('woff2'); font-style:normal; font-weight:700; font-display:swap; }
-.name-fallback { font-family:var(--name-font), 'Inter Variable', sans-serif; font-size:clamp(25px,8.3vw,135px); font-weight:700; letter-spacing:-.045em; white-space:nowrap; }
-.name-fallback span:last-child { font-size:inherit; }
-.workshop-page .landing-header { height:82px; }
-.workshop-page .name-stage { min-height:190px; height:37svh; }
-.workshop-page .landing-details { padding:22px 0 30px; }
-.workshop-back { display:inline-flex; align-items:center; gap:9px; font-size:12px; color:var(--body-text); }
-.workshop-controls { width:min(100%,860px); border-top:1px solid var(--border); padding-top:22px; }
-.workshop-section + .workshop-section { margin-top:16px; }
-.workshop-section h2 { font-size:11px; font-weight:500; color:var(--body-text); margin:0 0 8px; }
-.workshop-options { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
-.workshop-options button { color:var(--foreground); background:var(--card); border:1px solid var(--border); border-radius:11px; padding:11px 12px; text-align:left; line-height:1.5; min-height:62px; transition:border-color .15s,background .15s; }
-.workshop-options button span { display:block; font-size:12px; font-weight:500; }
-.workshop-options button small { display:block; font-size:10px; color:var(--body-text); margin-top:2px; }
-.workshop-options button[aria-pressed="true"] { border-color:var(--primary); background:var(--subtle); box-shadow:0 0 0 1px var(--primary); }
-.workshop-options button:hover { border-color:var(--primary); }
-.motion-options { grid-template-columns:repeat(3,minmax(0,1fr)); }
-.workshop-bottom { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:16px; font-size:11px; color:var(--body-text); }
-.workshop-bottom label { display:flex; align-items:center; gap:8px; cursor:pointer; }
-.workshop-bottom input { width:15px; height:15px; accent-color:var(--primary); }
-.copy-comparison { display:flex; align-items:center; gap:7px; padding:5px 0; border:0; color:var(--primary); background:transparent; font-size:11px; }
-.copy-note { font-size:11px; color:var(--body-text); margin-top:8px; }
-@media(max-width:700px) {
-  .name-fallback { font-size:8vw; }
-  .workshop-page .landing-header { gap:15px; height:78px; }
-  .workshop-page .landing-controls { gap:10px; }
-  .workshop-page .landing-controls .motion-toggle { font-size:9px; }
-  .workshop-back { font-size:11px; gap:5px; }
-  .workshop-controls { padding-top:17px; }
-  .workshop-options { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .motion-options { grid-template-columns:repeat(3,minmax(0,1fr)); }
-  .workshop-options button { padding:9px 10px; }
-  .workshop-options button span { font-size:11px; }
-  .workshop-options button small { font-size:9px; }
-  .workshop-bottom { font-size:10px; flex-wrap:wrap; }
-  .copy-comparison { font-size:10px; }
-  .workshop-page .landing-details { padding-bottom:28px; }
+@font-face {
+  font-family: 'Workshop Space';
+  src: url('/fonts/space-grotesk-bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Workshop Outfit';
+  src: url('/fonts/outfit-bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Workshop Bricolage';
+  src: url('/fonts/bricolage-bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+.name-fallback {
+  font-family: var(--name-font), 'Inter Variable', sans-serif;
+  font-size: clamp(25px, 8.3vw, 135px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+.name-fallback span:last-child {
+  font-size: inherit;
+}
+.workshop-page .landing-header {
+  height: 82px;
+}
+.workshop-page .name-stage {
+  min-height: 190px;
+  height: 37svh;
+}
+.workshop-page .landing-details {
+  padding: 22px 0 30px;
+}
+.workshop-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  color: var(--body-text);
+}
+.workshop-controls {
+  width: min(100%, 860px);
+  border-top: 1px solid var(--border);
+  padding-top: 22px;
+}
+.workshop-section + .workshop-section {
+  margin-top: 16px;
+}
+.workshop-section h2 {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--body-text);
+  margin: 0 0 8px;
+}
+.workshop-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.workshop-options button {
+  color: var(--foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 11px 12px;
+  text-align: left;
+  line-height: 1.5;
+  min-height: 62px;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.workshop-options button span {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+.workshop-options button small {
+  display: block;
+  font-size: 10px;
+  color: var(--body-text);
+  margin-top: 2px;
+}
+.workshop-options button[aria-pressed='true'] {
+  border-color: var(--primary);
+  background: var(--subtle);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+.workshop-options button:hover {
+  border-color: var(--primary);
+}
+.motion-options {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.workshop-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 16px;
+  font-size: 11px;
+  color: var(--body-text);
+}
+.workshop-bottom label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.workshop-bottom input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--primary);
+}
+.copy-comparison {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 0;
+  border: 0;
+  color: var(--primary);
+  background: transparent;
+  font-size: 11px;
+}
+.copy-note {
+  font-size: 11px;
+  color: var(--body-text);
+  margin-top: 8px;
+}
+@media (max-width: 700px) {
+  .name-fallback {
+    font-size: 8vw;
+  }
+  .workshop-page .landing-header {
+    gap: 15px;
+    height: 78px;
+  }
+  .workshop-page .landing-controls {
+    gap: 10px;
+  }
+  .workshop-page .landing-controls .motion-toggle {
+    font-size: 9px;
+  }
+  .workshop-back {
+    font-size: 11px;
+    gap: 5px;
+  }
+  .workshop-controls {
+    padding-top: 17px;
+  }
+  .workshop-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .motion-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .workshop-options button {
+    padding: 9px 10px;
+  }
+  .workshop-options button span {
+    font-size: 11px;
+  }
+  .workshop-options button small {
+    font-size: 9px;
+  }
+  .workshop-bottom {
+    font-size: 10px;
+    flex-wrap: wrap;
+  }
+  .copy-comparison {
+    font-size: 10px;
+  }
+  .workshop-page .landing-details {
+    padding-bottom: 28px;
+  }
 }

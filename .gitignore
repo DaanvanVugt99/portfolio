@@ -7,3 +7,9 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+# Local agent instructions and working notes
+.agent/
+/AGENTS.md
+/DESIGN_NOTES.md
+/REVIEW.md

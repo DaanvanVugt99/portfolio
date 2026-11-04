@@ -1,7 +1,22 @@
 import {
-  ACESFilmicToneMapping, AmbientLight, Box3, Color, DirectionalLight, Group,
-  HemisphereLight, Mesh, MeshStandardMaterial, OrthographicCamera, VSMShadowMap,
-  PlaneGeometry, Raycaster, Scene, ShadowMaterial, Vector2, Vector3, WebGLRenderer,
+  ACESFilmicToneMapping,
+  AmbientLight,
+  Box3,
+  Color,
+  DirectionalLight,
+  Group,
+  HemisphereLight,
+  Mesh,
+  MeshStandardMaterial,
+  OrthographicCamera,
+  VSMShadowMap,
+  PlaneGeometry,
+  Raycaster,
+  Scene,
+  ShadowMaterial,
+  Vector2,
+  Vector3,
+  WebGLRenderer,
 } from 'three'
 import { FontLoader } from 'three/addons/loaders/FontLoader.js'
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
@@ -9,13 +24,33 @@ import { landing, nameAppearance as art } from '../data/landing'
 import { defaultMotion, type MotionStyle } from '../data/workshop'
 
 type ResolvedTheme = 'light' | 'dark'
-export type NameScene = { setPreferences: (theme: ResolvedTheme, motion: boolean) => void; setMotionStyle: (style: MotionStyle, idle: boolean) => void; dispose: () => void }
-type Options = { theme: ResolvedTheme; motionEnabled: boolean; signal: AbortSignal; fontUrl?: string; motionStyle?: MotionStyle; idle?: boolean }
+export type NameScene = {
+  setPreferences: (theme: ResolvedTheme, motion: boolean) => void
+  setMotionStyle: (style: MotionStyle, idle: boolean) => void
+  dispose: () => void
+}
+type Options = {
+  theme: ResolvedTheme
+  motionEnabled: boolean
+  signal: AbortSignal
+  fontUrl?: string
+  motionStyle?: MotionStyle
+  idle?: boolean
+}
 type Letter = {
   mesh: Mesh<TextGeometry, MeshStandardMaterial[]>
-  baseX: number; baseY: number; x: number; y: number; vpx: number; vpy: number
-  z: number; rx: number; ry: number
-  vz: number; vx: number; vy: number
+  baseX: number
+  baseY: number
+  x: number
+  y: number
+  vpx: number
+  vpy: number
+  z: number
+  rx: number
+  ry: number
+  vz: number
+  vx: number
+  vy: number
 }
 
 export async function createNameScene(host: HTMLDivElement, options: Options): Promise<NameScene> {
@@ -52,12 +87,21 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
     let cursor = 0
     for (const char of text) {
       const glyph = font.data.glyphs[char]
-      const advance = (glyph?.ha ?? 350) / font.data.resolution * fontSize
+      const advance = ((glyph?.ha ?? 350) / font.data.resolution) * fontSize
       if (char !== ' ') {
         const key = `${char}-${fontSize}`
         let cached = geometryCache.get(key)
         if (!cached) {
-          const geometry = new TextGeometry(char, { font, size: fontSize, depth: art.depth, curveSegments: 10, bevelEnabled: true, bevelThickness: art.bevelThickness, bevelSize: art.bevelSize, bevelSegments: 4 })
+          const geometry = new TextGeometry(char, {
+            font,
+            size: fontSize,
+            depth: art.depth,
+            curveSegments: 10,
+            bevelEnabled: true,
+            bevelThickness: art.bevelThickness,
+            bevelSize: art.bevelSize,
+            bevelSegments: 4,
+          })
           geometry.computeBoundingBox()
           const center = geometry.boundingBox!.getCenter(new Vector3())
           geometry.translate(-center.x, -center.y, -center.z)
@@ -69,7 +113,21 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
         mesh.castShadow = true
         mesh.userData.letter = char
         row.add(mesh)
-        letters.push({ mesh, baseX: mesh.position.x, baseY: mesh.position.y, x: 0, y: 0, vpx: 0, vpy: 0, z: 0, rx: 0, ry: 0, vz: 0, vx: 0, vy: 0 })
+        letters.push({
+          mesh,
+          baseX: mesh.position.x,
+          baseY: mesh.position.y,
+          x: 0,
+          y: 0,
+          vpx: 0,
+          vpy: 0,
+          z: 0,
+          rx: 0,
+          ry: 0,
+          vz: 0,
+          vx: 0,
+          vy: 0,
+        })
       }
       cursor += advance + art.tracking
     }
@@ -140,9 +198,9 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
     if (!width || !height || disposed) return
     renderer.setSize(width, height, false)
     const aspect = width / height
-    const viewHeight = Math.max(size.y * art.viewPaddingY, size.x / aspect * art.viewPaddingX)
-    camera.left = -viewHeight * aspect / 2
-    camera.right = viewHeight * aspect / 2
+    const viewHeight = Math.max(size.y * art.viewPaddingY, (size.x / aspect) * art.viewPaddingX)
+    camera.left = (-viewHeight * aspect) / 2
+    camera.right = (viewHeight * aspect) / 2
     // Centre the combined letter-and-shadow silhouette, leaving room below the g.
     const opticalOffset = size.y * art.opticalOffset
     camera.top = viewHeight / 2 - opticalOffset
@@ -187,35 +245,76 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
         letter.mesh.getWorldPosition(projected).project(camera)
         dx = pointer.x - projected.x
         dy = pointer.y - projected.y
-        const distance = Math.hypot(dx * (camera.right - camera.left) / (camera.top - camera.bottom), dy)
+        const distance = Math.hypot(
+          (dx * (camera.right - camera.left)) / (camera.top - camera.bottom),
+          dy,
+        )
         influence = Math.max(0, 1 - distance / motionStyle.influenceRadius) ** 2
       }
       const wave = motion && idleMotion ? Math.sin(time * 0.0009 + index * 0.65) : 0
-      const targetZ = pressed === letter ? -motionStyle.pressDepth : influence * motionStyle.hoverDepth + wave * 0.018
+      const targetZ =
+        pressed === letter
+          ? -motionStyle.pressDepth
+          : influence * motionStyle.hoverDepth + wave * 0.018
       const targetX = motion ? -Math.tanh(dx * 8) * influence * motionStyle.travelX : 0
-      const targetY = motion ? -Math.tanh(dy * 8) * influence * motionStyle.travelY + wave * 0.025 : 0
-      const targetRX = motion ? -Math.max(-1, Math.min(1, dy * 4)) * influence * motionStyle.maxTilt + wave * 0.012 : 0
-      const targetRY = motion ? Math.max(-1, Math.min(1, dx * 4)) * influence * motionStyle.maxTilt : 0
+      const targetY = motion
+        ? -Math.tanh(dy * 8) * influence * motionStyle.travelY + wave * 0.025
+        : 0
+      const targetRX = motion
+        ? -Math.max(-1, Math.min(1, dy * 4)) * influence * motionStyle.maxTilt + wave * 0.012
+        : 0
+      const targetRY = motion
+        ? Math.max(-1, Math.min(1, dx * 4)) * influence * motionStyle.maxTilt
+        : 0
       if (motion) {
-        letter.vz += ((targetZ - letter.z) * motionStyle.spring - letter.vz * motionStyle.damping) * dt
-        letter.vx += ((targetRX - letter.rx) * motionStyle.spring - letter.vx * motionStyle.damping) * dt
-        letter.vy += ((targetRY - letter.ry) * motionStyle.spring - letter.vy * motionStyle.damping) * dt
-        letter.vpx += ((targetX - letter.x) * motionStyle.spring - letter.vpx * motionStyle.damping) * dt
-        letter.vpy += ((targetY - letter.y) * motionStyle.spring - letter.vpy * motionStyle.damping) * dt
+        letter.vz +=
+          ((targetZ - letter.z) * motionStyle.spring - letter.vz * motionStyle.damping) * dt
+        letter.vx +=
+          ((targetRX - letter.rx) * motionStyle.spring - letter.vx * motionStyle.damping) * dt
+        letter.vy +=
+          ((targetRY - letter.ry) * motionStyle.spring - letter.vy * motionStyle.damping) * dt
+        letter.vpx +=
+          ((targetX - letter.x) * motionStyle.spring - letter.vpx * motionStyle.damping) * dt
+        letter.vpy +=
+          ((targetY - letter.y) * motionStyle.spring - letter.vpy * motionStyle.damping) * dt
         letter.x += letter.vpx * dt
         letter.y += letter.vpy * dt
         letter.z += letter.vz * dt
         letter.rx += letter.vx * dt
         letter.ry += letter.vy * dt
       }
-      const active = Math.abs(targetZ - letter.z) + Math.abs(targetRX - letter.rx) + Math.abs(targetRY - letter.ry) + Math.abs(targetX - letter.x) + Math.abs(targetY - letter.y) + Math.abs(letter.vz) + Math.abs(letter.vx) + Math.abs(letter.vy) + Math.abs(letter.vpx) + Math.abs(letter.vpy) > 0.0005
+      const active =
+        Math.abs(targetZ - letter.z) +
+          Math.abs(targetRX - letter.rx) +
+          Math.abs(targetRY - letter.ry) +
+          Math.abs(targetX - letter.x) +
+          Math.abs(targetY - letter.y) +
+          Math.abs(letter.vz) +
+          Math.abs(letter.vx) +
+          Math.abs(letter.vy) +
+          Math.abs(letter.vpx) +
+          Math.abs(letter.vpy) >
+        0.0005
       moving ||= active
-      const progress = Math.max(0, Math.min(1, (elapsed - index * 11) / (art.entranceMs - index * 11)))
+      const progress = Math.max(
+        0,
+        Math.min(1, (elapsed - index * 11) / (art.entranceMs - index * 11)),
+      )
       const arrive = entering ? (1 - progress) ** 3 : 0
-      letter.mesh.position.set(letter.baseX + letter.x, letter.baseY + letter.y, letter.z + arrive * 0.55)
-      letter.mesh.rotation.set(letter.rx - arrive * 0.075, letter.ry + arrive * 0.12 * (index % 2 ? -1 : 1), 0)
+      letter.mesh.position.set(
+        letter.baseX + letter.x,
+        letter.baseY + letter.y,
+        letter.z + arrive * 0.55,
+      )
+      letter.mesh.rotation.set(
+        letter.rx - arrive * 0.075,
+        letter.ry + arrive * 0.12 * (index % 2 ? -1 : 1),
+        0,
+      )
     }
-    try { renderer.render(scene, camera) } catch (error) {
+    try {
+      renderer.render(scene, camera)
+    } catch (error) {
       if (!painted) throw error
       host.dispatchEvent(new Event('name-renderer-lost'))
       return
@@ -230,7 +329,10 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
 
   function point(event: PointerEvent) {
     const rect = host.getBoundingClientRect()
-    pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1)
+    pointer.set(
+      ((event.clientX - rect.left) / rect.width) * 2 - 1,
+      (-(event.clientY - rect.top) / rect.height) * 2 + 1,
+    )
     camera.updateMatrixWorld()
     root.updateMatrixWorld(true)
   }
@@ -246,8 +348,11 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
     point(event)
     inside = true
     raycaster.setFromCamera(pointer, camera)
-    const hit = raycaster.intersectObjects(letters.map(letter => letter.mesh), false)[0]
-    pressed = hit ? letters.find(letter => letter.mesh === hit.object) ?? null : null
+    const hit = raycaster.intersectObjects(
+      letters.map((letter) => letter.mesh),
+      false,
+    )[0]
+    pressed = hit ? (letters.find((letter) => letter.mesh === hit.object) ?? null) : null
     if (pressed) {
       host.setPointerCapture(event.pointerId)
       renderer.domElement.dataset.presses = String(Number(renderer.domElement.dataset.presses) + 1)
@@ -256,11 +361,19 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
     requestRender()
   }
   function onUp(event: PointerEvent) {
-    if (pressed && motion && event.type !== 'pointercancel') pressed.vz += motionStyle.releaseImpulse
+    if (pressed && motion && event.type !== 'pointercancel')
+      pressed.vz += motionStyle.releaseImpulse
     pressed = null
     const rect = host.getBoundingClientRect()
-    const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom
-    if (event.pointerType !== 'mouse' || event.type === 'pointercancel' || outside) { inside = false; pointer.set(10, 10) }
+    const outside =
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    if (event.pointerType !== 'mouse' || event.type === 'pointercancel' || outside) {
+      inside = false
+      pointer.set(10, 10)
+    }
     renderer.domElement.dataset.interaction = inside ? 'hover' : 'rest'
     requestRender()
   }
@@ -280,7 +393,10 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
       frame = null
       lastTime = 0
       renderer.domElement.dataset.renderState = 'hidden'
-    } else { lastTime = 0; requestRender() }
+    } else {
+      lastTime = 0
+      requestRender()
+    }
   }
   function contextLost(event: Event) {
     event.preventDefault()
@@ -297,7 +413,10 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   document.addEventListener('visibilitychange', visibilityChanged)
   const observer = new ResizeObserver(resize)
   observer.observe(host)
-  const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; visibilityChanged() })
+  const intersection = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting
+    visibilityChanged()
+  })
   intersection.observe(host)
   applyTheme(options.theme)
   resize()
@@ -334,7 +453,10 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
       host.removeEventListener('pointerleave', onLeave)
       renderer.domElement.removeEventListener('webglcontextlost', contextLost)
       geometryCache.forEach(({ geometry }) => geometry.dispose())
-      face.dispose(); side.dispose(); shadowGeometry.dispose(); shadowMaterial.dispose()
+      face.dispose()
+      side.dispose()
+      shadowGeometry.dispose()
+      shadowMaterial.dispose()
       key.shadow.map?.dispose()
       renderer.dispose()
       renderer.forceContextLoss()
@@ -348,6 +470,9 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
     frame = null
     render(performance.now())
     entranceStart = motion ? performance.now() : null
-  } catch (error) { controller.dispose(); throw error }
+  } catch (error) {
+    controller.dispose()
+    throw error
+  }
   return controller
 }
