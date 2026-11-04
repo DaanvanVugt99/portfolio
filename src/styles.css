@@ -452,22 +452,6 @@ p {
   opacity: 0.24;
   mask-image: radial-gradient(ellipse at 50% 60%, #000, transparent 75%);
 }
-.vex-mark {
-  position: absolute;
-  left: 30px;
-  top: 27px;
-  font-size: 36px;
-  font-weight: 250;
-  line-height: 1;
-  letter-spacing: -2px;
-  color: var(--primary);
-}
-.vex-mark span {
-  font-weight: 650;
-  font-size: 11px;
-  letter-spacing: 0;
-  margin-left: 1px;
-}
 .visual-caption {
   position: absolute;
   left: 30px;
@@ -908,46 +892,6 @@ p {
 }
 .case-heading .pills {
   margin-top: 22px;
-}
-.vex-detail-visual {
-  height: 460px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.vex-detail-visual .phone {
-  width: 205px;
-  height: 422px;
-}
-.vex-detail-visual .phone-back {
-  left: 43%;
-  top: 40px;
-}
-.vex-detail-visual .phone-front {
-  left: 62%;
-  top: 78px;
-}
-.vex-detail-visual .vex-mark {
-  font-size: 60px;
-  left: 50px;
-  top: 50px;
-}
-.vex-detail-visual .vex-mark span {
-  font-size: 16px;
-}
-.vex-detail-visual .visual-caption {
-  left: 50px;
-  top: 140px;
-  font-size: 17px;
-  max-width: 230px;
-}
-.vex-detail-visual .connection-chip {
-  left: 50px;
-  bottom: 110px;
-}
-.vex-detail-visual .screen-note {
-  left: 50px;
-  bottom: 45px;
-  font-size: 11px;
 }
 .case-columns {
   display: grid;
@@ -1414,10 +1358,6 @@ p {
   .vex-visual {
     height: 300px;
   }
-  .vex-mark {
-    left: 25px;
-    top: 24px;
-  }
   .visual-caption {
     left: 25px;
     max-width: 100px;
@@ -1591,44 +1531,6 @@ p {
   }
   .case-heading > p {
     font-size: 14px;
-  }
-  .vex-detail-visual {
-    height: 360px;
-  }
-  .vex-detail-visual .phone {
-    width: 155px;
-    height: 319px;
-  }
-  .vex-detail-visual .phone-back {
-    left: 33%;
-    top: 62px;
-  }
-  .vex-detail-visual .phone-front {
-    left: 63%;
-    top: 100px;
-  }
-  .vex-detail-visual .vex-mark {
-    top: 30px;
-    left: 25px;
-    font-size: 40px;
-  }
-  .vex-detail-visual .vex-mark span {
-    font-size: 11px;
-  }
-  .vex-detail-visual .visual-caption {
-    top: 90px;
-    left: 25px;
-    font-size: 11px;
-    max-width: 100px;
-  }
-  .vex-detail-visual .connection-chip {
-    left: 22px;
-    bottom: 65px;
-  }
-  .vex-detail-visual .screen-note {
-    left: 25px;
-    bottom: 25px;
-    font-size: 9px;
   }
   .case-columns {
     grid-template-columns: 1fr;

@@ -30,6 +30,7 @@ import { MotionToggle } from './components/PreferenceControls'
 import { Settings } from './components/Settings'
 import { LandingPage } from './components/LandingPage'
 import { WorkshopPage } from './components/WorkshopPage'
+import { vexShowcasePhones } from './data/vexScreenshots'
 
 function Github({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
   return (
@@ -284,20 +285,14 @@ function Phone({
   )
 }
 
-function VexVisual({ detail = false }: { detail?: boolean }) {
+function VexVisual() {
   const { t } = useTranslation()
   return (
-    <MotionRegion
-      className={`vex-visual ${detail ? 'vex-detail-visual' : ''}`}
-      label={t('visuals.vex')}
-    >
+    <MotionRegion className="vex-visual" label={t('visuals.vex')}>
       <div className="visual-grid" />
-      <div className="vex-mark">
-        V<span>EX</span>
-      </div>
       <div className="phone-composition">
-        <Phone source="vex-hotels.webp" className="phone-back" />
-        <Phone source="vex-stay.webp" alternate="vex-vouchers.webp" className="phone-front" />
+        <Phone source="vex-home.png" className="phone-back" />
+        <Phone source="vex-room-key.png" alternate="vex-vouchers.png" className="phone-front" />
       </div>
       <div className="connection-chip">
         <span className="connection-node">
@@ -318,6 +313,30 @@ function VexVisual({ detail = false }: { detail?: boolean }) {
       </div>
       <div className="screen-note">
         <span className="status-dot" /> iOS & Android
+      </div>
+    </MotionRegion>
+  )
+}
+
+function VexProjectVisual() {
+  const { t } = useTranslation()
+  return (
+    <MotionRegion className="vex-project-visual" label={t('visuals.vexProject')}>
+      <div className="visual-grid" />
+      <img
+        className="vex-project-logo"
+        src="/assets/valk-exclusief-logo.svg"
+        alt="Valk Exclusief"
+        width="579"
+        height="292"
+      />
+      <span className="vex-project-platforms">
+        <Smartphone size={13} aria-hidden="true" /> iOS & Android
+      </span>
+      <div className="vex-project-phones">
+        {vexShowcasePhones.map(({ id, ...phone }) => (
+          <Phone key={id} {...phone} />
+        ))}
       </div>
     </MotionRegion>
   )
@@ -502,7 +521,7 @@ function ProjectPage({ project }: { project: Project }) {
         <Pills items={project.technologies} />
       </div>
       {project.slug === 'vex' ? (
-        <VexVisual detail />
+        <VexProjectVisual />
       ) : (
         <div className="divergence-detail-visual">
           <img

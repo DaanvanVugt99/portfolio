@@ -1,0 +1,178 @@
+.vex-project-visual {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: radial-gradient(ellipse at 50% 65%, #b9caff60, transparent 65%), var(--vex-bg);
+}
+.vex-project-visual .visual-grid {
+  opacity: 0.18;
+  mask-image: radial-gradient(ellipse at 50% 80%, #000, transparent 65%);
+}
+.vex-project-visual::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 54px;
+  background: linear-gradient(transparent, var(--vex-bg));
+  pointer-events: none;
+  z-index: 2;
+}
+.vex-project-logo {
+  position: absolute;
+  left: 34px;
+  top: 26px;
+  width: 132px;
+  height: auto;
+  filter: brightness(0);
+  opacity: 0.8;
+  z-index: 1;
+}
+:root[data-theme='dark'] .vex-project-logo {
+  filter: none;
+  opacity: 0.95;
+}
+.vex-project-platforms {
+  position: absolute;
+  top: 38px;
+  right: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--body-text);
+  font-size: 10px;
+}
+.vex-project-phones {
+  position: absolute;
+  inset: auto 0 -65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 36px;
+}
+.vex-project-phones .phone {
+  position: relative;
+  width: 172px;
+  height: auto;
+  aspect-ratio: 166 / 338;
+  flex-shrink: 0;
+  box-shadow:
+    0 24px 32px -12px #222c5540,
+    inset 0 0 0 1px #ffffff15;
+}
+.vex-project-phones .showcase-phone-one {
+  margin-top: 28px;
+  transform: rotate(-9deg);
+  animation: showcase-left 10s ease-in-out infinite;
+}
+.vex-project-phones .showcase-phone-two {
+  width: 190px;
+  z-index: 1;
+  transform: translateY(-8px);
+  animation: showcase-center 10s ease-in-out infinite;
+}
+.vex-project-phones .showcase-phone-three {
+  margin-top: 28px;
+  transform: rotate(9deg);
+  animation: showcase-right 10s ease-in-out infinite;
+}
+.vex-project-phones .phone-screen {
+  position: absolute;
+  inset: 5px;
+  width: auto;
+  height: auto;
+}
+.vex-project-phones .phone-alternate {
+  animation-name: showcase-screen;
+}
+@keyframes showcase-screen {
+  0%,
+  39%,
+  100% {
+    opacity: 0;
+  }
+  42%,
+  79% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 0;
+  }
+}
+@keyframes showcase-left {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-9deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(-7deg);
+  }
+}
+@keyframes showcase-center {
+  0%,
+  100% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+}
+@keyframes showcase-right {
+  0%,
+  100% {
+    transform: translateY(0) rotate(9deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(7deg);
+  }
+}
+@media (max-width: 700px) {
+  .vex-project-visual {
+    height: 370px;
+  }
+  .vex-project-logo {
+    width: 108px;
+    left: 22px;
+    top: 22px;
+  }
+  .vex-project-platforms {
+    top: 30px;
+    right: 22px;
+    font-size: 9px;
+  }
+  .vex-project-phones {
+    gap: 22px;
+    inset: auto 0 -52px;
+  }
+  .vex-project-phones .phone {
+    width: 132px;
+  }
+  .vex-project-phones .showcase-phone-two {
+    width: 146px;
+  }
+}
+@media (max-width: 600px) {
+  .vex-project-visual {
+    height: clamp(310px, 96vw, 380px);
+  }
+  .vex-project-phones {
+    gap: 16px;
+    bottom: -58px;
+  }
+  .vex-project-phones .phone {
+    width: clamp(102px, 32vw, 140px);
+    border-radius: 23px;
+  }
+  .vex-project-phones .showcase-phone-two {
+    width: clamp(116px, 36vw, 156px);
+  }
+  .vex-project-phones .showcase-phone-three {
+    display: none;
+  }
+  .vex-project-phones .phone-screen {
+    inset: 4px;
+    border-radius: 18px;
+  }
+}
