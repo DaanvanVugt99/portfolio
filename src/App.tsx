@@ -19,7 +19,7 @@ import {
   Terminal,
   Workflow,
 } from 'lucide-react'
-import { useEffect, useRef, useState, type ReactNode, type SVGProps } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode, type SVGProps } from 'react'
 import { Button } from './components/ui/button'
 import { Card } from './components/ui/card'
 import { profile, type Project } from './data/portfolio'
@@ -31,6 +31,7 @@ import { Settings } from './components/Settings'
 import { LandingPage } from './components/LandingPage'
 import { WorkshopPage } from './components/WorkshopPage'
 import { vexShowcasePhones } from './data/vexScreenshots'
+import { ExperiencePage } from './components/ExperiencePage'
 
 function Github({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
   return (
@@ -98,36 +99,42 @@ function PageEffects() {
   const { t } = useTranslation()
   const { projects } = usePortfolio()
   const { pathname, hash } = useLocation()
-  const previousPath = useRef(pathname)
+  const previousLocation = useRef<{ pathname: string; hash: string } | null>(null)
   useEffect(() => {
     const project = projects.find((p) => pathname === `/projects/${p.slug}`)
     document.title = project
       ? `${project.title} — Daan van Vugt`
       : pathname === '/portfolio'
         ? `${t('overview.title')} — Daan van Vugt`
-        : t('meta.home')
+        : pathname === '/experience'
+          ? `${t('experience.title')} — Daan van Vugt`
+          : t('meta.home')
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute(
         'content',
         project
           ? `${project.title} — ${project.description} ${project.role}`
-          : t('meta.description'),
+          : pathname === '/experience'
+            ? t('experience.metaDescription')
+            : t('meta.description'),
       )
   }, [pathname, t, projects])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const changedPage = previousLocation.current?.pathname !== pathname
     const main = document.getElementById('main')
     main?.setAttribute('tabindex', '-1')
-    if (previousPath.current !== pathname) main?.focus({ preventScroll: true })
-    previousPath.current = pathname
-    if (hash)
-      requestAnimationFrame(() =>
-        document.getElementById(hash.slice(1))?.scrollIntoView({
-          behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-        }),
-      )
-    else window.scrollTo(0, 0)
+    if (previousLocation.current && changedPage) main?.focus({ preventScroll: true })
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView({
+        behavior:
+          changedPage || matchMedia('(prefers-reduced-motion: reduce)').matches
+            ? 'instant'
+            : 'smooth',
+      })
+    } else window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    previousLocation.current = { pathname, hash }
   }, [pathname, hash])
   return null
 }
@@ -223,12 +230,26 @@ function ExperienceCard() {
   const { t } = useTranslation()
   const { backendTechnologies } = usePortfolio()
   return (
-    <Card className="experience-card">
-      <div className="eyebrow">
+    <Card className="experience-card" id="experience">
+      <div className="eyebrow experience-card-label">
         <span className="icon-label">
           <Layers3 size={15} />
         </span>{' '}
-        {t('overview.experience')}
+        <h2>
+          <Link
+            className="experience-card-link"
+            to="/experience"
+            aria-label={t('experience.cardLink')}
+          >
+            {t('overview.experience')}
+          </Link>
+        </h2>
+        <ArrowUpRight
+          className="experience-card-arrow"
+          size={17}
+          strokeWidth={1.5}
+          aria-hidden="true"
+        />
       </div>
       <div className="experience-heading">
         <strong>
@@ -636,6 +657,7 @@ function App() {
           <Route path="/workshop" element={<WorkshopPage />} />
           <Route element={<SiteLayout />}>
             <Route path="/portfolio" element={<OverviewPage />} />
+            <Route path="/experience" element={<ExperiencePage />} />
             {projects.map((project) => (
               <Route
                 key={project.slug}

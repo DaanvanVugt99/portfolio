@@ -59,6 +59,48 @@
     "github": "Daan van Vugt op GitHub",
     "preview": "Ontwerpversie · Projectbeschrijvingen en contactgegevens worden nog aangevuld."
   },
+  "experience": {
+    "title": "Werk & opleiding",
+    "back": "Terug naar portfolio",
+    "cardLink": "Bekijk de tijdlijn van werk en opleiding",
+    "listLabel": "Werk en opleiding, meest recente eerst",
+    "to": "tot",
+    "opportunity": {
+      "period": "Op zoek naar een nieuwe uitdaging",
+      "status": "Op zoek naar werk",
+      "title": "Fullstack- of backenddeveloper",
+      "description": "Op zoek naar mijn volgende baan. Ook geïnteresseerd in andere functies binnen softwareontwikkeling.",
+      "contact": "Neem contact op"
+    },
+    "origin": { "established": "Opgericht in" },
+    "vexLink": "Valk Exclusief-app",
+    "metaDescription": "Het werk en de opleiding van Daan van Vugt: softwareontwikkeling bij Valk Digital, HBO-ICT aan Hogeschool van Arnhem en Nijmegen en VWO op het Titus Brandsmalyceum in Oss.",
+    "kinds": {
+      "work": "Werkervaring",
+      "study": "Hoger onderwijs",
+      "school": "Voortgezet onderwijs"
+    },
+    "entries": {
+      "valk": {
+        "qualification": "Softwareontwikkelaar",
+        "bullets": [
+          "Webapps en native mobiele applicaties.",
+          "Backendservices en integraties.",
+          "Testen, uitrollen en onderhoud."
+        ]
+      },
+      "han": {
+        "qualification": "HBO-ICT · Software Engineering",
+        "description": "Software engineering, databases en datawarehousing.",
+        "status": "Opleidingsonderdelen afgerond; afstudeeropdracht niet afgerond. Geen diploma behaald."
+      },
+      "tbl": {
+        "qualification": "VWO · Natuur & Techniek",
+        "description": "Voorbereidend wetenschappelijk onderwijs.",
+        "status": "VWO-diploma behaald"
+      }
+    }
+  },
   "visuals": {
     "vexProject": "Het Valk Exclusief-logo met geanimeerde appschermen voor hotelboekingen, zelf inchecken, digitale kamersleutels en beloningen.",
     "vex": "Echte schermen van de Valk Exclusief-app met zelf inchecken, een digitale kamersleutel en beloningen. Decoratieve, conceptuele verbinding tussen app en services.",

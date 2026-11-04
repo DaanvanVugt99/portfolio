@@ -59,6 +59,48 @@
     "github": "Daan van Vugt on GitHub",
     "preview": "Design preview · Project stories and contact details are being refined."
   },
+  "experience": {
+    "title": "Experience & education",
+    "back": "Back to portfolio",
+    "cardLink": "View work and education timeline",
+    "listLabel": "Work and education, most recent first",
+    "to": "to",
+    "opportunity": {
+      "period": "Looking for the next opportunity",
+      "status": "Open to work",
+      "title": "Fullstack or backend developer",
+      "description": "Looking for my next role. Also open to other software development opportunities.",
+      "contact": "Get in touch"
+    },
+    "origin": { "established": "Established" },
+    "vexLink": "Valk Exclusief app",
+    "metaDescription": "Daan van Vugt’s work and education: software development at Valk Digital, HBO-ICT studies at Hogeschool van Arnhem en Nijmegen, and VWO at Titus Brandsmalyceum in Oss.",
+    "kinds": {
+      "work": "Professional experience",
+      "study": "Higher education",
+      "school": "Secondary education"
+    },
+    "entries": {
+      "valk": {
+        "qualification": "Software developer",
+        "bullets": [
+          "Web and native mobile applications.",
+          "Backend services and integrations.",
+          "Testing, deployment, and maintenance."
+        ]
+      },
+      "han": {
+        "qualification": "HBO-ICT · Software Engineering",
+        "description": "Software engineering, databases, and data warehousing.",
+        "status": "Coursework completed; graduation assignment unfinished. No degree awarded."
+      },
+      "tbl": {
+        "qualification": "VWO · Science & Technology",
+        "description": "Pre-university secondary education.",
+        "status": "VWO diploma awarded"
+      }
+    }
+  },
   "visuals": {
     "vexProject": "Valk Exclusief logo and animated app screens showing hotel bookings, self check-in, digital room keys, and rewards.",
     "vex": "Actual Valk Exclusief app screens showing self check-in, a digital room key, and rewards. Decorative conceptual app and services connection.",
