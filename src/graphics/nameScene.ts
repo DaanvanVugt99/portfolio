@@ -18,13 +18,14 @@ import {
   Vector3,
   WebGLRenderer,
 } from 'three'
-import { FontLoader } from 'three/addons/loaders/FontLoader.js'
+import { FontLoader, type FontData } from 'three/addons/loaders/FontLoader.js'
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
 import { landing, nameAppearance as art } from '../data/landing'
 import { defaultMotion, type MotionStyle } from '../data/workshop'
 
 type ResolvedTheme = 'light' | 'dark'
 export type NameScene = {
+  reveal: () => void
   setPreferences: (theme: ResolvedTheme, motion: boolean) => void
   setMotionStyle: (style: MotionStyle, idle: boolean) => void
   dispose: () => void
@@ -33,7 +34,7 @@ type Options = {
   theme: ResolvedTheme
   motionEnabled: boolean
   signal: AbortSignal
-  fontUrl?: string
+  fontData: FontData
   motionStyle?: MotionStyle
   idle?: boolean
 }
@@ -54,10 +55,8 @@ type Letter = {
 }
 
 export async function createNameScene(host: HTMLDivElement, options: Options): Promise<NameScene> {
-  const response = await fetch(options.fontUrl ?? landing.font, { signal: options.signal })
-  if (!response.ok) throw new Error('Font unavailable')
-  const font = new FontLoader().parse(await response.json())
   options.signal.throwIfAborted()
+  const font = new FontLoader().parse(options.fontData)
 
   const renderer = new WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'low-power' })
   renderer.setPixelRatio(Math.min(devicePixelRatio, art.maxPixelRatio))
@@ -75,8 +74,8 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   camera.position.set(0, 0, 12)
   const root = new Group()
   scene.add(root)
-  const face = new MeshStandardMaterial({ roughness: 0.34, metalness: 0.04 })
-  const side = new MeshStandardMaterial({ roughness: 0.42, metalness: 0.02 })
+  const face = new MeshStandardMaterial({ roughness: 0.34, metalness: 0.04, transparent: true })
+  const side = new MeshStandardMaterial({ roughness: 0.42, metalness: 0.02, transparent: true })
   const geometryCache = new Map<string, { geometry: TextGeometry; center: Vector3 }>()
   const letters: Letter[] = []
   const rows: { group: Group; height: number; centerY: number }[] = []
@@ -108,7 +107,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
           cached = { geometry, center }
           geometryCache.set(key, cached)
         }
-        const mesh = new Mesh(cached.geometry, [face, side])
+        const mesh = new Mesh(cached.geometry, [face.clone(), side.clone()])
         mesh.position.set(cursor + cached.center.x, cached.center.y, 0)
         mesh.castShadow = true
         mesh.userData.letter = char
@@ -182,13 +181,18 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   let visible = true
   let frame: number | null = null
   let lastTime = 0
-  let entranceStart: number | null = motion ? performance.now() : null
+  let entranceStart: number | null = null
+  let revealed = false
   let painted = false
 
   function applyTheme(theme: ResolvedTheme) {
     currentTheme = theme
     face.color.set(art[theme].face)
     side.color.set(art[theme].side)
+    for (const letter of letters) {
+      letter.mesh.material[0].color.copy(face.color)
+      letter.mesh.material[1].color.copy(side.color)
+    }
     scene.background = new Color(art[theme].background)
     shadowMaterial.opacity = art[theme].shadowOpacity
   }
@@ -210,7 +214,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   }
 
   function requestRender() {
-    if (disposed || frame !== null || !visible || document.hidden) return
+    if (disposed || !revealed || frame !== null || !visible || document.hidden) return
     renderer.domElement.dataset.renderState = motion ? 'active' : 'paused'
     frame = requestAnimationFrame(render)
   }
@@ -224,6 +228,10 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
       letter.x = letter.y = letter.vpx = letter.vpy = 0
       letter.mesh.position.set(letter.baseX, letter.baseY, 0)
       letter.mesh.rotation.set(0, 0, 0)
+      letter.mesh.material.forEach((material) => {
+        material.opacity = 1
+      })
+      letter.mesh.castShadow = true
     }
     renderer.domElement.dataset.interaction = 'rest'
   }
@@ -235,6 +243,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
     lastTime = time
     const elapsed = entranceStart === null ? art.entranceMs : time - entranceStart
     const entering = motion && elapsed < art.entranceMs
+    renderer.domElement.dataset.entrance = entering ? 'entering' : 'settled'
     let moving = false
     root.updateMatrixWorld(true)
     for (const [index, letter] of letters.entries()) {
@@ -296,14 +305,21 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
           Math.abs(letter.vpy) >
         0.0005
       moving ||= active
+      const stagger = Math.min(art.entranceStaggerMs, art.entranceMs / (letters.length * 2))
       const progress = Math.max(
         0,
-        Math.min(1, (elapsed - index * 11) / (art.entranceMs - index * 11)),
+        Math.min(1, (elapsed - index * stagger) / (art.entranceMs - index * stagger)),
       )
       const arrive = entering ? (1 - progress) ** 3 : 0
+      const fade = entering ? Math.min(1, progress / 0.6) : 1
+      const opacity = fade * fade * (3 - 2 * fade)
+      letter.mesh.material.forEach((material) => {
+        material.opacity = opacity
+      })
+      letter.mesh.castShadow = opacity > 0.45
       letter.mesh.position.set(
         letter.baseX + letter.x,
-        letter.baseY + letter.y,
+        letter.baseY + letter.y - arrive * art.entranceRise,
         letter.z + arrive * 0.55,
       )
       letter.mesh.rotation.set(
@@ -312,6 +328,8 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
         0,
       )
     }
+    const shadowProgress = entering ? Math.min(1, elapsed / (art.entranceMs * 0.85)) : 1
+    shadowMaterial.opacity = art[currentTheme].shadowOpacity * shadowProgress
     try {
       renderer.render(scene, camera)
     } catch (error) {
@@ -421,6 +439,13 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   applyTheme(options.theme)
   resize()
   const controller: NameScene = {
+    reveal() {
+      if (disposed || revealed) return
+      revealed = true
+      entranceStart = motion ? performance.now() : null
+      lastTime = 0
+      render(performance.now())
+    },
     setMotionStyle(style, idle) {
       if (disposed) return
       motionStyle = style
@@ -442,6 +467,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
     dispose() {
       if (disposed) return
       disposed = true
+      options.signal.removeEventListener('abort', controller.dispose)
       if (frame !== null) cancelAnimationFrame(frame)
       observer.disconnect()
       intersection.disconnect()
@@ -453,6 +479,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
       host.removeEventListener('pointerleave', onLeave)
       renderer.domElement.removeEventListener('webglcontextlost', contextLost)
       geometryCache.forEach(({ geometry }) => geometry.dispose())
+      letters.forEach(({ mesh }) => mesh.material.forEach((material) => material.dispose()))
       face.dispose()
       side.dispose()
       shadowGeometry.dispose()
@@ -464,12 +491,13 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
       scene.clear()
     },
   }
-  // Paint before removing the HTML fallback, even when motion is disabled.
+  // Warm up the GPU before revealing the canvas. The entrance clock starts
+  // after React exposes it, so shader compilation cannot skip the animation.
+  options.signal.addEventListener('abort', controller.dispose, { once: true })
   try {
-    if (frame !== null) cancelAnimationFrame(frame)
-    frame = null
+    await renderer.compileAsync(scene, camera)
+    options.signal.throwIfAborted()
     render(performance.now())
-    entranceStart = motion ? performance.now() : null
   } catch (error) {
     controller.dispose()
     throw error

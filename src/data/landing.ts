@@ -30,5 +30,8 @@ export const nameAppearance = {
   },
   shadow: { resolution: 1024, radius: 5, blurSamples: 12, planeDepth: -0.38 },
   entranceMs: 780,
+  entranceStaggerMs: 22,
+  entranceRise: 0.18,
+  loadTimeoutMs: 8000,
   maxPixelRatio: 1.75,
 }
