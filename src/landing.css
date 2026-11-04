@@ -17,6 +17,7 @@
 .landing-header {
   --header-height: 108px;
   --header-surface: var(--landing-background);
+  --header-fade-surface: var(--landing-background);
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
