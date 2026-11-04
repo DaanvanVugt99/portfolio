@@ -29,11 +29,6 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  font-size: 29px;
-}
-.landing-header .monogram span {
-  right: 7px;
-  bottom: 7px;
 }
 .landing-portfolio-mark {
   transition: opacity 0.2s;

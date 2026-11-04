@@ -47,6 +47,12 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.dataset.theme = resolvedTheme
     document
+      .querySelector<HTMLLinkElement>('link[rel="icon"]')
+      ?.setAttribute(
+        'href',
+        resolvedTheme === 'dark' ? '/favicon-dark.svg?v=2' : '/favicon.svg?v=2',
+      )
+    document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute('content', resolvedTheme === 'light' ? '#ffffff' : '#0e111b')
     try {

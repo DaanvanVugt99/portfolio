@@ -32,6 +32,7 @@ import { LandingPage } from './components/LandingPage'
 import { WorkshopPage } from './components/WorkshopPage'
 import { vexShowcasePhones } from './data/vexScreenshots'
 import { ExperiencePage } from './components/ExperiencePage'
+import { BrandMark } from './components/BrandMark'
 
 function Github({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
   return (
@@ -77,7 +78,7 @@ function Header() {
     <header className="site-header">
       <Link className="identity" to="/" aria-label={t('navigation.home')}>
         <span className="monogram">
-          d<span>.</span>
+          <BrandMark />
         </span>
         <span>
           Daan van Vugt<span className="identity-role">{t('profile.role')}</span>

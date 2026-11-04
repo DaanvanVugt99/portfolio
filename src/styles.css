@@ -112,26 +112,16 @@ button:disabled {
   letter-spacing: -0.25px;
 }
 .monogram {
-  display: grid;
-  place-content: center;
+  display: block;
   width: 40px;
   height: 40px;
-  background: var(--foreground);
-  color: var(--card);
   border-radius: 12px;
-  font-size: 31px;
-  font-weight: 650;
-  letter-spacing: -4px;
-  padding-right: 5px;
-  line-height: 1;
-  position: relative;
 }
-.monogram span {
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
-  font-size: 25px;
-  color: #a6a3ff;
+.brand-mark {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
 }
 .identity-role {
   display: block;
@@ -1305,12 +1295,7 @@ p {
   .monogram {
     width: 35px;
     height: 35px;
-    font-size: 28px;
     border-radius: 10px;
-  }
-  .monogram span {
-    right: 7px;
-    bottom: 7px;
   }
   .site-header nav {
     display: none;

@@ -7,6 +7,7 @@ import { MotionToggle } from './PreferenceControls'
 import { Settings } from './Settings'
 import { useTranslation } from 'react-i18next'
 import type { MotionStyle } from '../data/workshop'
+import { BrandMark } from './BrandMark'
 
 export function LandingPage({
   preview,
@@ -33,7 +34,7 @@ export function LandingPage({
             to={landing.href}
             aria-label={t('navigation.openPortfolio')}
           >
-            d<span aria-hidden="true">.</span>
+            <BrandMark />
           </Link>
         )}
         <div className="landing-controls">
