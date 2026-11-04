@@ -1,0 +1,133 @@
+{
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "light": "Light",
+    "system": "System",
+    "dark": "Dark",
+    "language": "Language",
+    "close": "Close settings"
+  },
+  "motion": {
+    "pause": "Pause motion",
+    "play": "Play motion",
+    "reduced": "Reduced motion",
+    "deviceReduced": "Reduced motion enabled by your device"
+  },
+  "navigation": {
+    "home": "Daan van Vugt, home",
+    "label": "Main navigation",
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact",
+    "skip": "Skip to content",
+    "openPortfolio": "Open portfolio overview",
+    "landing": "Landing page",
+    "back": "Back to selected work"
+  },
+  "profile": {
+    "role": "Software developer",
+    "introduction": "Open to fullstack and backend development roles.",
+    "about": "I’d like to be involved earlier in understanding requirements and deciding how to solve them.",
+    "music": "Making music",
+    "films": "Films & cinema"
+  },
+  "landing": {
+    "experience": "3 years of professional experience",
+    "action": "View portfolio"
+  },
+  "overview": {
+    "title": "Portfolio",
+    "viewProjects": "View projects",
+    "experience": "Experience",
+    "years": "years",
+    "professional": "of professional development",
+    "at": "at",
+    "fullstack": "Fullstack development",
+    "backend": "Backend services & integrations",
+    "mobile": "Native mobile applications",
+    "database": "Database design",
+    "delivery": "Testing & delivery",
+    "vexRead": "Read about the Valk Exclusief project",
+    "divergenceSummary": "Custom systems, tooling, and regression checks.",
+    "explore": "Explore the project",
+    "email": "Email",
+    "pending": "to add",
+    "emailPending": "The public email address will be added after design review.",
+    "linkedinPending": "The LinkedIn URL will be added after design review.",
+    "github": "Daan van Vugt on GitHub",
+    "preview": "Design preview · Project stories and contact details are being refined."
+  },
+  "visuals": {
+    "vex": "Actual Valk Exclusief app screens showing self check-in, a digital room key, and rewards. Decorative conceptual app and services connection.",
+    "divergence": "A real development render of Divergence’s laboratory map, alongside a conceptual code, build, test sequence.",
+    "mapAlt": "A development render of the laboratory map in Emerald Rogue: Divergence",
+    "development": "Development preview",
+    "map": "Map development"
+  },
+  "caseStudy": {
+    "involvement": "My involvement",
+    "links": "Project links",
+    "draft": "Case study draft",
+    "draftNote": "Case-study draft · Details to be completed together after homepage review.",
+    "other": "Other project",
+    "credits": "Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited to its contributors."
+  },
+  "links": { "appStore": "App Store", "googlePlay": "Google Play", "code": "Explore the code" },
+  "projects": {
+    "vex": {
+      "eyebrow": "Professional work · iOS & Android",
+      "description": "An iOS and Android hotel app for bookings, online check-in, digital room keys, and rewards.",
+      "role": "App development, end to end, alongside a colleague at Valk Digital.",
+      "contributions": [
+        "Worked across the entire application alongside a colleague.",
+        "Built and maintained app features and backend integrations.",
+        "Contributed to testing, deployment, and ongoing maintenance."
+      ],
+      "nextStory": "Next: choose a feature or integration to walk through, including the problem, your decisions, and how you tested it."
+    },
+    "divergence": {
+      "eyebrow": "Personal project · GBA / C",
+      "description": "A personal C project extending Pokémon Emerald Rogue with custom game systems, tooling, and regression checks.",
+      "role": "Personal development on a standalone fork of Pokémon Emerald Rogue.",
+      "contributions": [
+        "Extends an existing decompilation-based codebase with custom game systems.",
+        "Includes project-specific changes, build tooling, and focused regression checks.",
+        "Maintains clear project documentation and upstream credits."
+      ],
+      "nextStory": "Next: select a system or bug fix that best demonstrates your engineering decisions.",
+      "tooling": "Python tooling",
+      "testing": "Regression testing"
+    }
+  },
+  "notFound": {
+    "title": "Page not found.",
+    "description": "This page does not exist.",
+    "back": "Back to the portfolio"
+  },
+  "meta": {
+    "home": "Daan van Vugt — Software developer",
+    "description": "Daan van Vugt. Software developer with 3 years of professional experience in web and mobile applications, backend services, and testing."
+  },
+  "workshop": {
+    "label": "Design comparison",
+    "typeface": "Typeface",
+    "movement": "Movement",
+    "idle": "Slow idle movement",
+    "copied": "Link copied",
+    "copy": "Copy comparison link",
+    "copyError": "Copy the address from your browser to share this combination.",
+    "fonts": {
+      "space": "Angular details",
+      "outfit": "Rounder shapes",
+      "bricolage": "More irregular detail",
+      "original": "Previous version",
+      "originalName": "Original font"
+    },
+    "motions": {
+      "original": { "name": "Original", "description": "Small tilt, quick settle" },
+      "responsive": { "name": "Responsive", "description": "More travel and rebound" },
+      "bouncy": { "name": "Bouncy", "description": "Looser, longer spring" }
+    }
+  }
+}

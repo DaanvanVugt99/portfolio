@@ -1,0 +1,133 @@
+{
+  "settings": {
+    "title": "Instellingen",
+    "appearance": "Weergave",
+    "light": "Licht",
+    "system": "Systeem",
+    "dark": "Donker",
+    "language": "Taal",
+    "close": "Instellingen sluiten"
+  },
+  "motion": {
+    "pause": "Animaties pauzeren",
+    "play": "Animaties afspelen",
+    "reduced": "Minder beweging",
+    "deviceReduced": "Je apparaat heeft minder beweging ingeschakeld"
+  },
+  "navigation": {
+    "home": "Daan van Vugt, startpagina",
+    "label": "Hoofdnavigatie",
+    "work": "Projecten",
+    "about": "Over mij",
+    "contact": "Contact",
+    "skip": "Naar de inhoud",
+    "openPortfolio": "Portfolio-overzicht openen",
+    "landing": "Startpagina",
+    "back": "Terug naar projecten"
+  },
+  "profile": {
+    "role": "Softwareontwikkelaar",
+    "introduction": "Op zoek naar een functie als fullstack- of backendontwikkelaar.",
+    "about": "Ik wil graag eerder betrokken zijn bij het begrijpen van de wensen en het bepalen van de oplossing.",
+    "music": "Muziek maken",
+    "films": "Film & bioscoop"
+  },
+  "landing": {
+    "experience": "3 jaar professionele ervaring",
+    "action": "Bekijk portfolio"
+  },
+  "overview": {
+    "title": "Portfolio",
+    "viewProjects": "Bekijk projecten",
+    "experience": "Ervaring",
+    "years": "jaar",
+    "professional": "professionele ontwikkelervaring",
+    "at": "bij",
+    "fullstack": "Fullstackontwikkeling",
+    "backend": "Backendservices & integraties",
+    "mobile": "Native mobiele apps",
+    "database": "Databaseontwerp",
+    "delivery": "Testen & opleveren",
+    "vexRead": "Lees over het Valk Exclusief-project",
+    "divergenceSummary": "Eigen systemen, ontwikkeltools en regressiecontroles.",
+    "explore": "Bekijk het project",
+    "email": "E-mail",
+    "pending": "volgt",
+    "emailPending": "Het openbare e-mailadres wordt na de ontwerpreview toegevoegd.",
+    "linkedinPending": "De LinkedIn-link wordt na de ontwerpreview toegevoegd.",
+    "github": "Daan van Vugt op GitHub",
+    "preview": "Ontwerpversie · Projectbeschrijvingen en contactgegevens worden nog aangevuld."
+  },
+  "visuals": {
+    "vex": "Echte schermen van de Valk Exclusief-app met zelf inchecken, een digitale kamersleutel en beloningen. Decoratieve, conceptuele verbinding tussen app en services.",
+    "divergence": "Een ontwikkelrender van de laboratoriumkaart van Divergence, naast een conceptuele reeks voor code, bouwen en testen.",
+    "mapAlt": "Een ontwikkelrender van de laboratoriumkaart in Emerald Rogue: Divergence",
+    "development": "Ontwikkelversie",
+    "map": "Kaartontwikkeling"
+  },
+  "caseStudy": {
+    "involvement": "Mijn bijdrage",
+    "links": "Projectlinks",
+    "draft": "Projectbeschrijving in concept",
+    "draftNote": "Concept · Details vullen we samen aan na de review van de homepage.",
+    "other": "Ander project",
+    "credits": "Gebaseerd op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Deze pagina gaat over de Divergence-fork; het oorspronkelijke werk blijft toegeschreven aan de makers."
+  },
+  "links": { "appStore": "App Store", "googlePlay": "Google Play", "code": "Bekijk de code" },
+  "projects": {
+    "vex": {
+      "eyebrow": "Professioneel werk · iOS & Android",
+      "description": "Een hotelapp voor iOS en Android om te boeken, online in te checken, digitale kamersleutels te gebruiken en beloningen te ontvangen.",
+      "role": "De volledige app ontwikkeld, samen met een collega bij Valk Digital.",
+      "contributions": [
+        "Samen met een collega aan alle onderdelen van de app gewerkt.",
+        "Appfuncties en backendintegraties gebouwd en onderhouden.",
+        "Bijgedragen aan testen, uitrollen en doorlopend onderhoud."
+      ],
+      "nextStory": "Volgende stap: een functie of integratie uitlichten, met het probleem, de gemaakte keuzes en de manier van testen."
+    },
+    "divergence": {
+      "eyebrow": "Persoonlijk project · GBA / C",
+      "description": "Een persoonlijk C-project dat Pokémon Emerald Rogue uitbreidt met eigen spelsystemen, ontwikkeltools en regressiecontroles.",
+      "role": "Eigen ontwikkeling aan een zelfstandige fork van Pokémon Emerald Rogue.",
+      "contributions": [
+        "Breidt een bestaande codebase op basis van decompilatie uit met eigen spelsystemen.",
+        "Bevat projectspecifieke wijzigingen, buildtools en gerichte regressiecontroles.",
+        "Houdt de projectdocumentatie en vermelding van oorspronkelijke makers bij."
+      ],
+      "nextStory": "Volgende stap: een systeem of bugfix kiezen die de technische keuzes goed laat zien.",
+      "tooling": "Python-ontwikkeltools",
+      "testing": "Regressietests"
+    }
+  },
+  "notFound": {
+    "title": "Pagina niet gevonden.",
+    "description": "Deze pagina bestaat niet.",
+    "back": "Terug naar het portfolio"
+  },
+  "meta": {
+    "home": "Daan van Vugt — Softwareontwikkelaar",
+    "description": "Daan van Vugt. Softwareontwikkelaar met 3 jaar professionele ervaring in webapps, mobiele apps, backendservices en testen."
+  },
+  "workshop": {
+    "label": "Ontwerpen vergelijken",
+    "typeface": "Lettertype",
+    "movement": "Beweging",
+    "idle": "Rustige beweging zonder interactie",
+    "copied": "Link gekopieerd",
+    "copy": "Vergelijkingslink kopiëren",
+    "copyError": "Kopieer het adres uit je browser om deze combinatie te delen.",
+    "fonts": {
+      "space": "Hoekige details",
+      "outfit": "Rondere vormen",
+      "bricolage": "Meer onregelmatige details",
+      "original": "Vorige versie",
+      "originalName": "Oorspronkelijk lettertype"
+    },
+    "motions": {
+      "original": { "name": "Origineel", "description": "Kleine kanteling, snel stil" },
+      "responsive": { "name": "Responsief", "description": "Meer beweging en terugvering" },
+      "bouncy": { "name": "Verend", "description": "Losser, langer verend" }
+    }
+  }
+}

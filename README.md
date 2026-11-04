@@ -16,6 +16,7 @@ npm run dev
 ```sh
 npm run lint
 npm run format:check
+npm test
 npm run build
 ```
 

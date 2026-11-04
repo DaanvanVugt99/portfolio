@@ -1,8 +1,5 @@
 export const landing = {
   lines: ['Daan van Vugt'],
-  role: 'Software developer',
-  experience: '3 years of professional experience',
-  action: 'View portfolio',
   href: '/portfolio',
   font: '/fonts/space-grotesk-bold.typeface.json',
   fontFamily: 'Workshop Space',

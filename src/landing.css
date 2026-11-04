@@ -54,9 +54,6 @@
 .motion-toggle:disabled {
   cursor: default;
 }
-.landing-controls .theme-switch {
-  background: var(--background);
-}
 .landing-main {
   display: flex;
   flex-direction: column;

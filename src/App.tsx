@@ -22,9 +22,12 @@ import {
 import { useEffect, useRef, useState, type ReactNode, type SVGProps } from 'react'
 import { Button } from './components/ui/button'
 import { Card } from './components/ui/card'
-import { backendTechnologies, profile, projects, type Project } from './data/portfolio'
+import { profile, type Project } from './data/portfolio'
+import { usePortfolio } from './hooks/usePortfolio'
+import { useTranslation } from 'react-i18next'
 import { PreferencesProvider } from './state/Preferences'
-import { MotionToggle, ThemeSwitcher } from './components/PreferenceControls'
+import { MotionToggle } from './components/PreferenceControls'
+import { Settings } from './components/Settings'
 import { LandingPage } from './components/LandingPage'
 import { WorkshopPage } from './components/WorkshopPage'
 
@@ -67,29 +70,32 @@ function Linkedin({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: nu
 }
 
 function Header() {
+  const { t } = useTranslation()
   return (
     <header className="site-header">
-      <Link className="identity" to="/" aria-label="Daan van Vugt, home">
+      <Link className="identity" to="/" aria-label={t('navigation.home')}>
         <span className="monogram">
           d<span>.</span>
         </span>
         <span>
-          Daan van Vugt<span className="identity-role">Software developer</span>
+          Daan van Vugt<span className="identity-role">{t('profile.role')}</span>
         </span>
       </Link>
-      <nav aria-label="Main navigation">
-        <Link to="/portfolio#work">Work</Link>
-        <Link to="/portfolio#about">About</Link>
+      <nav aria-label={t('navigation.label')}>
+        <Link to="/portfolio#work">{t('navigation.work')}</Link>
+        <Link to="/portfolio#about">{t('navigation.about')}</Link>
         <Link to="/portfolio#contact">
-          Contact <ArrowUpRight size={13} />
+          {t('navigation.contact')} <ArrowUpRight size={13} />
         </Link>
       </nav>
-      <ThemeSwitcher />
+      <Settings />
     </header>
   )
 }
 
 function PageEffects() {
+  const { t } = useTranslation()
+  const { projects } = usePortfolio()
   const { pathname, hash } = useLocation()
   const previousPath = useRef(pathname)
   useEffect(() => {
@@ -97,16 +103,19 @@ function PageEffects() {
     document.title = project
       ? `${project.title} — Daan van Vugt`
       : pathname === '/portfolio'
-        ? 'Portfolio — Daan van Vugt'
-        : 'Daan van Vugt — Software developer'
+        ? `${t('overview.title')} — Daan van Vugt`
+        : t('meta.home')
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute(
         'content',
         project
           ? `${project.title} — ${project.description} ${project.role}`
-          : 'Daan van Vugt. Software developer with 3 years of professional experience in web and mobile applications, backend services, and testing.',
+          : t('meta.description'),
       )
+  }, [pathname, t, projects])
+
+  useEffect(() => {
     const main = document.getElementById('main')
     main?.setAttribute('tabindex', '-1')
     if (previousPath.current !== pathname) main?.focus({ preventScroll: true })
@@ -177,6 +186,8 @@ function AbstractIllustration() {
 }
 
 function IntroCard() {
+  const { t } = useTranslation()
+  const { profile } = usePortfolio()
   return (
     <Card className="intro-card">
       <div className="eyebrow intro-eyebrow">{profile.role}</div>
@@ -187,7 +198,7 @@ function IntroCard() {
       <p>{profile.introduction}</p>
       <div className="intro-bottom">
         <a className="overview-work-link" href="#work">
-          View projects <ArrowDown size={16} />
+          {t('overview.viewProjects')} <ArrowDown size={16} />
         </a>
       </div>
       <AbstractIllustration />
@@ -208,34 +219,36 @@ function Pills({ items }: { items: string[] }) {
 }
 
 function ExperienceCard() {
+  const { t } = useTranslation()
+  const { backendTechnologies } = usePortfolio()
   return (
     <Card className="experience-card">
       <div className="eyebrow">
         <span className="icon-label">
           <Layers3 size={15} />
         </span>{' '}
-        EXPERIENCE
+        {t('overview.experience')}
       </div>
       <div className="experience-heading">
         <strong>
-          3<span> years</span>
+          3<span> {t('overview.years')}</span>
         </strong>
         <p>
-          of professional development
+          {t('overview.professional')}
           <br />
-          at <span>Valk Digital</span>
+          {t('overview.at')} <span>Valk Digital</span>
         </p>
       </div>
       <div className="experience-rule" />
       <div className="capabilities">
         <span>
-          <Braces size={16} /> Fullstack development
+          <Braces size={16} /> {t('overview.fullstack')}
         </span>
         <span>
-          <Server size={16} /> Backend services & integrations
+          <Server size={16} /> {t('overview.backend')}
         </span>
         <span>
-          <Smartphone size={16} /> Native mobile applications
+          <Smartphone size={16} /> {t('overview.mobile')}
         </span>
       </div>
       <Pills items={backendTechnologies} />
@@ -272,10 +285,11 @@ function Phone({
 }
 
 function VexVisual({ detail = false }: { detail?: boolean }) {
+  const { t } = useTranslation()
   return (
     <MotionRegion
       className={`vex-visual ${detail ? 'vex-detail-visual' : ''}`}
-      label="Actual Valk Exclusief app screens showing self check-in, a digital room key, and rewards. Decorative conceptual app and services connection."
+      label={t('visuals.vex')}
     >
       <div className="visual-grid" />
       <div className="vex-mark">
@@ -310,6 +324,8 @@ function VexVisual({ detail = false }: { detail?: boolean }) {
 }
 
 function VexCard() {
+  const { t } = useTranslation()
+  const { projects } = usePortfolio()
   const project = projects[0]
   return (
     <Card className="vex-card project-card" id="work">
@@ -323,7 +339,7 @@ function VexCard() {
           <Link
             className="round-link project-arrow"
             to="/projects/vex"
-            aria-label="Read about the Valk Exclusief project"
+            aria-label={t('overview.vexRead')}
           >
             <ArrowUpRight size={20} />
           </Link>
@@ -354,19 +370,17 @@ function BuildSequence() {
 }
 
 function DivergenceCard() {
+  const { t } = useTranslation()
   return (
     <Card className="divergence-card project-card">
-      <MotionRegion
-        className="divergence-visual"
-        label="A real development render of Divergence’s laboratory map, alongside a conceptual code, build, test sequence."
-      >
+      <MotionRegion className="divergence-visual" label={t('visuals.divergence')}>
         <div className="map-frame">
           <img src="/assets/divergence-lab.png" alt="" width="320" height="256" loading="lazy" />
         </div>
         <BuildSequence />
       </MotionRegion>
       <div className="divergence-copy">
-        <div className="eyebrow">PERSONAL PROJECT · GBA / C</div>
+        <div className="eyebrow">{t('projects.divergence.eyebrow')}</div>
         <h2>
           <Link to="/projects/divergence">
             Emerald Rogue:
@@ -374,13 +388,9 @@ function DivergenceCard() {
             Divergence
           </Link>
         </h2>
-        <p>
-          Custom systems, tooling,
-          <br />
-          and regression checks.
-        </p>
+        <p>{t('overview.divergenceSummary')}</p>
         <Link className="text-link" to="/projects/divergence">
-          Explore the project <ArrowUpRight size={15} />
+          {t('overview.explore')} <ArrowUpRight size={15} />
         </Link>
       </div>
     </Card>
@@ -388,16 +398,18 @@ function DivergenceCard() {
 }
 
 function AboutCard() {
+  const { t } = useTranslation()
+  const { profile } = usePortfolio()
   return (
     <Card className="about-card" id="about">
-      <h2>About</h2>
+      <h2>{t('navigation.about')}</h2>
       <p>{profile.about}</p>
       <div className="interest-tags">
         <span>
-          <AudioLines size={14} /> Making music
+          <AudioLines size={14} /> {t('profile.music')}
         </span>
         <span>
-          <Film size={14} /> Films & cinema
+          <Film size={14} /> {t('profile.films')}
         </span>
       </div>
     </Card>
@@ -405,23 +417,21 @@ function AboutCard() {
 }
 
 function ContactCard() {
+  const { t } = useTranslation()
   return (
     <Card className="contact-card" id="contact">
       <span className="contact-symbol" aria-hidden="true">
         <ArrowUpRight size={36} strokeWidth={1.2} />
       </span>
-      <h2>Contact</h2>
+      <h2>{t('navigation.contact')}</h2>
       <div className="contact-links">
         {profile.email ? (
           <a href={`mailto:${profile.email}`}>
-            <Mail size={15} /> Email <ArrowUpRight size={12} />
+            <Mail size={15} /> {t('overview.email')} <ArrowUpRight size={12} />
           </a>
         ) : (
-          <span
-            className="pending-link"
-            title="Your preferred public email will be added after design review."
-          >
-            <Mail size={15} /> Email <small>to add</small>
+          <span className="pending-link" title={t('overview.emailPending')}>
+            <Mail size={15} /> {t('overview.email')} <small>{t('overview.pending')}</small>
           </span>
         )}
         <a href={profile.github} target="_blank" rel="noreferrer">
@@ -432,11 +442,8 @@ function ContactCard() {
             <Linkedin size={15} /> LinkedIn <ArrowUpRight size={12} />
           </a>
         ) : (
-          <span
-            className="pending-link"
-            title="Your LinkedIn URL will be added after design review."
-          >
-            <Linkedin size={15} /> LinkedIn <small>to add</small>
+          <span className="pending-link" title={t('overview.linkedinPending')}>
+            <Linkedin size={15} /> LinkedIn <small>{t('overview.pending')}</small>
           </span>
         )}
       </div>
@@ -445,16 +452,12 @@ function ContactCard() {
 }
 
 function Footer() {
+  const { t } = useTranslation()
   return (
     <footer className="site-footer">
       <span>© {new Date().getFullYear()} Daan van Vugt</span>
       <MotionToggle />
-      <a
-        href={profile.github}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Daan van Vugt on GitHub"
-      >
+      <a href={profile.github} target="_blank" rel="noreferrer" aria-label={t('overview.github')}>
         <Github size={16} />
       </a>
     </footer>
@@ -462,10 +465,11 @@ function Footer() {
 }
 
 function OverviewPage() {
+  const { t } = useTranslation()
   return (
     <>
       <div className="page-intro">
-        <span>PORTFOLIO</span>
+        <span>{t('overview.title')}</span>
       </div>
       <main id="main" className="bento-grid">
         <IntroCard />
@@ -476,18 +480,20 @@ function OverviewPage() {
         <ContactCard />
       </main>
       <div className="review-note">
-        <span /> Design preview · Project stories and contact details are being refined.
+        <span /> {t('overview.preview')}
       </div>
     </>
   )
 }
 
 function ProjectPage({ project }: { project: Project }) {
+  const { t } = useTranslation()
+  const { projects } = usePortfolio()
   const other = projects.find((p) => p.slug !== project.slug)!
   return (
     <main id="main" className="project-page">
       <Link to="/portfolio#work" className="back-link">
-        <ArrowLeft size={16} /> Back to selected work
+        <ArrowLeft size={16} /> {t('navigation.back')}
       </Link>
       <div className="case-heading">
         <span className="eyebrow">{project.eyebrow}</span>
@@ -503,14 +509,14 @@ function ProjectPage({ project }: { project: Project }) {
             src="/assets/divergence-lab.png"
             width="320"
             height="256"
-            alt="A development render of the laboratory map in Emerald Rogue: Divergence"
+            alt={t('visuals.mapAlt')}
           />
           <div>
-            <span className="eyebrow">DEVELOPMENT PREVIEW</span>
+            <span className="eyebrow">{t('visuals.development')}</span>
             <h2>
               Divergence
               <br />
-              map development
+              {t('visuals.map')}
             </h2>
             <BuildSequence />
           </div>
@@ -518,7 +524,7 @@ function ProjectPage({ project }: { project: Project }) {
       )}
       <div className="case-columns">
         <section>
-          <div className="eyebrow">MY INVOLVEMENT</div>
+          <div className="eyebrow">{t('caseStudy.involvement')}</div>
           <h2>{project.role}</h2>
           <ul className="contribution-list">
             {project.contributions.map((item) => (
@@ -530,7 +536,7 @@ function ProjectPage({ project }: { project: Project }) {
           </ul>
         </section>
         <aside>
-          <div className="eyebrow">PROJECT LINKS</div>
+          <div className="eyebrow">{t('caseStudy.links')}</div>
           {project.links.map((link) => (
             <Button asChild variant="outline" key={link.href}>
               <a href={link.href} target="_blank" rel="noreferrer">
@@ -541,24 +547,18 @@ function ProjectPage({ project }: { project: Project }) {
           ))}
         </aside>
       </div>
-      {project.slug === 'divergence' && (
-        <p className="credits">
-          Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s
-          pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited
-          to its contributors.
-        </p>
-      )}
+      {project.slug === 'divergence' && <p className="credits">{t('caseStudy.credits')}</p>}
       <section className="story-placeholder">
         <Workflow size={22} />
         <div>
-          <h2>Case study draft</h2>
+          <h2>{t('caseStudy.draft')}</h2>
           <p>{project.nextStory}</p>
-          <span>Case-study draft · Details to be completed together after homepage review.</span>
+          <span>{t('caseStudy.draftNote')}</span>
         </div>
       </section>
       <Link to={`/projects/${other.slug}`} className="next-project">
         <span>
-          <small>OTHER PROJECT</small>
+          <small>{t('caseStudy.other')}</small>
           {other.title}
         </span>
         <ArrowRight size={25} />
@@ -568,14 +568,15 @@ function ProjectPage({ project }: { project: Project }) {
 }
 
 function NotFound() {
+  const { t } = useTranslation()
   return (
     <main id="main" className="not-found">
       <span className="eyebrow">404</span>
-      <h1>Page not found.</h1>
-      <p>This page does not exist.</p>
+      <h1>{t('notFound.title')}</h1>
+      <p>{t('notFound.description')}</p>
       <Button asChild>
         <Link to="/portfolio">
-          Back to the portfolio <ArrowRight size={16} />
+          {t('notFound.back')} <ArrowRight size={16} />
         </Link>
       </Button>
     </main>
@@ -602,12 +603,14 @@ function SiteLayout() {
 }
 
 function App() {
+  const { t } = useTranslation()
+  const { projects } = usePortfolio()
   return (
     <PreferencesProvider>
       <BrowserRouter>
         <PageEffects />
         <a className="skip-link" href="#main">
-          Skip to content
+          {t('navigation.skip')}
         </a>
         <Routes>
           <Route path="/" element={<LandingGate />} />

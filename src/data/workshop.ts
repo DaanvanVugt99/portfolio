@@ -2,37 +2,31 @@ export const fontOptions = [
   {
     id: 'space',
     name: 'Space Grotesk',
-    description: 'Angular details',
     url: '/fonts/space-grotesk-bold.typeface.json',
     family: 'Workshop Space',
   },
   {
     id: 'outfit',
     name: 'Outfit',
-    description: 'Rounder shapes',
     url: '/fonts/outfit-bold.typeface.json',
     family: 'Workshop Outfit',
   },
   {
     id: 'bricolage',
     name: 'Bricolage Grotesque',
-    description: 'More irregular detail',
     url: '/fonts/bricolage-bold.typeface.json',
     family: 'Workshop Bricolage',
   },
   {
     id: 'original',
-    name: 'Original font',
-    description: 'Previous version',
+    name: 'Helvetiker Bold',
     url: '/fonts/helvetiker_bold.typeface.json',
     family: 'Inter Variable',
   },
 ] as const
 
 export type MotionStyle = {
-  id: string
-  name: string
-  description: string
+  id: 'original' | 'responsive' | 'bouncy'
   maxTilt: number
   hoverDepth: number
   pressDepth: number
@@ -47,8 +41,6 @@ export type MotionStyle = {
 export const motionOptions: MotionStyle[] = [
   {
     id: 'original',
-    name: 'Original',
-    description: 'Small tilt, quick settle',
     maxTilt: (Math.PI * 8) / 180,
     hoverDepth: 0.065,
     pressDepth: 0.085,
@@ -61,8 +53,6 @@ export const motionOptions: MotionStyle[] = [
   },
   {
     id: 'responsive',
-    name: 'Responsive',
-    description: 'More travel and rebound',
     maxTilt: (Math.PI * 15) / 180,
     hoverDepth: 0.18,
     pressDepth: 0.17,
@@ -75,8 +65,6 @@ export const motionOptions: MotionStyle[] = [
   },
   {
     id: 'bouncy',
-    name: 'Bouncy',
-    description: 'Looser, longer spring',
     maxTilt: (Math.PI * 20) / 180,
     hoverDepth: 0.27,
     pressDepth: 0.25,

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 import { Copy, Check } from 'lucide-react'
 import { defaultMotion, fontOptions, motionOptions } from '../data/workshop'
@@ -6,6 +7,7 @@ import { landing } from '../data/landing'
 import { LandingPage } from './LandingPage'
 
 export function WorkshopPage() {
+  const { t } = useTranslation()
   const [params, setParams] = useSearchParams()
   const [copied, setCopied] = useState(false)
   const [copyError, setCopyError] = useState(false)
@@ -34,33 +36,37 @@ export function WorkshopPage() {
     }
   }
   const controls = (
-    <section className="workshop-controls" aria-label="Design comparison">
+    <section className="workshop-controls" aria-label={t('workshop.label')}>
       <div className="workshop-section">
-        <h2>Typeface</h2>
-        <div className="workshop-options" role="group" aria-label="Typeface">
+        <h2>{t('workshop.typeface')}</h2>
+        <div className="workshop-options" role="group" aria-label={t('workshop.typeface')}>
           {fontOptions.map((item) => (
             <button
               key={item.id}
               aria-pressed={font.id === item.id}
               onClick={() => change('font', item.id)}
             >
-              <span>{item.name}</span>
-              <small>{item.description}</small>
+              <span>{item.id === 'original' ? t('workshop.fonts.originalName') : item.name}</span>
+              <small>{t(`workshop.fonts.${item.id}`)}</small>
             </button>
           ))}
         </div>
       </div>
       <div className="workshop-section">
-        <h2>Movement</h2>
-        <div className="workshop-options motion-options" role="group" aria-label="Movement">
+        <h2>{t('workshop.movement')}</h2>
+        <div
+          className="workshop-options motion-options"
+          role="group"
+          aria-label={t('workshop.movement')}
+        >
           {motionOptions.map((item) => (
             <button
               key={item.id}
               aria-pressed={motionStyle.id === item.id}
               onClick={() => change('motion', item.id)}
             >
-              <span>{item.name}</span>
-              <small>{item.description}</small>
+              <span>{t(`workshop.motions.${item.id}.name`)}</span>
+              <small>{t(`workshop.motions.${item.id}.description`)}</small>
             </button>
           ))}
         </div>
@@ -72,16 +78,16 @@ export function WorkshopPage() {
             checked={idle}
             onChange={(event) => change('idle', event.target.checked ? '1' : '0')}
           />{' '}
-          Slow idle movement
+          {t('workshop.idle')}
         </label>
         <button className="copy-comparison" onClick={copy}>
           {copied ? <Check size={14} /> : <Copy size={14} />}{' '}
-          {copied ? 'Link copied' : 'Copy comparison link'}
+          {copied ? t('workshop.copied') : t('workshop.copy')}
         </button>
       </div>
       {copyError && (
         <p className="copy-note" role="status">
-          Copy the address from your browser to share this combination.
+          {t('workshop.copyError')}
         </p>
       )}
     </section>

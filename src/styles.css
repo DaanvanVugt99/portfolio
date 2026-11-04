@@ -157,28 +157,6 @@ button:disabled {
 .site-header nav a:hover {
   color: var(--primary);
 }
-.theme-switch {
-  padding: 4px;
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  display: flex;
-  gap: 2px;
-}
-.theme-switch button {
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  width: 28px;
-  height: 27px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-}
-.theme-switch button[aria-pressed='true'] {
-  color: var(--foreground);
-  background: var(--card);
-  box-shadow: 0 1px 5px #00000012;
-}
 .page-intro {
   display: flex;
   justify-content: space-between;
@@ -1393,12 +1371,8 @@ p {
   .site-header nav {
     display: none;
   }
-  .theme-switch {
+  .site-header .settings-trigger {
     margin-left: auto;
-  }
-  .theme-switch button {
-    width: 25px;
-    height: 25px;
   }
   .page-intro {
     margin: 0 2px 18px;
