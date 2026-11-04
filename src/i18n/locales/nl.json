@@ -28,7 +28,7 @@
   "profile": {
     "role": "Softwareontwikkelaar",
     "introduction": "Op zoek naar een functie als fullstack- of backendontwikkelaar.",
-    "about": "Ik wil graag eerder betrokken zijn bij het begrijpen van de wensen en het bepalen van de oplossing.",
+    "about": "Ik zoek graag uit waar een probleem vandaan komt en werk aan de oplossing tot en met de release.",
     "music": "Muziek maken",
     "films": "Film & bioscoop"
   },
@@ -242,5 +242,20 @@
       "personal": "Persoonlijk project"
     },
     "metaDescription": "Projecten van Daan van Vugt: mobiele apps, fullstack-webontwikkeling, gedeelde backendservices en een persoonlijk C-project."
+  },
+  "about": {
+    "title": "Over mij",
+    "back": "Portfolio-overzicht",
+    "cardLink": "Over Daan van Vugt",
+    "portraitAlt": "Portret van Daan van Vugt",
+    "outsideWork": "Buiten mijn werk",
+    "viewWork": "Bekijk mijn werk",
+    "contact": "Neem contact op",
+    "metaDescription": "Over Daan van Vugt: softwareontwikkeling voor mobiel en web, games maken, bass music produceren en film.",
+    "biography": {
+      "introduction": "Hi, ik ben Daan van Vugt, een softwareontwikkelaar met drie jaar ervaring in het bouwen van mobiele apps en webtools. Bij <experience>Valk Digital</experience> werkte ik in een klein team aan de hele stack. De ene dag verfijnde ik een hotelboekingsflow in React Native. De andere dag zocht ik uit hoe housekeepingtaken weer gesynchroniseerd moesten worden nadat een apparaat opnieuw online kwam, of waarom een backofficepagina traag was.",
+      "approach": "Ik zoek graag uit waar een probleem vandaan komt en werk aan de oplossing tot en met de release. Ik schakel graag tussen frontend en backend en probeer code wat overzichtelijker achter te laten dan ik die aantrof. Bijvoorbeeld door een component te vereenvoudigen of een test toe te voegen voor een bug die ik net heb opgespoord.",
+      "personal": "In mijn vrije tijd maak ik games, produceer ik bass music in Ableton Live en ga ik graag naar de bioscoop. Ik werk aan <divergence>Divergence</divergence>, een Game Boy Advance-project geschreven in C, en ontwerp Phantasm, een tactische autobattler. Ik kan me een hele avond vermaken met het bijschaven van een spelmechaniek, een bassound goed in een track laten passen of een film kijken op het grote scherm."
+    }
   }
 }

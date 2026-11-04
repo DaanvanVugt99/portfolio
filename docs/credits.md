@@ -2,6 +2,7 @@
 
 - Layout reference: [Shadcn Studio Grid 14](https://shadcnstudio.com/blocks/bento-grid/bento-grid). The layout and illustrations are custom; premium block code is not included.
 - Project overview reference: [Shadcnblocks Projects 5](https://www.shadcnblocks.com/block/projects5). The project cards and static cover compositions are custom.
+- About page references: [Shadcnblocks About 9](https://www.shadcnblocks.com/block/about9) and [Josh Comeau's About page](https://www.joshwcomeau.com/about-josh/). The layout is custom; premium block code is not included. Portrait supplied by Daan van Vugt, resized to responsive WebP images with its original framing preserved.
 - Valk to Go photograph: [official product page](https://www.valkexclusief.nl/faciliteiten/valk-to-go-shop/), [original photograph](https://cdn.bfldr.com/BLW26VG3/at/ngpxhj4w4hsf4f7fp9xnnw/edit-0251.jpg). Image belongs to Valk Exclusief.
 - HKTD previews: [official Google Play listing](https://play.google.com/store/apps/details?id=com.hktdmobile). Images belong to Valk Digital / Valk Exclusief.
 - Timeline references: [Shadcn Studio Timeline 2](https://shadcnstudio.com/preview/blocks/base/marketing-ui/timeline-component/timeline-component-02) and [Aceternity Timeline](https://ui.aceternity.com/components/timeline). The timeline component is custom.

@@ -35,6 +35,7 @@ import { BrandMark } from './components/BrandMark'
 import { StickyHeader } from './components/StickyHeader'
 import { ProjectsPage } from './components/ProjectsPage'
 import { ProjectThumbnail } from './components/ProjectThumbnail'
+import { AboutPage } from './components/AboutPage'
 
 function Github({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
   return (
@@ -88,7 +89,7 @@ function Header() {
       </Link>
       <nav aria-label={t('navigation.label')}>
         <Link to="/projects">{t('navigation.work')}</Link>
-        <Link to="/portfolio#about">{t('navigation.about')}</Link>
+        <Link to="/about">{t('navigation.about')}</Link>
         <Link to="/portfolio#contact">
           {t('navigation.contact')} <ArrowUpRight size={13} />
         </Link>
@@ -109,11 +110,13 @@ function PageEffects() {
       ? `${project.title} — Daan van Vugt`
       : pathname === '/projects'
         ? `${t('work.title')} — Daan van Vugt`
-        : pathname === '/portfolio'
-          ? `${t('overview.title')} — Daan van Vugt`
-          : pathname === '/experience'
-            ? `${t('experience.title')} — Daan van Vugt`
-            : t('meta.home')
+        : pathname === '/about'
+          ? `${t('about.title')} — Daan van Vugt`
+          : pathname === '/portfolio'
+            ? `${t('overview.title')} — Daan van Vugt`
+            : pathname === '/experience'
+              ? `${t('experience.title')} — Daan van Vugt`
+              : t('meta.home')
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute(
@@ -122,9 +125,11 @@ function PageEffects() {
           ? `${project.title} — ${project.description} ${project.role}`
           : pathname === '/projects'
             ? t('work.metaDescription')
-            : pathname === '/experience'
-              ? t('experience.metaDescription')
-              : t('meta.description'),
+            : pathname === '/about'
+              ? t('about.metaDescription')
+              : pathname === '/experience'
+                ? t('experience.metaDescription')
+                : t('meta.description'),
       )
   }, [pathname, t, projects])
 
@@ -449,7 +454,14 @@ function AboutCard() {
   const { profile } = usePortfolio()
   return (
     <Card className="about-card" id="about">
-      <h2>{t('navigation.about')}</h2>
+      <div className="about-card-heading">
+        <h2>
+          <Link className="about-card-link" to="/about" aria-label={t('about.cardLink')}>
+            {t('navigation.about')}
+          </Link>
+        </h2>
+        <ArrowUpRight className="about-card-arrow" size={18} strokeWidth={1.5} aria-hidden="true" />
+      </div>
       <p>{profile.about}</p>
       <div className="interest-tags">
         <span>
@@ -661,15 +673,13 @@ function NotFound() {
 function LandingGate() {
   const { hash } = useLocation()
   if (hash === '#work') return <Navigate replace to="/projects" />
-  return ['#about', '#contact'].includes(hash) ? (
-    <Navigate replace to={`/portfolio${hash}`} />
-  ) : (
-    <LandingPage />
-  )
+  if (hash === '#about') return <Navigate replace to="/about" />
+  return hash === '#contact' ? <Navigate replace to={`/portfolio${hash}`} /> : <LandingPage />
 }
 
 function PortfolioGate() {
   const { hash } = useLocation()
+  if (hash === '#about') return <Navigate replace to="/about" />
   return hash === '#work' ? <Navigate replace to="/projects" /> : <OverviewPage />
 }
 
@@ -699,6 +709,7 @@ function App() {
           <Route element={<SiteLayout />}>
             <Route path="/portfolio" element={<PortfolioGate />} />
             <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/experience" element={<ExperiencePage />} />
             {projects.map((project) => (
               <Route

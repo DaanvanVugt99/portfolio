@@ -28,7 +28,7 @@
   "profile": {
     "role": "Software developer",
     "introduction": "Open to fullstack and backend development roles.",
-    "about": "I’d like to be involved earlier in understanding requirements and deciding how to solve them.",
+    "about": "I like getting to the bottom of a problem and seeing the fix through to release.",
     "music": "Making music",
     "films": "Films & cinema"
   },
@@ -242,5 +242,20 @@
       "personal": "Personal project"
     },
     "metaDescription": "Daan van Vugt's projects: mobile apps, full-stack web development, shared backend services, and a personal C project."
+  },
+  "about": {
+    "title": "About me",
+    "back": "Portfolio overview",
+    "cardLink": "About Daan van Vugt",
+    "portraitAlt": "Portrait of Daan van Vugt",
+    "outsideWork": "Outside work",
+    "viewWork": "View my work",
+    "contact": "Get in touch",
+    "metaDescription": "About Daan van Vugt: software development across mobile and web, making games, producing bass music, and cinema.",
+    "biography": {
+      "introduction": "Hi, I’m Daan van Vugt, a software developer with three years of experience building mobile apps and web tools. At <experience>Valk Digital</experience>, I worked across the stack in a small team. Some days I was polishing a hotel booking flow in React Native. Other days I was figuring out how to sync housekeeping tasks after a device came back online or why a back-office page was slow.",
+      "approach": "I like getting to the bottom of a problem and seeing the fix through to release. I’m happy moving between frontend and backend, and I tend to leave the code a little easier to work with than I found it, whether that means simplifying a component or adding a test for a bug I just tracked down.",
+      "personal": "Outside work, I make games, produce bass music in Ableton Live, and love going to the cinema. I’m building <divergence>Divergence</divergence>, a Game Boy Advance project written in C, and designing Phantasm, a tactical autobattler. I can happily spend an evening tweaking a game mechanic, getting a bass sound to sit right in a track, or catching a film on the big screen."
+    }
   }
 }
