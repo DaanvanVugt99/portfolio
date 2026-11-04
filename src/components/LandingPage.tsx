@@ -8,6 +8,7 @@ import { Settings } from './Settings'
 import { useTranslation } from 'react-i18next'
 import type { MotionStyle } from '../data/workshop'
 import { BrandMark } from './BrandMark'
+import { StickyHeader } from './StickyHeader'
 
 export function LandingPage({
   preview,
@@ -23,7 +24,7 @@ export function LandingPage({
   const { t } = useTranslation()
   return (
     <div className={`landing-page ${preview ? 'workshop-page' : ''}`}>
-      <header className="landing-header">
+      <StickyHeader className="landing-header">
         {preview ? (
           <Link to="/" className="workshop-back">
             <ArrowLeft size={15} /> {t('navigation.landing')}
@@ -41,7 +42,7 @@ export function LandingPage({
           <MotionToggle />
           <Settings />
         </div>
-      </header>
+      </StickyHeader>
       <main id="main" className="landing-main" tabIndex={-1}>
         <LandingName
           key={preview?.fontUrl ?? landing.font}

@@ -33,6 +33,7 @@ import { WorkshopPage } from './components/WorkshopPage'
 import { vexShowcasePhones } from './data/vexScreenshots'
 import { ExperiencePage } from './components/ExperiencePage'
 import { BrandMark } from './components/BrandMark'
+import { StickyHeader } from './components/StickyHeader'
 
 function Github({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
   return (
@@ -75,7 +76,7 @@ function Linkedin({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: nu
 function Header() {
   const { t } = useTranslation()
   return (
-    <header className="site-header">
+    <StickyHeader className="site-header">
       <Link className="identity" to="/" aria-label={t('navigation.home')}>
         <span className="monogram">
           <BrandMark />
@@ -92,7 +93,7 @@ function Header() {
         </Link>
       </nav>
       <Settings />
-    </header>
+    </StickyHeader>
   )
 }
 

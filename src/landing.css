@@ -15,9 +15,10 @@
   padding: 0 48px;
 }
 .landing-header {
+  --header-height: 108px;
+  --header-surface: var(--landing-background);
   width: 100%;
   max-width: 1440px;
-  height: 108px;
   margin: 0 auto;
   flex-shrink: 0;
   display: flex;
@@ -225,7 +226,7 @@
 }
 @media (min-width: 1450px) {
   .landing-header {
-    height: 120px;
+    --header-height: 120px;
   }
   .landing-details {
     padding-bottom: 64px;
@@ -236,7 +237,7 @@
     padding: 0 20px;
   }
   .landing-header {
-    height: 88px;
+    --header-height: 88px;
   }
   .landing-controls {
     gap: 16px;
@@ -272,7 +273,7 @@
 }
 @media (max-height: 520px) and (min-width: 701px) {
   .landing-header {
-    height: 68px;
+    --header-height: 68px;
   }
   .name-stage {
     min-height: 195px;

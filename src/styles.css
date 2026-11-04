@@ -56,7 +56,7 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 24px;
+  scroll-padding-top: 104px;
 }
 body {
   margin: 0;
@@ -97,7 +97,7 @@ button:disabled {
   padding: 0 0 20px;
 }
 .site-header {
-  height: 120px;
+  --header-height: 120px;
   display: flex;
   align-items: center;
   gap: 42px;
@@ -1091,7 +1091,7 @@ p {
 }
 @media (min-width: 1450px) {
   .site-header {
-    height: 135px;
+    --header-height: 135px;
   }
   .page-intro {
     margin-bottom: 25px;
@@ -1281,7 +1281,7 @@ p {
     padding-bottom: 12px;
   }
   .site-header {
-    height: 98px;
+    --header-height: 98px;
     gap: 14px;
     flex-wrap: wrap;
   }

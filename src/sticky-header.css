@@ -1,0 +1,83 @@
+.header-scroll-sentinel {
+  display: block;
+  flex-shrink: 0;
+  height: 1px;
+  margin-bottom: -1px;
+  transform: translateY(32px);
+  pointer-events: none;
+}
+.sticky-header {
+  --header-compact-height: 72px;
+  --header-inset: 12px;
+  --header-padding: 22px;
+  position: sticky;
+  top: calc(var(--header-inset) - (var(--header-height) - var(--header-compact-height)) / 2);
+  height: var(--header-height);
+  z-index: 40;
+  isolation: isolate;
+  pointer-events: none;
+  transition: padding-inline 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sticky-header > * {
+  pointer-events: auto;
+}
+.sticky-header::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: calc((var(--header-height) - var(--header-compact-height)) / 2) 0;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--header-surface, var(--card)) 88%, transparent);
+  box-shadow:
+    0 12px 34px -22px #20243530,
+    0 2px 8px -5px #20243512;
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  transition:
+    opacity 260ms ease,
+    backdrop-filter 260ms ease;
+  pointer-events: none;
+}
+.sticky-header[data-scrolled='true'] {
+  padding-inline: var(--header-padding);
+}
+.sticky-header[data-scrolled='true']::before {
+  opacity: 1;
+  backdrop-filter: blur(18px) saturate(140%);
+  pointer-events: auto;
+}
+:root[data-theme='dark'] .sticky-header::before {
+  box-shadow:
+    0 12px 34px -22px #0008,
+    0 2px 8px -5px #0005;
+}
+:root[data-motion='paused'] .sticky-header,
+:root[data-motion='paused'] .sticky-header::before {
+  transition: none;
+}
+@media (max-width: 700px) {
+  html {
+    scroll-padding-top: 96px;
+  }
+  .sticky-header {
+    --header-compact-height: 64px;
+    --header-inset: 10px;
+    --header-padding: 12px;
+  }
+  .sticky-header::before {
+    border-radius: 17px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sticky-header,
+  .sticky-header::before {
+    transition: none;
+  }
+}
+@media (max-height: 520px) and (min-width: 701px) {
+  .landing-header {
+    --header-compact-height: 56px;
+    --header-inset: 8px;
+  }
+}
