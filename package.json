@@ -1,0 +1,9 @@
+{
+  "name": "daan-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"dev": "vite --host 127.0.0.1", "check": "tsc --noEmit", "build": "tsc --noEmit && vite build", "preview": "vite preview --host 127.0.0.1"},
+  "dependencies": {"@fontsource-variable/inter": "latest", "@radix-ui/react-slot": "latest", "class-variance-authority": "latest", "clsx": "latest", "lucide-react": "latest", "react": "latest", "react-dom": "latest", "react-router-dom": "latest", "tailwind-merge": "latest", "three": "latest"},
+  "devDependencies": {"@tailwindcss/vite": "latest", "@types/node": "latest", "@types/react": "latest", "@types/react-dom": "latest", "@types/three": "latest", "@vitejs/plugin-react": "latest", "tailwindcss": "latest", "typescript": "latest", "vite": "latest"}
+}
