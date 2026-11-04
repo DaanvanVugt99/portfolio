@@ -23,7 +23,7 @@
     "skip": "Skip to content",
     "openPortfolio": "Open portfolio overview",
     "landing": "Landing page",
-    "back": "Back to selected work"
+    "back": "Back to projects"
   },
   "profile": {
     "role": "Software developer",
@@ -57,7 +57,7 @@
     "emailPending": "The public email address will be added after design review.",
     "linkedinPending": "The LinkedIn URL will be added after design review.",
     "github": "Daan van Vugt on GitHub",
-    "preview": "Design preview · Project stories and contact details are being refined."
+    "preview": "Design preview · Project stories are being refined."
   },
   "experience": {
     "title": "Experience & education",
@@ -72,7 +72,9 @@
       "description": "Looking for my next role. Also open to other software development opportunities.",
       "contact": "Get in touch"
     },
-    "origin": { "established": "Established" },
+    "origin": {
+      "established": "Established"
+    },
     "vexLink": "Valk Exclusief app",
     "metaDescription": "Daan van Vugt’s work and education: software development at Valk Digital, HBO-ICT studies at Hogeschool van Arnhem en Nijmegen, and VWO at Titus Brandsmalyceum in Oss.",
     "kinds": {
@@ -107,7 +109,10 @@
     "divergence": "A real development render of Divergence’s laboratory map, alongside a conceptual code, build, test sequence.",
     "mapAlt": "A development render of the laboratory map in Emerald Rogue: Divergence",
     "development": "Development preview",
-    "map": "Map development"
+    "map": "Map development",
+    "vexThumbnail": "Valk Exclusief app previews showing hotel bookings and a digital room key.",
+    "valkToGoThumbnail": "A guest using the self-service checkout in a Valk to Go shop.",
+    "hktdThumbnail": "Official HKTD app previews showing room states and a housekeeping task."
   },
   "caseStudy": {
     "involvement": "My involvement",
@@ -115,20 +120,31 @@
     "draft": "Case study draft",
     "draftNote": "Case-study draft · Details to be completed together after homepage review.",
     "other": "Other project",
-    "credits": "Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited to its contributors."
+    "credits": "Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited to its contributors.",
+    "backend": "Shared backend · Roomserve"
   },
-  "links": { "appStore": "App Store", "googlePlay": "Google Play", "code": "Explore the code" },
+  "links": {
+    "appStore": "App Store",
+    "googlePlay": "Google Play",
+    "code": "Explore the code",
+    "product": "Product website"
+  },
   "projects": {
     "vex": {
       "eyebrow": "Professional work · iOS & Android",
       "description": "An iOS and Android hotel app for bookings, online check-in, digital room keys, and rewards.",
-      "role": "App development, end to end, alongside a colleague at Valk Digital.",
+      "role": "App development alongside a colleague, plus work on the shared Roomserve backend at Valk Digital.",
       "contributions": [
         "Worked across the entire application alongside a colleague.",
         "Built and maintained app features and backend integrations.",
         "Contributed to testing, deployment, and ongoing maintenance."
       ],
-      "nextStory": "Next: choose a feature or integration to walk through, including the problem, your decisions, and how you tested it."
+      "nextStory": "Next: choose a feature or integration to walk through, including the problem, your decisions, and how you tested it.",
+      "backend": "Valk Exclusief and HKTD use Roomserve, a shared Ruby on Rails backend. My work included APIs, database work, and automated tests.",
+      "overview": {
+        "summary": "Hotel bookings, online check-in, digital room keys, and rewards.",
+        "contribution": "App and Rails backend development, alongside a colleague."
+      }
     },
     "divergence": {
       "eyebrow": "Personal project · GBA / C",
@@ -141,7 +157,41 @@
       ],
       "nextStory": "Next: select a system or bug fix that best demonstrates your engineering decisions.",
       "tooling": "Python tooling",
-      "testing": "Regression testing"
+      "testing": "Regression testing",
+      "overview": {
+        "summary": "A Game Boy Advance project extending an existing open-source game.",
+        "contribution": "Personal C development, build tooling, and regression checks."
+      }
+    },
+    "valk-to-go": {
+      "eyebrow": "Professional work · Full-stack",
+      "description": "Self-service shops at Van der Valk hotels, with checkout systems and a back office for shop management.",
+      "role": "Full-stack development across React frontends and an Elixir/Phoenix backend at Valk Digital.",
+      "contributions": [
+        "Worked on React frontends for the back office and checkout systems.",
+        "Developed and maintained backend functionality and APIs in Elixir/Phoenix.",
+        "Contributed to testing, delivery, and ongoing maintenance."
+      ],
+      "overview": {
+        "summary": "Self-service hotel shops, checkout systems, and shop management.",
+        "contribution": "React frontends and Elixir/Phoenix backend development."
+      }
+    },
+    "hktd": {
+      "title": "HKTD — Housekeeping & technical services",
+      "eyebrow": "Professional work · Mobile & backend",
+      "description": "A mobile app for housekeeping and technical-services staff at Van der Valk hotels.",
+      "role": "Development and maintenance of the staff app and its shared backend at Valk Digital.",
+      "contributions": [
+        "Worked on the React Native and TypeScript application for hotel staff.",
+        "Contributed to Roomserve APIs, database work, and automated tests in Ruby on Rails.",
+        "Maintained existing functionality and contributed to testing and delivery."
+      ],
+      "backend": "Valk Exclusief and HKTD use Roomserve, a shared Ruby on Rails backend. My work included APIs, database work, and automated tests.",
+      "overview": {
+        "summary": "An operational app for housekeeping and technical-services staff.",
+        "contribution": "Mobile development and shared Rails API, database, and test work."
+      }
     }
   },
   "notFound": {
@@ -169,9 +219,28 @@
       "originalName": "Original font"
     },
     "motions": {
-      "original": { "name": "Original", "description": "Small tilt, quick settle" },
-      "responsive": { "name": "Responsive", "description": "More travel and rebound" },
-      "bouncy": { "name": "Bouncy", "description": "Looser, longer spring" }
+      "original": {
+        "name": "Original",
+        "description": "Small tilt, quick settle"
+      },
+      "responsive": {
+        "name": "Responsive",
+        "description": "More travel and rebound"
+      },
+      "bouncy": {
+        "name": "Bouncy",
+        "description": "Looser, longer spring"
+      }
     }
+  },
+  "work": {
+    "title": "Work",
+    "back": "Portfolio overview",
+    "technologies": "Technologies",
+    "categories": {
+      "professional": "Professional work",
+      "personal": "Personal project"
+    },
+    "metaDescription": "Daan van Vugt's projects: mobile apps, full-stack web development, shared backend services, and a personal C project."
   }
 }

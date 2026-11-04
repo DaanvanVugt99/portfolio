@@ -57,7 +57,7 @@
     "emailPending": "Het openbare e-mailadres wordt na de ontwerpreview toegevoegd.",
     "linkedinPending": "De LinkedIn-link wordt na de ontwerpreview toegevoegd.",
     "github": "Daan van Vugt op GitHub",
-    "preview": "Ontwerpversie · Projectbeschrijvingen en contactgegevens worden nog aangevuld."
+    "preview": "Ontwerpversie · Projectbeschrijvingen worden nog aangevuld."
   },
   "experience": {
     "title": "Werk & opleiding",
@@ -72,7 +72,9 @@
       "description": "Op zoek naar mijn volgende baan. Ook geïnteresseerd in andere functies binnen softwareontwikkeling.",
       "contact": "Neem contact op"
     },
-    "origin": { "established": "Opgericht in" },
+    "origin": {
+      "established": "Opgericht in"
+    },
     "vexLink": "Valk Exclusief-app",
     "metaDescription": "Het werk en de opleiding van Daan van Vugt: softwareontwikkeling bij Valk Digital, HBO-ICT aan Hogeschool van Arnhem en Nijmegen en VWO op het Titus Brandsmalyceum in Oss.",
     "kinds": {
@@ -107,7 +109,10 @@
     "divergence": "Een ontwikkelrender van de laboratoriumkaart van Divergence, naast een conceptuele reeks voor code, bouwen en testen.",
     "mapAlt": "Een ontwikkelrender van de laboratoriumkaart in Emerald Rogue: Divergence",
     "development": "Ontwikkelversie",
-    "map": "Kaartontwikkeling"
+    "map": "Kaartontwikkeling",
+    "vexThumbnail": "Schermen van de Valk Exclusief-app voor hotelboekingen en een digitale kamersleutel.",
+    "valkToGoThumbnail": "Een gast gebruikt de zelfbedieningskassa in een Valk to Go-shop.",
+    "hktdThumbnail": "Officiële HKTD-appbeelden met kamerstatussen en een housekeepingtaak."
   },
   "caseStudy": {
     "involvement": "Mijn bijdrage",
@@ -115,20 +120,31 @@
     "draft": "Projectbeschrijving in concept",
     "draftNote": "Concept · Details vullen we samen aan na de review van de homepage.",
     "other": "Ander project",
-    "credits": "Gebaseerd op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Deze pagina gaat over de Divergence-fork; het oorspronkelijke werk blijft toegeschreven aan de makers."
+    "credits": "Gebaseerd op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Deze pagina gaat over de Divergence-fork; het oorspronkelijke werk blijft toegeschreven aan de makers.",
+    "backend": "Gedeelde backend · Roomserve"
   },
-  "links": { "appStore": "App Store", "googlePlay": "Google Play", "code": "Bekijk de code" },
+  "links": {
+    "appStore": "App Store",
+    "googlePlay": "Google Play",
+    "code": "Bekijk de code",
+    "product": "Productwebsite"
+  },
   "projects": {
     "vex": {
       "eyebrow": "Professioneel werk · iOS & Android",
       "description": "Een hotelapp voor iOS en Android om te boeken, online in te checken, digitale kamersleutels te gebruiken en beloningen te ontvangen.",
-      "role": "De volledige app ontwikkeld, samen met een collega bij Valk Digital.",
+      "role": "De volledige app ontwikkeld, samen met een collega bij Valk Digital. Daarnaast meegewerkt aan de gedeelde Roomserve-backend.",
       "contributions": [
         "Samen met een collega aan alle onderdelen van de app gewerkt.",
         "Appfuncties en backendintegraties gebouwd en onderhouden.",
         "Bijgedragen aan testen, uitrollen en doorlopend onderhoud."
       ],
-      "nextStory": "Volgende stap: een functie of integratie uitlichten, met het probleem, de gemaakte keuzes en de manier van testen."
+      "nextStory": "Volgende stap: een functie of integratie uitlichten, met het probleem, de gemaakte keuzes en de manier van testen.",
+      "backend": "Valk Exclusief en HKTD gebruiken Roomserve als gedeelde Ruby on Rails-backend. Ik werkte aan API’s, databasewerk en geautomatiseerde tests.",
+      "overview": {
+        "summary": "Hotelboekingen, online inchecken, digitale kamersleutels en beloningen.",
+        "contribution": "Appontwikkeling samen met een collega, plus werk aan de Rails-backend."
+      }
     },
     "divergence": {
       "eyebrow": "Persoonlijk project · GBA / C",
@@ -141,7 +157,41 @@
       ],
       "nextStory": "Volgende stap: een systeem of bugfix kiezen die de technische keuzes goed laat zien.",
       "tooling": "Python-ontwikkeltools",
-      "testing": "Regressietests"
+      "testing": "Regressietests",
+      "overview": {
+        "summary": "Een Game Boy Advance-project dat een bestaande open-sourcegame uitbreidt.",
+        "contribution": "Eigen C-ontwikkeling, buildtools en regressiecontroles."
+      }
+    },
+    "valk-to-go": {
+      "eyebrow": "Professioneel werk · Fullstack",
+      "description": "Zelfbedieningswinkels in Van der Valk-hotels, met kassasystemen en een backoffice voor winkelbeheer.",
+      "role": "Fullstackontwikkeling aan React-frontends en een Elixir/Phoenix-backend bij Valk Digital.",
+      "contributions": [
+        "Gewerkt aan React-frontends voor de backoffice en kassasystemen.",
+        "Backendfunctionaliteit en API’s ontwikkeld en onderhouden in Elixir/Phoenix.",
+        "Bijgedragen aan testen, opleveren en doorlopend onderhoud."
+      ],
+      "overview": {
+        "summary": "Zelfbedieningswinkels, kassasystemen en winkelbeheer voor hotels.",
+        "contribution": "Ontwikkeling van React-frontends en een Elixir/Phoenix-backend."
+      }
+    },
+    "hktd": {
+      "title": "HKTD — Housekeeping & technische dienst",
+      "eyebrow": "Professioneel werk · Mobiel & backend",
+      "description": "Een mobiele app voor medewerkers van housekeeping en de technische dienst in Van der Valk-hotels.",
+      "role": "Ontwikkeling en onderhoud van de medewerkersapp en de gedeelde backend bij Valk Digital.",
+      "contributions": [
+        "Gewerkt aan de React Native- en TypeScript-applicatie voor hotelmedewerkers.",
+        "Meegewerkt aan Roomserve-API’s, databasewerk en geautomatiseerde tests in Ruby on Rails.",
+        "Bestaande functionaliteit onderhouden en bijgedragen aan testen en opleveren."
+      ],
+      "backend": "Valk Exclusief en HKTD gebruiken Roomserve als gedeelde Ruby on Rails-backend. Ik werkte aan API’s, databasewerk en geautomatiseerde tests.",
+      "overview": {
+        "summary": "Een operationele app voor housekeeping en de technische dienst.",
+        "contribution": "Mobiele ontwikkeling en werk aan gedeelde Rails-API’s, databases en tests."
+      }
     }
   },
   "notFound": {
@@ -169,9 +219,28 @@
       "originalName": "Oorspronkelijk lettertype"
     },
     "motions": {
-      "original": { "name": "Origineel", "description": "Kleine kanteling, snel stil" },
-      "responsive": { "name": "Responsief", "description": "Meer beweging en terugvering" },
-      "bouncy": { "name": "Verend", "description": "Losser, langer verend" }
+      "original": {
+        "name": "Origineel",
+        "description": "Kleine kanteling, snel stil"
+      },
+      "responsive": {
+        "name": "Responsief",
+        "description": "Meer beweging en terugvering"
+      },
+      "bouncy": {
+        "name": "Verend",
+        "description": "Losser, langer verend"
+      }
     }
+  },
+  "work": {
+    "title": "Projecten",
+    "back": "Portfolio-overzicht",
+    "technologies": "Technologieën",
+    "categories": {
+      "professional": "Professioneel werk",
+      "personal": "Persoonlijk project"
+    },
+    "metaDescription": "Projecten van Daan van Vugt: mobiele apps, fullstack-webontwikkeling, gedeelde backendservices en een persoonlijk C-project."
   }
 }

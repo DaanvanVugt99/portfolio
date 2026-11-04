@@ -1,6 +1,5 @@
 import { BrowserRouter, Link, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import {
-  ArrowDown,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
@@ -34,6 +33,8 @@ import { vexShowcasePhones } from './data/vexScreenshots'
 import { ExperiencePage } from './components/ExperiencePage'
 import { BrandMark } from './components/BrandMark'
 import { StickyHeader } from './components/StickyHeader'
+import { ProjectsPage } from './components/ProjectsPage'
+import { ProjectThumbnail } from './components/ProjectThumbnail'
 
 function Github({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
   return (
@@ -86,7 +87,7 @@ function Header() {
         </span>
       </Link>
       <nav aria-label={t('navigation.label')}>
-        <Link to="/portfolio#work">{t('navigation.work')}</Link>
+        <Link to="/projects">{t('navigation.work')}</Link>
         <Link to="/portfolio#about">{t('navigation.about')}</Link>
         <Link to="/portfolio#contact">
           {t('navigation.contact')} <ArrowUpRight size={13} />
@@ -106,20 +107,24 @@ function PageEffects() {
     const project = projects.find((p) => pathname === `/projects/${p.slug}`)
     document.title = project
       ? `${project.title} — Daan van Vugt`
-      : pathname === '/portfolio'
-        ? `${t('overview.title')} — Daan van Vugt`
-        : pathname === '/experience'
-          ? `${t('experience.title')} — Daan van Vugt`
-          : t('meta.home')
+      : pathname === '/projects'
+        ? `${t('work.title')} — Daan van Vugt`
+        : pathname === '/portfolio'
+          ? `${t('overview.title')} — Daan van Vugt`
+          : pathname === '/experience'
+            ? `${t('experience.title')} — Daan van Vugt`
+            : t('meta.home')
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute(
         'content',
         project
           ? `${project.title} — ${project.description} ${project.role}`
-          : pathname === '/experience'
-            ? t('experience.metaDescription')
-            : t('meta.description'),
+          : pathname === '/projects'
+            ? t('work.metaDescription')
+            : pathname === '/experience'
+              ? t('experience.metaDescription')
+              : t('meta.description'),
       )
   }, [pathname, t, projects])
 
@@ -207,9 +212,9 @@ function IntroCard() {
       </h1>
       <p>{profile.introduction}</p>
       <div className="intro-bottom">
-        <a className="overview-work-link" href="#work">
-          {t('overview.viewProjects')} <ArrowDown size={16} />
-        </a>
+        <Link className="overview-work-link" to="/projects">
+          {t('overview.viewProjects')} <ArrowRight size={16} />
+        </Link>
       </div>
       <AbstractIllustration />
     </Card>
@@ -368,9 +373,9 @@ function VexProjectVisual() {
 function VexCard() {
   const { t } = useTranslation()
   const { projects } = usePortfolio()
-  const project = projects[0]
+  const project = projects.find((project) => project.slug === 'vex')!
   return (
-    <Card className="vex-card project-card" id="work">
+    <Card className="vex-card project-card">
       <VexVisual />
       <div className="project-copy">
         <div className="eyebrow">{project.eyebrow}</div>
@@ -528,24 +533,13 @@ function OverviewPage() {
   )
 }
 
-function ProjectPage({ project }: { project: Project }) {
+function ProjectDetailVisual({ project }: { project: Project }) {
   const { t } = useTranslation()
-  const { projects } = usePortfolio()
-  const other = projects.find((p) => p.slug !== project.slug)!
-  return (
-    <main id="main" className="project-page">
-      <Link to="/portfolio#work" className="back-link">
-        <ArrowLeft size={16} /> {t('navigation.back')}
-      </Link>
-      <div className="case-heading">
-        <span className="eyebrow">{project.eyebrow}</span>
-        <h1>{project.title}</h1>
-        <p>{project.description}</p>
-        <Pills items={project.technologies} />
-      </div>
-      {project.slug === 'vex' ? (
-        <VexProjectVisual />
-      ) : (
+  switch (project.slug) {
+    case 'vex':
+      return <VexProjectVisual />
+    case 'divergence':
+      return (
         <div className="divergence-detail-visual">
           <img
             src="/assets/divergence-lab.png"
@@ -563,6 +557,41 @@ function ProjectPage({ project }: { project: Project }) {
             <BuildSequence />
           </div>
         </div>
+      )
+    case 'valk-to-go':
+    case 'hktd':
+      return (
+        <div className="project-static-visual">
+          <ProjectThumbnail thumbnail={project.thumbnail} priority />
+        </div>
+      )
+  }
+}
+
+function ProjectPage({ project }: { project: Project }) {
+  const { t } = useTranslation()
+  const { projects } = usePortfolio()
+  const other = projects.find((p) => p.slug !== project.slug)!
+  return (
+    <main id="main" className="project-page">
+      <Link to={`/projects#${project.slug}`} className="back-link">
+        <ArrowLeft size={16} /> {t('navigation.back')}
+      </Link>
+      <div className="case-heading">
+        <span className="eyebrow">{project.eyebrow}</span>
+        <h1>{project.title}</h1>
+        <p>{project.description}</p>
+        <Pills items={project.technologies} />
+      </div>
+      <ProjectDetailVisual project={project} />
+      {project.backend && (
+        <section className="shared-backend">
+          <Server size={22} strokeWidth={1.5} aria-hidden="true" />
+          <div>
+            <h2>{t('caseStudy.backend')}</h2>
+            <p>{project.backend}</p>
+          </div>
+        </section>
       )}
       <div className="case-columns">
         <section>
@@ -577,27 +606,31 @@ function ProjectPage({ project }: { project: Project }) {
             ))}
           </ul>
         </section>
-        <aside>
-          <div className="eyebrow">{t('caseStudy.links')}</div>
-          {project.links.map((link) => (
-            <Button asChild variant="outline" key={link.href}>
-              <a href={link.href} target="_blank" rel="noreferrer">
-                {link.label}
-                <ExternalLink size={14} />
-              </a>
-            </Button>
-          ))}
-        </aside>
+        {project.links.length > 0 && (
+          <aside>
+            <div className="eyebrow">{t('caseStudy.links')}</div>
+            {project.links.map((link) => (
+              <Button asChild variant="outline" key={link.href}>
+                <a href={link.href} target="_blank" rel="noreferrer">
+                  {link.label}
+                  <ExternalLink size={14} />
+                </a>
+              </Button>
+            ))}
+          </aside>
+        )}
       </div>
       {project.slug === 'divergence' && <p className="credits">{t('caseStudy.credits')}</p>}
-      <section className="story-placeholder">
-        <Workflow size={22} />
-        <div>
-          <h2>{t('caseStudy.draft')}</h2>
-          <p>{project.nextStory}</p>
-          <span>{t('caseStudy.draftNote')}</span>
-        </div>
-      </section>
+      {project.nextStory && (
+        <section className="story-placeholder">
+          <Workflow size={22} />
+          <div>
+            <h2>{t('caseStudy.draft')}</h2>
+            <p>{project.nextStory}</p>
+            <span>{t('caseStudy.draftNote')}</span>
+          </div>
+        </section>
+      )}
       <Link to={`/projects/${other.slug}`} className="next-project">
         <span>
           <small>{t('caseStudy.other')}</small>
@@ -627,11 +660,17 @@ function NotFound() {
 
 function LandingGate() {
   const { hash } = useLocation()
-  return ['#work', '#about', '#contact'].includes(hash) ? (
+  if (hash === '#work') return <Navigate replace to="/projects" />
+  return ['#about', '#contact'].includes(hash) ? (
     <Navigate replace to={`/portfolio${hash}`} />
   ) : (
     <LandingPage />
   )
+}
+
+function PortfolioGate() {
+  const { hash } = useLocation()
+  return hash === '#work' ? <Navigate replace to="/projects" /> : <OverviewPage />
 }
 
 function SiteLayout() {
@@ -658,7 +697,8 @@ function App() {
           <Route path="/" element={<LandingGate />} />
           <Route path="/workshop" element={<WorkshopPage />} />
           <Route element={<SiteLayout />}>
-            <Route path="/portfolio" element={<OverviewPage />} />
+            <Route path="/portfolio" element={<PortfolioGate />} />
+            <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/experience" element={<ExperiencePage />} />
             {projects.map((project) => (
               <Route
