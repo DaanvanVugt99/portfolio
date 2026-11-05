@@ -27,10 +27,7 @@
   },
   "profile": {
     "role": "Softwareontwikkelaar",
-    "introduction": "Op zoek naar een functie als fullstack- of backendontwikkelaar.",
-    "about": "Ik zoek graag uit waar een probleem vandaan komt en werk aan de oplossing tot en met de release.",
-    "music": "Muziek maken",
-    "films": "Film & bioscoop"
+    "introduction": "Op zoek naar een functie als fullstack- of backendontwikkelaar."
   },
   "landing": {
     "loading": "Visual laden",
@@ -253,9 +250,13 @@
     "contact": "Neem contact op",
     "metaDescription": "Over Daan van Vugt: softwareontwikkeling voor mobiel en web, games maken, bass music produceren en film.",
     "biography": {
-      "introduction": "Hi, ik ben Daan van Vugt, een softwareontwikkelaar met drie jaar ervaring in het bouwen van mobiele apps en webtools. Bij <experience>Valk Digital</experience> werkte ik in een klein team aan de hele stack. De ene dag verfijnde ik een hotelboekingsflow in React Native. De andere dag zocht ik uit hoe housekeepingtaken weer gesynchroniseerd moesten worden nadat een apparaat opnieuw online kwam, of waarom een backofficepagina traag was.",
-      "approach": "Ik zoek graag uit waar een probleem vandaan komt en werk aan de oplossing tot en met de release. Ik schakel graag tussen frontend en backend en probeer code wat overzichtelijker achter te laten dan ik die aantrof. Bijvoorbeeld door een component te vereenvoudigen of een test toe te voegen voor een bug die ik net heb opgespoord.",
-      "personal": "In mijn vrije tijd maak ik games, produceer ik bass music in Ableton Live en ga ik graag naar de bioscoop. Ik werk aan <divergence>Divergence</divergence>, een Game Boy Advance-project geschreven in C, en ontwerp Phantasm, een tactische autobattler. Ik kan me een hele avond vermaken met het bijschaven van een spelmechaniek, een bassound goed in een track laten passen of een film kijken op het grote scherm."
+      "introduction": "Ik ben Daan van Vugt, softwaredeveloper met drie jaar ervaring met mobiele apps en webapplicaties. Bij <experience>Valk Digital</experience> werkte ik in een klein team en was ik met zowel frontend als backend bezig. De ene dag verbeterde ik de boekingsflow van de hotelapp in React Native. De andere dag zocht ik uit hoe housekeepingtaken weer goed gesynchroniseerd konden worden zodra een apparaat weer online kwam, of waarom een pagina in de backoffice zo traag was.",
+      "approach": "Ik duik graag in een probleem om uit te zoeken waar het misgaat. Daarna wil ik het ook afmaken: oplossen, testen en naar productie brengen. Ik werk graag aan zowel frontend als backend en probeer code wat overzichtelijker achter te laten. Soms door een component simpeler te maken, soms door een test te schrijven voor een bug die ik net heb gevonden.",
+      "personal": "Buiten mijn werk maak ik games, produceer ik bass music in Ableton Live en ga ik graag naar de bioscoop. Ik werk aan <divergence>Divergence</divergence>, een project voor de Game Boy Advance in C. Daarnaast ben ik Phantasm aan het ontwerpen, een tactische autobattler. Ik kan me een hele avond bezighouden met een spelmechaniek bijschaven, een basgeluid precies goed krijgen in een track of een film kijken op het grote doek."
+    },
+    "card": {
+      "description": "Bij Valk Digital werkte ik drie jaar aan mobiele apps, webapplicaties en backendservices. Ik zoek graag uit waar iets misgaat en zorg dat de oplossing ook echt in productie komt.",
+      "action": "Meer over mij"
     }
   },
   "contact": {

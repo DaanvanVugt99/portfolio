@@ -3,13 +3,11 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
-  AudioLines,
   Check,
   CheckCheck,
   Code2,
   Database,
   ExternalLink,
-  Film,
   Layers3,
   Mail,
   Server,
@@ -38,6 +36,7 @@ import { AboutPage } from './components/AboutPage'
 import { ContactPage } from './components/ContactPage'
 import { Github, Linkedin } from './components/SocialIcons'
 import { SkillGroups } from './components/SkillGroups'
+import { aboutPortrait } from './data/about'
 
 function Header() {
   const { t } = useTranslation()
@@ -409,24 +408,30 @@ function DivergenceCard() {
 
 function AboutCard() {
   const { t } = useTranslation()
-  const { profile } = usePortfolio()
+  const portrait = aboutPortrait.sources[0]
   return (
     <Card className="about-card" id="about">
-      <div className="about-card-heading">
-        <h2>
-          <Link className="about-card-link" to="/about" aria-label={t('about.cardLink')}>
-            {t('navigation.about')}
-          </Link>
-        </h2>
-        <ArrowUpRight className="about-card-arrow" size={18} strokeWidth={1.5} aria-hidden="true" />
-      </div>
-      <p>{profile.about}</p>
-      <div className="interest-tags">
-        <span>
-          <AudioLines size={14} /> {t('profile.music')}
-        </span>
-        <span>
-          <Film size={14} /> {t('profile.films')}
+      <img
+        className="about-card-portrait"
+        src={portrait.src}
+        width={portrait.width}
+        height={portrait.width}
+        alt={t('about.portraitAlt')}
+        loading="lazy"
+        decoding="async"
+      />
+      <div className="about-card-copy">
+        <div className="about-card-heading">
+          <h2>
+            <Link className="about-card-link" to="/about" aria-label={t('about.cardLink')}>
+              {t('about.title')}
+            </Link>
+          </h2>
+        </div>
+        <p>{t('about.card.description')}</p>
+        <span className="about-card-action">
+          {t('about.card.action')}
+          <ArrowRight className="about-card-arrow" size={16} strokeWidth={1.5} aria-hidden="true" />
         </span>
       </div>
     </Card>

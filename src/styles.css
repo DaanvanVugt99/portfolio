@@ -689,34 +689,6 @@ p {
   padding: 29px 32px;
   min-height: 231px;
 }
-.about-card h2 {
-  font-size: 24px;
-  letter-spacing: -0.85px;
-  line-height: 1.25;
-  font-weight: 500;
-  margin-top: 13px;
-}
-.about-card p {
-  position: absolute;
-  right: 30px;
-  top: 60px;
-  width: 43%;
-  font-size: 11px;
-  color: var(--body-text);
-  line-height: 1.85;
-}
-.interest-tags {
-  display: flex;
-  gap: 18px;
-  margin-top: 22px;
-  font-size: 9px;
-  color: var(--muted);
-}
-.interest-tags span {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
 .contact-card {
   grid-column: 8/13;
   grid-row: 7;
@@ -1145,7 +1117,6 @@ p {
   .about-card {
     grid-column: 1;
     grid-row: 4;
-    padding: 26px;
   }
   .contact-card {
     grid-column: 2;
@@ -1201,15 +1172,6 @@ p {
   .divergence-visual .build-sequence {
     right: 45px;
     bottom: 15px;
-  }
-  .about-card p {
-    position: static;
-    width: auto;
-    margin-top: 15px;
-  }
-  .interest-tags {
-    gap: 12px;
-    flex-wrap: wrap;
   }
   .contact-card p br {
     display: none;
@@ -1403,23 +1365,6 @@ p {
   }
   .build-sequence i {
     width: 5px;
-  }
-  .about-card {
-    padding: 28px;
-    min-height: 290px;
-  }
-  .about-card h2 {
-    font-size: 26px;
-  }
-  .about-card p {
-    position: static;
-    width: auto;
-    font-size: 12px;
-    margin-top: 18px;
-  }
-  .interest-tags {
-    margin-top: 22px;
-    font-size: 10px;
   }
   .contact-card {
     padding: 28px;
