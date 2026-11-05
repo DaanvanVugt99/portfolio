@@ -1,5 +1,7 @@
 # Credits
 
+- Mobile navigation reference: [Shadcnblocks Navbar 18](https://www.shadcnblocks.com/block/navbar18), built with the project's editable shadcn/Radix Popover. Styling and navigation code are custom; premium block code is not included.
+
 - Contact page reference: [Shadcnblocks Contact 1](https://www.shadcnblocks.com/block/contact1). The split layout and form components are custom; premium block code is not included.
 
 - Layout reference: [Shadcn Studio Grid 14](https://shadcnstudio.com/blocks/bento-grid/bento-grid). The layout and illustrations are custom; premium block code is not included.

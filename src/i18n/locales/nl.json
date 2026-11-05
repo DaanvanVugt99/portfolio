@@ -23,7 +23,10 @@
     "skip": "Naar de inhoud",
     "openPortfolio": "Home openen",
     "landing": "Startpagina",
-    "back": "Terug naar projecten"
+    "back": "Terug naar projecten",
+    "menu": "Menu",
+    "openMenu": "Navigatiemenu openen",
+    "closeMenu": "Navigatiemenu sluiten"
   },
   "profile": {
     "role": "Softwareontwikkelaar",

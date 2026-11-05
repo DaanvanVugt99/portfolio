@@ -37,9 +37,12 @@ import { ContactPage } from './components/ContactPage'
 import { Github, Linkedin } from './components/SocialIcons'
 import { SkillGroups } from './components/SkillGroups'
 import { aboutPortrait } from './data/about'
+import { siteNavigation } from './data/navigation'
+import { MobileNavigation } from './components/MobileNavigation'
 
 function Header() {
   const { t } = useTranslation()
+  const location = useLocation()
   return (
     <StickyHeader className="site-header">
       <Link
@@ -55,14 +58,17 @@ function Header() {
         </span>
       </Link>
       <nav aria-label={t('navigation.label')}>
-        <Link to="/portfolio">{t('navigation.home')}</Link>
-        <Link to="/projects">{t('navigation.work')}</Link>
-        <Link to="/about">{t('navigation.about')}</Link>
-        <Link to="/contact">
-          {t('navigation.contact')} <ArrowUpRight size={13} />
-        </Link>
+        {siteNavigation.map(({ id, href }) => (
+          <Link key={id} to={href}>
+            {t(`navigation.${id}`)}{' '}
+            {id === 'contact' && <ArrowUpRight size={13} aria-hidden="true" />}
+          </Link>
+        ))}
       </nav>
-      <Settings />
+      <div className="site-header-actions">
+        <Settings />
+        <MobileNavigation key={location.key} />
+      </div>
     </StickyHeader>
   )
 }

@@ -23,7 +23,10 @@
     "skip": "Skip to content",
     "openPortfolio": "Open Home",
     "landing": "Landing page",
-    "back": "Back to projects"
+    "back": "Back to projects",
+    "menu": "Menu",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "profile": {
     "role": "Software developer",
