@@ -100,8 +100,8 @@ export const projectDefinitions: ProjectDefinition[] = [
       sources: ['/assets/hktd-screen-3.png', '/assets/hktd-screen-2.png'],
       altKey: 'visuals.hktdThumbnail',
     },
-    technologies: ['React Native', 'TypeScript', 'Ruby on Rails'],
-    overviewTechnologies: ['React Native', 'TypeScript', 'Ruby on Rails'],
+    technologies: ['React Native', 'React', 'TypeScript', 'Ruby on Rails'],
+    overviewTechnologies: ['React Native', 'React', 'TypeScript', 'Ruby on Rails'],
     links: [
       { label: 'googlePlay', href: 'https://play.google.com/store/apps/details?id=com.hktdmobile' },
     ],

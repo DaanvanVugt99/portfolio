@@ -46,7 +46,7 @@
     "viewProjects": "View projects",
     "experience": "Experience",
     "years": "years",
-    "professional": "of professional development",
+    "professional": "of professional experience",
     "at": "at",
     "fullstack": "Fullstack development",
     "backend": "Backend services & integrations",
@@ -57,9 +57,6 @@
     "divergenceSummary": "Custom systems, tooling, and regression checks.",
     "explore": "Explore the project",
     "email": "Email",
-    "pending": "to add",
-    "emailPending": "The public email address will be added after design review.",
-    "linkedinPending": "The LinkedIn URL will be added after design review.",
     "github": "Daan van Vugt on GitHub"
   },
   "experience": {
@@ -140,7 +137,7 @@
   },
   "projects": {
     "vex": {
-      "eyebrow": "Professional work",
+      "eyebrow": "Professional work · iOS & Android",
       "description": "The Valk Exclusief app lets hotel guests manage bookings, check in online, use digital room keys, and collect rewards. It is available on iOS and Android.",
       "role": "At Valk Digital, I worked across the React Native app and its shared Ruby on Rails backend, from feature development and integrations to testing and delivery.",
       "contributions": [
@@ -156,8 +153,8 @@
       }
     },
     "divergence": {
-      "eyebrow": "Personal project",
-      "description": "Divergence is my personal Game Boy Advance project written in C. It builds on Pokémon Emerald Rogue, adding my own gameplay systems to an existing open-source game.",
+      "eyebrow": "Personal project · GBA / C",
+      "description": "Divergence is my personal Game Boy Advance project written in C. It builds on Pokémon Emerald Rogue, adding my own gameplay systems to its existing codebase.",
       "role": "I’m developing Divergence as my own fork of Pokémon Emerald Rogue. The work involves understanding and extending a substantial existing C codebase, alongside maintaining the tools I use to build and check the game.",
       "contributions": [
         "Design and implement custom gameplay systems in C within the existing decompilation-based engine.",
@@ -167,12 +164,12 @@
       "tooling": "Python tooling",
       "testing": "Regression testing",
       "overview": {
-        "summary": "A Game Boy Advance project extending an existing open-source game.",
+        "summary": "A Game Boy Advance project extending Pokémon Emerald Rogue.",
         "contribution": "Personal C development, build tooling, and regression checks."
       }
     },
     "valk-to-go": {
-      "eyebrow": "Professional work",
+      "eyebrow": "Professional work · Fullstack",
       "description": "Valk to Go provides self-service shops at Van der Valk hotels. The software includes the checkout guests use to pay and a back office for managing the shops.",
       "role": "At Valk Digital, I worked across the stack on the software behind Valk to Go. My involvement spanned the React frontends and the Elixir/Phoenix backend that supports them.",
       "contributions": [
@@ -187,18 +184,19 @@
     },
     "hktd": {
       "title": "HKTD — Housekeeping & technical services",
-      "eyebrow": "Professional work",
+      "eyebrow": "Professional work · Mobile, web & backend",
       "description": "HKTD includes a mobile app for housekeeping and technical services staff at Van der Valk hotels, plus a web back office. Staff use the app to view room statuses and tasks, while supervisors use the back office to plan and manage the work.",
-      "role": "At Valk Digital, I developed and maintained HKTD as part of the team. My involvement covered the mobile application and backend work shared with Valk Exclusief.",
+      "role": "At Valk Digital, I worked on the React Native app, the React web back office, and the backend that HKTD shares with Valk Exclusief.",
       "contributions": [
         "Built and maintained staff-app functionality in React Native and TypeScript.",
+        "Developed features for the web back office in React.",
         "Contributed to Roomserve APIs, database changes, and automated backend tests in Ruby on Rails.",
         "Investigated issues, maintained existing behaviour, and contributed to testing and delivery."
       ],
       "backend": "HKTD and Valk Exclusief connect to Roomserve, a shared Ruby on Rails backend. It supports both the staff application and the guest-facing hotel app.",
       "overview": {
         "summary": "Mobile app for hotel staff and a web back office for planning and managing work.",
-        "contribution": "Mobile development and shared Rails API, database, and test work."
+        "contribution": "React Native app, React back office, and shared Rails backend work."
       }
     }
   },

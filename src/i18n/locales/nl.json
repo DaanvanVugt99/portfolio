@@ -57,9 +57,6 @@
     "divergenceSummary": "Eigen game mechanics, tooling en regression checks.",
     "explore": "Bekijk het project",
     "email": "E-mail",
-    "pending": "volgt",
-    "emailPending": "Het e-mailadres volgt nog.",
-    "linkedinPending": "De LinkedIn-link volgt nog.",
     "github": "Daan van Vugt op GitHub"
   },
   "experience": {
@@ -157,7 +154,7 @@
     },
     "divergence": {
       "eyebrow": "Persoonlijk project · GBA / C",
-      "description": "Divergence is mijn eigen Game Boy Advance-project in C. Ik bouw voort op Pokémon Emerald Rogue, een bestaande open-sourcegame, en voeg daar mijn eigen game mechanics aan toe.",
+      "description": "Divergence is mijn eigen Game Boy Advance-project in C. Ik bouw voort op de bestaande codebase van Pokémon Emerald Rogue en voeg daar mijn eigen game mechanics aan toe.",
       "role": "Ik ontwikkel Divergence als mijn eigen fork van Pokémon Emerald Rogue. Ik bouw verder op een grote bestaande C-codebase en onderhoud de tooling voor builds en tests.",
       "contributions": [
         "Eigen game mechanics ontwerpen en implementeren in C, binnen de bestaande decompilation-codebase.",
@@ -167,7 +164,7 @@
       "tooling": "Python tooling",
       "testing": "Regression testing",
       "overview": {
-        "summary": "Een Game Boy Advance-project dat een bestaande open-sourcegame uitbreidt.",
+        "summary": "Een Game Boy Advance-project dat voortbouwt op Pokémon Emerald Rogue.",
         "contribution": "Eigen gameplay in C, build tooling en regression checks."
       }
     },
@@ -187,18 +184,19 @@
     },
     "hktd": {
       "title": "HKTD — Housekeeping & technische dienst",
-      "eyebrow": "Professioneel werk · Mobiel & backend",
+      "eyebrow": "Professioneel werk · Mobiel, web & backend",
       "description": "HKTD heeft een mobiele app en een webapplicatie voor housekeeping en de technische dienst in Van der Valk-hotels. Medewerkers bekijken kamerstatussen en taken in de app. Supervisors gebruiken de backoffice om het werk te plannen en te beheren.",
-      "role": "Bij Valk Digital werkte ik aan de React Native-app en de backend die HKTD deelt met Valk Exclusief.",
+      "role": "Bij Valk Digital werkte ik aan de React Native-app, de React-backoffice en de backend die HKTD deelt met Valk Exclusief.",
       "contributions": [
         "Features voor hotelmedewerkers gebouwd en onderhouden in React Native en TypeScript.",
+        "Features ontwikkeld voor de webbackoffice in React.",
         "Meegewerkt aan Roomserve-API’s, databasewijzigingen en geautomatiseerde backendtests in Ruby on Rails.",
         "Bugs uitgezocht, bestaande functionaliteit onderhouden en bijgedragen aan tests en releases."
       ],
       "backend": "HKTD en Valk Exclusief gebruiken Roomserve als gedeelde Ruby on Rails-backend. Die ondersteunt zowel de medewerkersapp als de hotelapp voor gasten.",
       "overview": {
         "summary": "Een mobiele app voor hotelmedewerkers en een webbackoffice voor planning en beheer.",
-        "contribution": "Gewerkt aan de app en gedeelde Rails-API’s, databases en tests."
+        "contribution": "Gewerkt aan de React Native-app, React-backoffice en gedeelde Rails-backend."
       }
     }
   },

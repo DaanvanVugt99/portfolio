@@ -191,8 +191,7 @@ function IntroCard() {
     <Card className="intro-card">
       <div className="eyebrow intro-eyebrow">{profile.role}</div>
       <h1>
-        <span>Daan</span>
-        <span>van Vugt</span>
+        <span>Daan</span> <span>van Vugt</span>
       </h1>
       <p>{profile.introduction}</p>
       <div className="intro-bottom">
@@ -402,8 +401,7 @@ function DivergenceCard() {
         <div className="eyebrow">{t('projects.divergence.eyebrow')}</div>
         <h2>
           <Link to="/projects/divergence">
-            Emerald Rogue:
-            <br />
+            Emerald Rogue: <br />
             Divergence
           </Link>
         </h2>
@@ -457,28 +455,16 @@ function ContactCard() {
         <ArrowUpRight size={28} strokeWidth={1.2} aria-hidden="true" />
       </Link>
       <div className="contact-links">
-        {profile.email ? (
-          <a href={`mailto:${profile.email}`}>
-            <Mail size={18} aria-hidden="true" /> {t('overview.email')}{' '}
-            <ArrowUpRight size={16} aria-hidden="true" />
-          </a>
-        ) : (
-          <span className="pending-link" title={t('overview.emailPending')}>
-            <Mail size={15} /> {t('overview.email')} <small>{t('overview.pending')}</small>
-          </span>
-        )}
+        <a href={`mailto:${profile.email}`}>
+          <Mail size={18} aria-hidden="true" /> {t('overview.email')}{' '}
+          <ArrowUpRight size={16} aria-hidden="true" />
+        </a>
         <a href={profile.github} target="_blank" rel="noreferrer">
           <Github size={18} /> GitHub <ArrowUpRight size={16} aria-hidden="true" />
         </a>
-        {profile.linkedin ? (
-          <a href={profile.linkedin} target="_blank" rel="noreferrer">
-            <Linkedin size={18} /> LinkedIn <ArrowUpRight size={16} aria-hidden="true" />
-          </a>
-        ) : (
-          <span className="pending-link" title={t('overview.linkedinPending')}>
-            <Linkedin size={15} /> LinkedIn <small>{t('overview.pending')}</small>
-          </span>
-        )}
+        <a href={profile.linkedin} target="_blank" rel="noreferrer">
+          <Linkedin size={18} /> LinkedIn <ArrowUpRight size={16} aria-hidden="true" />
+        </a>
       </div>
     </Card>
   )

@@ -726,8 +726,7 @@ p {
   margin-top: 18px;
   font-size: 14px;
 }
-.contact-links a,
-.pending-link {
+.contact-links a {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -743,15 +742,6 @@ p {
 }
 .contact-links a:hover {
   color: var(--primary);
-}
-.pending-link {
-  color: var(--muted);
-}
-.pending-link small {
-  font-size: 8px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0 3px;
 }
 .site-footer {
   display: flex;
