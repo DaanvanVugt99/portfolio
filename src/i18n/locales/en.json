@@ -17,6 +17,7 @@
   "navigation": {
     "home": "Home",
     "label": "Main navigation",
+    "loading": "Loading page…",
     "work": "My work",
     "about": "About",
     "contact": "Contact",
@@ -170,7 +171,7 @@
     },
     "valk-to-go": {
       "eyebrow": "Professional work · Fullstack",
-      "description": "Valk to Go provides self-service shops at Van der Valk hotels. The software includes the checkout guests use to pay and a back office for managing the shops.",
+      "description": "Valk to Go provides self-service shops at Valk Exclusief hotels. The software includes the checkout guests use to pay and a back office for managing the shops.",
       "role": "At Valk Digital, I worked across the stack on the software behind Valk to Go. My involvement spanned the React frontends and the Elixir/Phoenix backend that supports them.",
       "contributions": [
         "Built and maintained React interfaces for the checkout and shop-management back office.",
@@ -185,7 +186,7 @@
     "hktd": {
       "title": "HKTD — Housekeeping & technical services",
       "eyebrow": "Professional work · Mobile, web & backend",
-      "description": "HKTD includes a mobile app for housekeeping and technical services staff at Van der Valk hotels, plus a web back office. Staff use the app to view room statuses and tasks, while supervisors use the back office to plan and manage the work.",
+      "description": "HKTD includes a mobile app for housekeeping and technical services staff at Valk Exclusief hotels, plus a web back office. Staff use the app to view room statuses and tasks, while supervisors use the back office to plan and manage the work.",
       "role": "At Valk Digital, I worked on the React Native app, the React web back office, and the backend that HKTD shares with Valk Exclusief.",
       "contributions": [
         "Built and maintained staff-app functionality in React Native and TypeScript.",

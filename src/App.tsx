@@ -1,45 +1,48 @@
-import { BrowserRouter, Link, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  CheckCheck,
-  Code2,
-  Database,
-  ExternalLink,
-  Layers3,
-  LockKeyhole,
-  Mail,
-  Server,
-  Smartphone,
-  Terminal,
-} from 'lucide-react'
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+  BrowserRouter,
+  Link,
+  Navigate,
+  NavLink,
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom'
+import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react'
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef } from 'react'
 import { Button } from './components/ui/button'
-import { Card } from './components/ui/card'
-import { profile, type Project } from './data/portfolio'
+import { profile } from './data/portfolio'
 import { usePortfolio } from './hooks/usePortfolio'
 import { useTranslation } from 'react-i18next'
 import { PreferencesProvider } from './state/Preferences'
 import { MotionToggle } from './components/PreferenceControls'
 import { Settings } from './components/Settings'
 import { LandingPage } from './components/LandingPage'
-import { vexShowcasePhones } from './data/vexScreenshots'
-import { ExperiencePage } from './components/ExperiencePage'
 import { BrandMark } from './components/BrandMark'
 import { StickyHeader } from './components/StickyHeader'
-import { ProjectsPage } from './components/ProjectsPage'
-import { ProjectThumbnail } from './components/ProjectThumbnail'
-import { AboutPage } from './components/AboutPage'
-import { ContactPage } from './components/ContactPage'
 import { Github, Linkedin } from './components/SocialIcons'
-import { SkillGroups } from './components/SkillGroups'
-import { aboutPortrait } from './data/about'
 import { siteNavigation } from './data/navigation'
 import { MobileNavigation } from './components/MobileNavigation'
-import { DivergenceProjectVisual } from './components/DivergenceProjectVisual'
-import { DivergenceGifPreview } from './components/DivergenceGifPreview'
+import { whenRouteContentReady } from './lib/routeContent'
+
+const OverviewPage = lazy(() =>
+  import('./components/OverviewPage').then((module) => ({ default: module.OverviewPage })),
+)
+const ProjectPage = lazy(() =>
+  import('./components/ProjectPage').then((module) => ({ default: module.ProjectPage })),
+)
+const ProjectsPage = lazy(() =>
+  import('./components/ProjectsPage').then((module) => ({ default: module.ProjectsPage })),
+)
+const ExperiencePage = lazy(() =>
+  import('./components/ExperiencePage').then((module) => ({ default: module.ExperiencePage })),
+)
+const AboutPage = lazy(() =>
+  import('./components/AboutPage').then((module) => ({ default: module.AboutPage })),
+)
+const ContactPage = lazy(() =>
+  import('./components/ContactPage').then((module) => ({ default: module.ContactPage })),
+)
 
 function Header() {
   const { t } = useTranslation()
@@ -60,10 +63,10 @@ function Header() {
       </Link>
       <nav aria-label={t('navigation.label')}>
         {siteNavigation.map(({ id, href }) => (
-          <Link key={id} to={href}>
+          <NavLink key={id} to={href} end={id === 'home'}>
             {t(`navigation.${id}`)}{' '}
             {id === 'contact' && <ArrowUpRight size={13} aria-hidden="true" />}
-          </Link>
+          </NavLink>
         ))}
       </nav>
       <div className="site-header-actions">
@@ -114,360 +117,22 @@ function PageEffects() {
 
   useLayoutEffect(() => {
     const changedPage = previousLocation.current?.pathname !== pathname
-    const main = document.getElementById('main')
-    main?.setAttribute('tabindex', '-1')
-    if (previousLocation.current && changedPage) main?.focus({ preventScroll: true })
-    if (hash) {
-      document.getElementById(hash.slice(1))?.scrollIntoView({
-        behavior:
-          changedPage || matchMedia('(prefers-reduced-motion: reduce)').matches
-            ? 'instant'
-            : 'smooth',
-      })
-    } else window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    const shouldFocus = Boolean(previousLocation.current && changedPage)
     previousLocation.current = { pathname, hash }
+    return whenRouteContentReady((main) => {
+      main.setAttribute('tabindex', '-1')
+      if (shouldFocus) main.focus({ preventScroll: true })
+      if (hash) {
+        document.getElementById(hash.slice(1))?.scrollIntoView({
+          behavior:
+            changedPage || matchMedia('(prefers-reduced-motion: reduce)').matches
+              ? 'instant'
+              : 'smooth',
+        })
+      } else window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    })
   }, [pathname, hash])
   return null
-}
-
-function MotionRegion({
-  children,
-  className = '',
-  label,
-}: {
-  children: ReactNode
-  className?: string
-  label: string
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-  useEffect(() => {
-    if (!ref.current) return
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
-      threshold: 0.1,
-    })
-    observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-  return (
-    <div
-      ref={ref}
-      className={`motion-region ${className}`}
-      data-playing={visible}
-      role="img"
-      aria-label={label}
-    >
-      {children}
-    </div>
-  )
-}
-
-function AbstractIllustration() {
-  return (
-    <div className="abstract-art" aria-hidden="true">
-      <div className="art-orbit orbit-one" />
-      <div className="art-orbit orbit-two" />
-      <div className="art-tile tile-back">
-        <Database size={24} />
-      </div>
-      <div className="art-tile tile-mid">
-        <Code2 size={28} />
-      </div>
-      <div className="art-tile tile-front">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="art-dot dot-one" />
-      <div className="art-dot dot-two" />
-    </div>
-  )
-}
-
-function IntroCard() {
-  const { t } = useTranslation()
-  const { profile } = usePortfolio()
-  return (
-    <Card className="intro-card">
-      <div className="eyebrow intro-eyebrow">{profile.role}</div>
-      <h1>
-        <span>Daan</span> <span>van Vugt</span>
-      </h1>
-      <p>{profile.introduction}</p>
-      <div className="intro-bottom">
-        <Link className="overview-work-link" to="/projects">
-          {t('overview.viewProjects')} <ArrowRight size={16} />
-        </Link>
-      </div>
-      <AbstractIllustration />
-    </Card>
-  )
-}
-
-function Pills({ items }: { items: string[] }) {
-  return (
-    <div className="pills">
-      {items.map((item) => (
-        <span className="pill" key={item}>
-          {item}
-        </span>
-      ))}
-    </div>
-  )
-}
-
-function ExperienceCard() {
-  const { t } = useTranslation()
-  return (
-    <Card className="experience-card" id="experience">
-      <div className="eyebrow experience-card-label">
-        <span className="icon-label">
-          <Layers3 size={15} />
-        </span>{' '}
-        <h2>
-          <Link
-            className="experience-card-link"
-            to="/experience"
-            aria-label={t('experience.cardLink')}
-          >
-            {t('overview.experience')}
-          </Link>
-        </h2>
-        <ArrowUpRight
-          className="experience-card-arrow"
-          size={17}
-          strokeWidth={1.5}
-          aria-hidden="true"
-        />
-      </div>
-      <div className="experience-heading">
-        <strong>
-          3<span> {t('overview.years')}</span>
-        </strong>
-        <p>{t('skills.role')}</p>
-      </div>
-      <div className="experience-rule" />
-      <SkillGroups compact />
-      <p className="experience-summary">{t('skills.summary')}</p>
-    </Card>
-  )
-}
-
-function Phone({
-  source,
-  alternate,
-  className = '',
-}: {
-  source: string
-  alternate?: string
-  className?: string
-}) {
-  return (
-    <div className={`phone ${className}`}>
-      <div className="phone-screen">
-        <img src={`/assets/${source}`} alt="" width="500" height="1024" draggable="false" />
-        {alternate && (
-          <img
-            className="phone-alternate"
-            src={`/assets/${alternate}`}
-            alt=""
-            width="500"
-            height="1024"
-            draggable="false"
-          />
-        )}
-      </div>
-    </div>
-  )
-}
-
-function VexVisual() {
-  const { t } = useTranslation()
-  return (
-    <MotionRegion className="vex-visual" label={t('visuals.vex')}>
-      <div className="visual-grid" />
-      <div className="phone-composition">
-        <Phone source="vex-home.png" className="phone-back" />
-        <Phone source="vex-room-key.png" alternate="vex-vouchers.png" className="phone-front" />
-      </div>
-      <div className="connection-chip">
-        <span className="connection-node">
-          <Smartphone size={14} />
-        </span>
-        <span className="connection-line">
-          <i />
-        </span>
-        <span className="connection-node">
-          <Server size={14} />
-        </span>
-        <span className="connection-line">
-          <i />
-        </span>
-        <span className="connection-node">
-          <Database size={14} />
-        </span>
-      </div>
-      <div className="screen-note">
-        <span className="status-dot" /> iOS & Android
-      </div>
-    </MotionRegion>
-  )
-}
-
-function VexProjectVisual() {
-  const { t } = useTranslation()
-  return (
-    <MotionRegion className="vex-project-visual" label={t('visuals.vexProject')}>
-      <div className="visual-grid" />
-      <img
-        className="vex-project-logo"
-        src="/assets/valk-exclusief-logo.svg"
-        alt="Valk Exclusief"
-        width="579"
-        height="292"
-      />
-      <span className="vex-project-platforms">
-        <Smartphone size={13} aria-hidden="true" /> iOS & Android
-      </span>
-      <div className="vex-project-phones">
-        {vexShowcasePhones.map(({ id, ...phone }) => (
-          <Phone key={id} {...phone} />
-        ))}
-      </div>
-    </MotionRegion>
-  )
-}
-
-function VexCard() {
-  const { t } = useTranslation()
-  const { projects } = usePortfolio()
-  const project = projects.find((project) => project.slug === 'vex')!
-  return (
-    <Card className="vex-card project-card">
-      <VexVisual />
-      <div className="project-copy">
-        <div className="eyebrow">{project.eyebrow}</div>
-        <div className="project-title-row">
-          <h2>
-            <Link to="/projects/vex">{project.title}</Link>
-          </h2>
-          <Link
-            className="round-link project-arrow"
-            to="/projects/vex"
-            aria-label={t('overview.vexRead')}
-          >
-            <ArrowUpRight size={20} />
-          </Link>
-        </div>
-        <p>{project.description}</p>
-        <Pills items={project.technologies} />
-      </div>
-    </Card>
-  )
-}
-
-function BuildSequence() {
-  return (
-    <div className="build-sequence" aria-hidden="true">
-      <span>
-        <Code2 size={12} /> code
-      </span>
-      <i />
-      <span>
-        <Terminal size={12} /> build
-      </span>
-      <i />
-      <span className="test-step">
-        <CheckCheck size={12} /> test
-      </span>
-    </div>
-  )
-}
-
-function DivergenceCard() {
-  const { t } = useTranslation()
-  return (
-    <Card className="divergence-card project-card">
-      <MotionRegion className="divergence-visual" label={t('visuals.divergence')}>
-        <div className="overworld-frame">
-          <DivergenceGifPreview
-            src="/assets/divergence-overworld.gif"
-            poster="/assets/divergence-overworld-poster.png"
-          />
-        </div>
-        <BuildSequence />
-      </MotionRegion>
-      <div className="divergence-copy">
-        <div className="eyebrow">{t('projects.divergence.eyebrow')}</div>
-        <h2>
-          <Link to="/projects/divergence">
-            Emerald Rogue: <br />
-            Divergence
-          </Link>
-        </h2>
-        <p>{t('overview.divergenceSummary')}</p>
-        <Link className="text-link" to="/projects/divergence">
-          {t('overview.explore')} <ArrowUpRight size={15} />
-        </Link>
-      </div>
-    </Card>
-  )
-}
-
-function AboutCard() {
-  const { t } = useTranslation()
-  const portrait = aboutPortrait.sources[0]
-  return (
-    <Card className="about-card" id="about">
-      <img
-        className="about-card-portrait"
-        src={portrait.src}
-        width={portrait.width}
-        height={portrait.width}
-        alt={t('about.portraitAlt')}
-        loading="lazy"
-        decoding="async"
-      />
-      <div className="about-card-copy">
-        <div className="about-card-heading">
-          <h2>
-            <Link className="about-card-link" to="/about" aria-label={t('about.cardLink')}>
-              {t('about.title')}
-            </Link>
-          </h2>
-        </div>
-        <p>{t('about.card.description')}</p>
-        <span className="about-card-action">
-          {t('about.card.action')}
-          <ArrowRight className="about-card-arrow" size={16} strokeWidth={1.5} aria-hidden="true" />
-        </span>
-      </div>
-    </Card>
-  )
-}
-
-function ContactCard() {
-  const { t } = useTranslation()
-  return (
-    <Card className="contact-card" id="contact">
-      <Link className="contact-card-heading-link" to="/contact">
-        <h2>{t('navigation.contact')}</h2>
-        <ArrowUpRight size={28} strokeWidth={1.2} aria-hidden="true" />
-      </Link>
-      <div className="contact-links">
-        <a href={`mailto:${profile.email}`}>
-          <Mail size={18} aria-hidden="true" /> {t('overview.email')}{' '}
-          <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
-        <a href={profile.github} target="_blank" rel="noreferrer">
-          <Github size={18} /> GitHub <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
-        <a href={profile.linkedin} target="_blank" rel="noreferrer">
-          <Linkedin size={18} /> LinkedIn <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
-      </div>
-    </Card>
-  )
 }
 
 function Footer() {
@@ -509,111 +174,6 @@ function Footer() {
   )
 }
 
-function OverviewPage() {
-  const { t } = useTranslation()
-  return (
-    <>
-      <div className="page-intro">
-        <span>{t('overview.title')}</span>
-      </div>
-      <main id="main" className="bento-grid">
-        <IntroCard />
-        <VexCard />
-        <ExperienceCard />
-        <DivergenceCard />
-        <AboutCard />
-        <ContactCard />
-      </main>
-    </>
-  )
-}
-
-function ProjectDetailVisual({ project }: { project: Project }) {
-  switch (project.slug) {
-    case 'vex':
-      return <VexProjectVisual />
-    case 'divergence':
-      return <DivergenceProjectVisual />
-    case 'valk-to-go':
-    case 'hktd':
-      return (
-        <div className="project-static-visual">
-          <ProjectThumbnail thumbnail={project.thumbnail} priority />
-        </div>
-      )
-  }
-}
-
-function ProjectPage({ project }: { project: Project }) {
-  const { t } = useTranslation()
-  const { projects } = usePortfolio()
-  const other = projects.find((p) => p.slug !== project.slug)!
-  return (
-    <main id="main" className="project-page">
-      <Link to={`/projects#${project.slug}`} className="back-link">
-        <ArrowLeft size={16} /> {t('navigation.back')}
-      </Link>
-      <div className="case-heading">
-        <span className="eyebrow">{project.eyebrow}</span>
-        <h1>{project.title}</h1>
-        <p>{project.description}</p>
-        <Pills items={project.technologies} />
-      </div>
-      <ProjectDetailVisual project={project} />
-      {project.backend && (
-        <section className="shared-backend">
-          <Server size={22} strokeWidth={1.5} aria-hidden="true" />
-          <div>
-            <h2>{t('caseStudy.backend')}</h2>
-            <p>{project.backend}</p>
-          </div>
-        </section>
-      )}
-      <div className="case-columns">
-        <section>
-          <h2>{t('caseStudy.involvement')}</h2>
-          <p className="project-role">{project.role}</p>
-          <ul className="contribution-list">
-            {project.contributions.map((item) => (
-              <li key={item}>
-                <Check size={16} aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
-        {(project.links.length > 0 || project.sourceVisibility === 'private') && (
-          <aside>
-            <h2 className="eyebrow">{t('caseStudy.links')}</h2>
-            {project.links.map((link) => (
-              <Button asChild variant="outline" key={link.href}>
-                <a href={link.href} target="_blank" rel="noreferrer">
-                  {link.label}
-                  <ExternalLink size={14} aria-hidden="true" />
-                </a>
-              </Button>
-            ))}
-            {project.sourceVisibility === 'private' && (
-              <span className="project-source-status">
-                <LockKeyhole size={15} aria-hidden="true" />
-                {t('caseStudy.privateSource')}
-              </span>
-            )}
-          </aside>
-        )}
-      </div>
-      {project.slug === 'divergence' && <p className="credits">{t('caseStudy.credits')}</p>}
-      <Link to={`/projects/${other.slug}`} className="next-project">
-        <span>
-          <small>{t('caseStudy.other')}</small>
-          {other.title}
-        </span>
-        <ArrowRight size={25} />
-      </Link>
-    </main>
-  )
-}
-
 function NotFound() {
   const { t } = useTranslation()
   return (
@@ -645,10 +205,19 @@ function PortfolioGate() {
 }
 
 function SiteLayout() {
+  const { t } = useTranslation()
   return (
     <div className="site-shell">
       <Header />
-      <Outlet />
+      <Suspense
+        fallback={
+          <main id="main" className="route-loading" data-route-loading aria-busy="true">
+            <p role="status">{t('navigation.loading')}</p>
+          </main>
+        }
+      >
+        <Outlet />
+      </Suspense>
       <Footer />
     </div>
   )

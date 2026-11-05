@@ -100,6 +100,7 @@
   background: var(--subtle);
 }
 .settings-theme {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,6 +126,13 @@
   background: var(--card);
   border-color: var(--border);
   box-shadow: 0 2px 4px #18245208;
+}
+.settings-theme-check {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  color: var(--landing-blue);
 }
 .settings-language-section {
   margin-top: 19px;

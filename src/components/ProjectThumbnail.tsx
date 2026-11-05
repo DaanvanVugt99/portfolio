@@ -25,6 +25,7 @@ export function ProjectThumbnail({
                   alt=""
                   width={500}
                   height={1024}
+                  decoding="async"
                   loading={priority ? 'eager' : 'lazy'}
                   draggable={false}
                 />
@@ -35,6 +36,7 @@ export function ProjectThumbnail({
               key={source}
               src={source}
               alt=""
+              decoding="async"
               loading={priority ? 'eager' : 'lazy'}
               draggable={false}
             />

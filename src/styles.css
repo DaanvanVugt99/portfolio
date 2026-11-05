@@ -144,7 +144,8 @@ button:disabled {
   align-items: center;
   gap: 3px;
 }
-.site-header nav a:hover {
+.site-header nav a:hover,
+.site-header nav a[aria-current='page'] {
   color: var(--primary);
 }
 .page-intro {
@@ -535,7 +536,7 @@ p {
   gap: 7px;
   align-items: center;
   font-size: 9px;
-  color: var(--muted);
+  color: var(--foreground);
   z-index: 1;
 }
 .screen-note .status-dot {
@@ -742,6 +743,12 @@ p {
 }
 .contact-links a:hover {
   color: var(--primary);
+}
+.route-loading {
+  min-height: 60svh;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
 }
 .site-footer {
   display: flex;

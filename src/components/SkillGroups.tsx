@@ -1,3 +1,4 @@
+import '../skills.css'
 import { useTranslation } from 'react-i18next'
 import { skillGroups, skills } from '../data/skills'
 

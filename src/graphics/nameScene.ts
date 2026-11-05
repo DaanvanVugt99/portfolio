@@ -180,6 +180,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   let visible = true
   let frame: number | null = null
   let lastTime = 0
+  let lastInteraction = 0
   let entranceStart: number | null = null
   let revealed = false
   let painted = false
@@ -238,10 +239,24 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   function render(time: number) {
     frame = null
     if (disposed) return
-    const dt = Math.min(lastTime ? (time - lastTime) / 1000 : 1 / 60, 1 / 30)
-    lastTime = time
     const elapsed = entranceStart === null ? art.entranceMs : time - entranceStart
     const entering = motion && elapsed < art.entranceMs
+    // The slow idle wave needs fewer GPU draws. Entrance and interaction keep
+    // the display's normal frame rate, including time for the spring to settle.
+    if (
+      motion &&
+      idleMotion &&
+      !entering &&
+      !pressed &&
+      time - lastInteraction > 1200 &&
+      lastTime &&
+      time - lastTime < 1000 / art.idleFrameRate - 1
+    ) {
+      requestRender()
+      return
+    }
+    const dt = Math.min(lastTime ? (time - lastTime) / 1000 : 1 / 60, 1 / 30)
+    lastTime = time
     renderer.domElement.dataset.entrance = entering ? 'entering' : 'settled'
     let moving = false
     root.updateMatrixWorld(true)
@@ -345,6 +360,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   }
 
   function point(event: PointerEvent) {
+    lastInteraction = performance.now()
     const rect = host.getBoundingClientRect()
     pointer.set(
       ((event.clientX - rect.left) / rect.width) * 2 - 1,
@@ -378,6 +394,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
     requestRender()
   }
   function onUp(event: PointerEvent) {
+    lastInteraction = performance.now()
     if (pressed && motion && event.type !== 'pointercancel')
       pressed.vz += motionStyle.releaseImpulse
     pressed = null
@@ -396,6 +413,7 @@ export async function createNameScene(host: HTMLDivElement, options: Options): P
   }
   function onLeave() {
     if (pressed) return
+    lastInteraction = performance.now()
     inside = false
     pointer.set(10, 10)
     renderer.domElement.dataset.interaction = 'rest'

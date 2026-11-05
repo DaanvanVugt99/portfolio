@@ -1,3 +1,4 @@
+import '../contact.css'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'

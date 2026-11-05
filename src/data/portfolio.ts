@@ -55,7 +55,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     sourceVisibility: 'private',
     thumbnail: {
       kind: 'phones',
-      sources: ['/assets/vex-home.png', '/assets/vex-room-key.png'],
+      sources: ['/assets/vex-home.webp', '/assets/vex-room-key.webp'],
       altKey: 'visuals.vexThumbnail',
     },
     technologies: ['React Native', 'TypeScript', 'Expo', 'Redux Toolkit', 'Ruby on Rails'],
@@ -97,7 +97,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     sourceVisibility: 'private',
     thumbnail: {
       kind: 'store-previews',
-      sources: ['/assets/hktd-screen-3.png', '/assets/hktd-screen-2.png'],
+      sources: ['/assets/hktd-screen-3.webp', '/assets/hktd-screen-2.webp'],
       altKey: 'visuals.hktdThumbnail',
     },
     technologies: ['React Native', 'React', 'TypeScript', 'Ruby on Rails'],

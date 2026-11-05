@@ -1,0 +1,160 @@
+.experience-card-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.experience-card-label h2 {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+}
+.experience-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+.experience-card-arrow {
+  margin-left: auto;
+  color: var(--body-text);
+  transition:
+    color 160ms,
+    transform 160ms;
+}
+.experience-card:hover .experience-card-arrow {
+  color: var(--timeline-ink);
+  transform: translate(2px, -2px);
+}
+.experience-card:has(a:focus-visible) {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+.experience-summary {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+.about-card {
+  display: grid;
+  grid-template-columns: 144px minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  padding: 28px 32px;
+}
+.about-card-portrait {
+  display: block;
+  width: 144px;
+  height: 144px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+.about-card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.about-card-heading h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+}
+.about-card-copy p {
+  margin: 0;
+  max-width: 42ch;
+  font-size: 13px;
+  color: var(--body-text);
+  line-height: 1.8;
+}
+.about-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  color: var(--landing-blue);
+  font-size: 11px;
+}
+.about-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+.about-card-arrow {
+  transition: transform 160ms;
+}
+.about-card:hover .about-card-arrow,
+.about-card:has(a:focus-visible) .about-card-arrow {
+  transform: translateX(3px);
+}
+.about-card:has(a:focus-visible) {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+:root[data-motion='paused'] .about-card-arrow {
+  transition: none;
+}
+:root[data-motion='paused'] .about-card .about-card-arrow {
+  transform: none;
+}
+@media (max-width: 1000px) {
+  .about-card {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 18px;
+    padding: 26px;
+    align-content: start;
+  }
+  .about-card-portrait {
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .about-card-copy {
+    display: contents;
+  }
+  .about-card-heading {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .about-card-copy p,
+  .about-card-action {
+    grid-column: 1 / -1;
+  }
+  .about-card-copy p {
+    max-width: none;
+  }
+}
+.contact-card-heading-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.contact-card-heading-link svg {
+  color: var(--primary);
+}
+.contact-card-heading-link:hover h2 {
+  color: var(--landing-blue);
+}
+@media (prefers-reduced-motion: reduce) {
+  .experience-card-arrow {
+    transition: none;
+  }
+  .experience-card:hover .experience-card-arrow {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-card .about-card-arrow {
+    transform: none;
+  }
+}

@@ -60,4 +60,5 @@ export const nameAppearance = {
   entranceRise: 0.18,
   loadTimeoutMs: 8000,
   maxPixelRatio: 1.75,
+  idleFrameRate: 30,
 }

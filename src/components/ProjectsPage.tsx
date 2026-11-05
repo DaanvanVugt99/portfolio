@@ -1,3 +1,4 @@
+import '../projects.css'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'

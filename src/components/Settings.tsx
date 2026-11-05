@@ -51,6 +51,9 @@ export function Settings() {
               <RadioGroupItem className="settings-theme" value={value} key={value}>
                 <Icon size={17} strokeWidth={1.5} aria-hidden="true" />
                 <span>{t(`settings.${value}`)}</span>
+                <RadioGroupIndicator className="settings-theme-check" aria-hidden="true">
+                  <Check size={12} strokeWidth={2} />
+                </RadioGroupIndicator>
               </RadioGroupItem>
             ))}
           </RadioGroup>

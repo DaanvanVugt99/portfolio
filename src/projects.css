@@ -302,6 +302,9 @@
   object-fit: contain;
   image-rendering: pixelated;
 }
+.divergence-gallery-copy > .eyebrow {
+  color: var(--foreground);
+}
 .divergence-gallery-copy {
   min-width: 0;
 }

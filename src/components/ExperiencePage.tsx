@@ -1,3 +1,6 @@
+import '@fontsource/cormorant-garamond/latin-500-italic.css'
+import '@fontsource/cormorant-garamond/latin-600.css'
+import '../experience.css'
 import { useMemo } from 'react'
 import {
   ArrowLeft,

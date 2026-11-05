@@ -41,7 +41,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: var(--body-text);
+  color: var(--foreground);
   font-size: 10px;
 }
 .vex-project-phones {
