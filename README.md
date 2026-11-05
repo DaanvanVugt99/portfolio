@@ -1,33 +1,37 @@
 # Daan van Vugt — Portfolio
 
-My personal portfolio, built with React, TypeScript, Vite, Tailwind CSS, and Three.js.
+[daanvanvugt.com](https://daanvanvugt.com)
+
+Built with React, TypeScript, Vite, Tailwind CSS and Three.js.
 
 ![Portfolio preview](docs/landing-preview.jpg)
 
 ## Development
+
+Use Node.js 24.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-## Checks
+Run `npm run verify` for formatting, lint, tests, TypeScript and the production build.
+Use `npm run format` or `npm run lint:fix` to apply fixes.
 
-```sh
-npm run lint
-npm run format:check
-npm test
-npm run build
-```
+## Releases
 
-Run `npm run format` to format the project, or `npm run lint:fix` to apply automatic lint fixes.
+`dev` and pull requests get Vercel previews. Merge `dev` into protected `main`
+through a PR with passing CI to publish production. Use a merge commit, then
+merge `origin/main` back into `dev` before starting the next change.
+
+Vercel runs the same verification before publishing. To roll back, restore the
+previous production deployment in Vercel, then submit a Git revert PR through
+`dev` so the repository matches the restored version.
 
 ## Contact form
 
-Create a form in [Formspree](https://formspree.io), verify the recipient email, and
-enable email notifications. Copy `.env.example` to `.env.local` and set
-`VITE_FORMSPREE_FORM_ID` to its public form ID, then restart Vite. Use Formspree's
-spam filtering with CAPTCHA disabled; the form also includes a honeypot.
-Until configured, visitors can use the direct email link.
+Copy `.env.example` to `.env.local` and set `VITE_FORMSPREE_FORM_ID` for local use.
+In Vercel, set this public Formspree ID for **Production only**. Leave it unset
+in previews; those show the direct-email alternative.
 
 [Asset credits](docs/credits.md)
