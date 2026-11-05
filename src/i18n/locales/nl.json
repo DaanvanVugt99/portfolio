@@ -257,5 +257,33 @@
       "approach": "Ik zoek graag uit waar een probleem vandaan komt en werk aan de oplossing tot en met de release. Ik schakel graag tussen frontend en backend en probeer code wat overzichtelijker achter te laten dan ik die aantrof. Bijvoorbeeld door een component te vereenvoudigen of een test toe te voegen voor een bug die ik net heb opgespoord.",
       "personal": "In mijn vrije tijd maak ik games, produceer ik bass music in Ableton Live en ga ik graag naar de bioscoop. Ik werk aan <divergence>Divergence</divergence>, een Game Boy Advance-project geschreven in C, en ontwerp Phantasm, een tactische autobattler. Ik kan me een hele avond vermaken met het bijschaven van een spelmechaniek, een bassound goed in een track laten passen of een film kijken op het grote scherm."
     }
+  },
+  "contact": {
+    "formLabel": "Stuur Daan een bericht",
+    "back": "Portfolio-overzicht",
+    "introduction": "Stuur me een bericht via het formulier, of mail me rechtstreeks.",
+    "metaDescription": "Neem contact op met Daan van Vugt via e-mail, LinkedIn of het contactformulier.",
+    "fields": {
+      "name": "Naam",
+      "email": "E-mailadres",
+      "message": "Bericht"
+    },
+    "send": "Verstuur bericht",
+    "sending": "Je bericht wordt verstuurd...",
+    "retry": "Probeer opnieuw",
+    "unavailable": "Het formulier is nog niet beschikbaar.",
+    "emailDirectly": "Mail me rechtstreeks.",
+    "processor": "Formspree verwerkt je naam, e-mailadres en bericht om je bericht te bezorgen.",
+    "privacy": "Privacybeleid",
+    "successTitle": "Bericht verstuurd",
+    "successMessage": "Bedankt voor je bericht. Het is succesvol verzonden.",
+    "sendAnother": "Nog een bericht sturen",
+    "errors": {
+      "required": "Vul dit veld in.",
+      "email": "Vul een geldig e-mailadres in.",
+      "rejected": "Controleer dit veld en probeer het opnieuw.",
+      "failed": "Je bericht kon niet worden verstuurd. Probeer het opnieuw.",
+      "checkFields": "Controleer de gemarkeerde velden."
+    }
   }
 }

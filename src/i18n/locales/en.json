@@ -257,5 +257,33 @@
       "approach": "I like getting to the bottom of a problem and seeing the fix through to release. I’m happy moving between frontend and backend, and I tend to leave the code a little easier to work with than I found it, whether that means simplifying a component or adding a test for a bug I just tracked down.",
       "personal": "Outside work, I make games, produce bass music in Ableton Live, and love going to the cinema. I’m building <divergence>Divergence</divergence>, a Game Boy Advance project written in C, and designing Phantasm, a tactical autobattler. I can happily spend an evening tweaking a game mechanic, getting a bass sound to sit right in a track, or catching a film on the big screen."
     }
+  },
+  "contact": {
+    "formLabel": "Send Daan a message",
+    "back": "Portfolio overview",
+    "introduction": "Send me a message using the form, or email me directly.",
+    "metaDescription": "Contact Daan van Vugt by email, LinkedIn, or the contact form.",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message"
+    },
+    "send": "Send message",
+    "sending": "Sending your message...",
+    "retry": "Try again",
+    "unavailable": "The form is not available yet.",
+    "emailDirectly": "Email me directly.",
+    "processor": "Your name, email, and message are processed by Formspree to deliver your message.",
+    "privacy": "Privacy policy",
+    "successTitle": "Message sent",
+    "successMessage": "Thanks for getting in touch. Your message has been submitted.",
+    "sendAnother": "Send another message",
+    "errors": {
+      "required": "Please fill in this field.",
+      "email": "Enter a valid email address.",
+      "rejected": "Check this field and try again.",
+      "failed": "Your message could not be sent. Please try again.",
+      "checkFields": "Please check the highlighted fields."
+    }
   }
 }

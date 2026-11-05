@@ -18,7 +18,7 @@ import {
   Terminal,
   Workflow,
 } from 'lucide-react'
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode, type SVGProps } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { Button } from './components/ui/button'
 import { Card } from './components/ui/card'
 import { profile, type Project } from './data/portfolio'
@@ -36,44 +36,8 @@ import { StickyHeader } from './components/StickyHeader'
 import { ProjectsPage } from './components/ProjectsPage'
 import { ProjectThumbnail } from './components/ProjectThumbnail'
 import { AboutPage } from './components/AboutPage'
-
-function Github({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M9 19c-4.3 1.3-4.3-2.2-6-2.7M15 22v-3.5c0-1 .1-1.7-.5-2.4 3.2-.4 6.5-1.6 6.5-7.1 0-1.6-.6-2.8-1.5-3.8.2-.4.6-1.8-.2-3.2 0 0-1.2-.4-3.9 1.4a13.5 13.5 0 0 0-6.8 0C5.9 1.6 4.7 2 4.7 2c-.8 1.4-.4 2.8-.2 3.2C3.6 6.2 3 7.4 3 9c0 5.5 3.3 6.7 6.5 7.1-.5.6-.5 1.3-.5 2.4V22" />
-    </svg>
-  )
-}
-function Linkedin({ size = 16, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <rect x="3" y="3" width="18" height="18" rx="3" />
-      <path d="M7.5 10.5v6M11.5 16.5v-6m0 2c0-3 5-3 5 0v4M7.5 7.4v.2" />
-    </svg>
-  )
-}
+import { ContactPage } from './components/ContactPage'
+import { Github, Linkedin } from './components/SocialIcons'
 
 function Header() {
   const { t } = useTranslation()
@@ -90,7 +54,7 @@ function Header() {
       <nav aria-label={t('navigation.label')}>
         <Link to="/projects">{t('navigation.work')}</Link>
         <Link to="/about">{t('navigation.about')}</Link>
-        <Link to="/portfolio#contact">
+        <Link to="/contact">
           {t('navigation.contact')} <ArrowUpRight size={13} />
         </Link>
       </nav>
@@ -112,11 +76,13 @@ function PageEffects() {
         ? `${t('work.title')} — Daan van Vugt`
         : pathname === '/about'
           ? `${t('about.title')} — Daan van Vugt`
-          : pathname === '/portfolio'
-            ? `${t('overview.title')} — Daan van Vugt`
-            : pathname === '/experience'
-              ? `${t('experience.title')} — Daan van Vugt`
-              : t('meta.home')
+          : pathname === '/contact'
+            ? `${t('navigation.contact')} — Daan van Vugt`
+            : pathname === '/portfolio'
+              ? `${t('overview.title')} — Daan van Vugt`
+              : pathname === '/experience'
+                ? `${t('experience.title')} — Daan van Vugt`
+                : t('meta.home')
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute(
@@ -127,9 +93,11 @@ function PageEffects() {
             ? t('work.metaDescription')
             : pathname === '/about'
               ? t('about.metaDescription')
-              : pathname === '/experience'
-                ? t('experience.metaDescription')
-                : t('meta.description'),
+              : pathname === '/contact'
+                ? t('contact.metaDescription')
+                : pathname === '/experience'
+                  ? t('experience.metaDescription')
+                  : t('meta.description'),
       )
   }, [pathname, t, projects])
 
@@ -479,10 +447,10 @@ function ContactCard() {
   const { t } = useTranslation()
   return (
     <Card className="contact-card" id="contact">
-      <span className="contact-symbol" aria-hidden="true">
-        <ArrowUpRight size={36} strokeWidth={1.2} />
-      </span>
-      <h2>{t('navigation.contact')}</h2>
+      <Link className="contact-card-heading-link" to="/contact">
+        <h2>{t('navigation.contact')}</h2>
+        <ArrowUpRight size={28} strokeWidth={1.2} aria-hidden="true" />
+      </Link>
       <div className="contact-links">
         {profile.email ? (
           <a href={`mailto:${profile.email}`}>
@@ -674,12 +642,13 @@ function LandingGate() {
   const { hash } = useLocation()
   if (hash === '#work') return <Navigate replace to="/projects" />
   if (hash === '#about') return <Navigate replace to="/about" />
-  return hash === '#contact' ? <Navigate replace to={`/portfolio${hash}`} /> : <LandingPage />
+  return hash === '#contact' ? <Navigate replace to="/contact" /> : <LandingPage />
 }
 
 function PortfolioGate() {
   const { hash } = useLocation()
   if (hash === '#about') return <Navigate replace to="/about" />
+  if (hash === '#contact') return <Navigate replace to="/contact" />
   return hash === '#work' ? <Navigate replace to="/projects" /> : <OverviewPage />
 }
 
@@ -710,6 +679,7 @@ function App() {
             <Route path="/portfolio" element={<PortfolioGate />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/experience" element={<ExperiencePage />} />
             {projects.map((project) => (
               <Route

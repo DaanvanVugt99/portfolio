@@ -104,7 +104,7 @@ export function ExperiencePage() {
             </span>
             <h2>{t('experience.opportunity.title')}</h2>
             <p className="timeline-description">{t('experience.opportunity.description')}</p>
-            <Link className="timeline-project-link" to="/portfolio#contact">
+            <Link className="timeline-project-link" to="/contact">
               {t('experience.opportunity.contact')}
               <ArrowUpRight size={16} strokeWidth={1.5} />
             </Link>

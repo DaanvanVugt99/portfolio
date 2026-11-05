@@ -1,5 +1,7 @@
 # Credits
 
+- Contact page reference: [Shadcnblocks Contact 1](https://www.shadcnblocks.com/block/contact1). The split layout and form components are custom; premium block code is not included.
+
 - Layout reference: [Shadcn Studio Grid 14](https://shadcnstudio.com/blocks/bento-grid/bento-grid). The layout and illustrations are custom; premium block code is not included.
 - Project overview reference: [Shadcnblocks Projects 5](https://www.shadcnblocks.com/block/projects5). The project cards and static cover compositions are custom.
 - About page references: [Shadcnblocks About 9](https://www.shadcnblocks.com/block/about9) and [Josh Comeau's About page](https://www.joshwcomeau.com/about-josh/). The layout is custom; premium block code is not included. Portrait supplied by Daan van Vugt, resized to responsive WebP images with its original framing preserved.

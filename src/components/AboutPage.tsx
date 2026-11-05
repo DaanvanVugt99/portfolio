@@ -53,7 +53,7 @@ export function AboutPage() {
                 {t('about.viewWork')} <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </Button>
-            <Link className="about-contact-link" to="/portfolio#contact">
+            <Link className="about-contact-link" to="/contact">
               {t('about.contact')} <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
           </div>
