@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next'
 import { establishedYear, experience, formatExperienceDate } from '../data/experience'
 import { Timeline, type TimelineItem } from './ui/timeline'
 import { Card } from './ui/card'
+import { SkillGroups } from './SkillGroups'
 
 const markers = { work: BriefcaseBusiness, study: Code2, school: Shapes }
 
@@ -139,6 +140,25 @@ export function ExperiencePage() {
         <h1>{t('experience.title')}</h1>
       </header>
       <Timeline items={items} label={t('experience.listLabel')} />
+      <section className="experience-skills" aria-labelledby="skills">
+        <h2 id="skills">{t('skills.title')}</h2>
+        <p>{t('skills.context')}</p>
+        <SkillGroups />
+        <section className="additional-languages" aria-labelledby="additional-languages">
+          <h3 id="additional-languages">{t('skills.additional.title')}</h3>
+          <dl>
+            <div>
+              <dt>Java</dt>
+              <dd>{t('skills.additional.java')}</dd>
+            </div>
+            <div>
+              <dt>C#</dt>
+              <dd>{t('skills.additional.csharp')}</dd>
+            </div>
+          </dl>
+          <p>{t('skills.additional.interest')}</p>
+        </section>
+      </section>
     </main>
   )
 }

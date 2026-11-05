@@ -16,13 +16,6 @@ export function usePortfolio() {
             : project.technologies,
         links: project.links.map((link) => ({ ...link, label: t(`links.${link.label}`) })),
       })),
-      backendTechnologies: [
-        'Ruby on Rails',
-        'Elixir',
-        t('overview.database'),
-        'Git',
-        t('overview.delivery'),
-      ],
     }),
     [t],
   )

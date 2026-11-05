@@ -285,5 +285,34 @@
       "failed": "Your message could not be sent. Please try again.",
       "checkFields": "Please check the highlighted fields."
     }
+  },
+  "skills": {
+    "title": "Technologies & tools",
+    "context": "Used in my professional work at Valk Digital.",
+    "role": "Software developer at Valk Digital",
+    "summary": "Automated testing · CI/CD · Production monitoring",
+    "integrationTests": "Integration tests",
+    "groups": {
+      "backend": "Backend & data",
+      "web": "Web",
+      "mobile": "Mobile",
+      "testing": "Testing",
+      "delivery": "Delivery",
+      "monitoring": "Monitoring"
+    },
+    "compact": {
+      "backend": "Backend",
+      "web": "Web",
+      "mobile": "Mobile",
+      "testing": "Testing",
+      "delivery": "Delivery",
+      "monitoring": "Monitoring"
+    },
+    "additional": {
+      "title": "Additional language experience",
+      "java": "Used extensively during my software engineering studies.",
+      "csharp": "Used in a short professional assignment.",
+      "interest": "My recent work has focused on TypeScript, Ruby on Rails, and Elixir/Phoenix. I’m also open to working with Java and C#."
+    }
   }
 }

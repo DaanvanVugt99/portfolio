@@ -285,5 +285,34 @@
       "failed": "Je bericht kon niet worden verstuurd. Probeer het opnieuw.",
       "checkFields": "Controleer de gemarkeerde velden."
     }
+  },
+  "skills": {
+    "title": "Technologieën & tools",
+    "context": "Gebruikt in mijn werk bij Valk Digital.",
+    "role": "Softwareontwikkelaar bij Valk Digital",
+    "summary": "Geautomatiseerd testen · CI/CD · Productiemonitoring",
+    "integrationTests": "Integratietests",
+    "groups": {
+      "backend": "Backend & data",
+      "web": "Web",
+      "mobile": "Mobiel",
+      "testing": "Testen",
+      "delivery": "Opleveren",
+      "monitoring": "Monitoring"
+    },
+    "compact": {
+      "backend": "Backend",
+      "web": "Web",
+      "mobile": "Mobiel",
+      "testing": "Testen",
+      "delivery": "Opleveren",
+      "monitoring": "Monitoring"
+    },
+    "additional": {
+      "title": "Ervaring met andere programmeertalen",
+      "java": "Veel gebruikt tijdens mijn opleiding Software Engineering.",
+      "csharp": "Gebruikt tijdens een korte professionele opdracht.",
+      "interest": "In mijn recente werk lag de nadruk op TypeScript, Ruby on Rails en Elixir/Phoenix. Ik sta ook open voor werk met Java en C#."
+    }
   }
 }

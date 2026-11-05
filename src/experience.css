@@ -43,6 +43,131 @@
 .experience-page {
   padding-top: 8px;
 }
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 48px;
+  margin: 0;
+}
+.skill-group {
+  min-width: 0;
+}
+.skill-group dt {
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--foreground);
+}
+.skill-group dd {
+  min-width: 0;
+  margin: 0;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.skill-tags .pill {
+  font-size: 11px;
+  padding: 4px 9px;
+}
+.skill-groups-compact {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+.skill-groups-compact .skill-group {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+.skill-groups-compact dt {
+  margin: 3px 0 0;
+  font-size: 10px;
+  color: var(--body-text);
+}
+.skill-groups-compact .skill-tags {
+  gap: 5px;
+}
+.skill-groups-compact .pill {
+  font-size: 9px;
+  padding: 3px 7px;
+}
+.experience-summary {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+.experience-skills {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 44px 0 24px;
+  border-top: 1px solid var(--border);
+}
+.experience-skills h2 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  font-weight: 550;
+}
+.experience-skills > p {
+  margin: 12px 0 32px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--body-text);
+}
+.additional-languages {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.additional-languages h3 {
+  margin: 0 0 20px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+.additional-languages dl {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+.additional-languages dl > div {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 16px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.additional-languages dt {
+  font-weight: 500;
+}
+.additional-languages dd {
+  margin: 0;
+  color: var(--body-text);
+}
+.additional-languages > p {
+  max-width: 70ch;
+  margin: 24px 0 0;
+  color: var(--body-text);
+  font-size: 13px;
+  line-height: 1.8;
+}
+@media (max-width: 700px) {
+  .experience-skills .skill-groups {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+  .experience-skills h2 {
+    font-size: 28px;
+  }
+}
 .experience-page-heading {
   margin: 37px 0 68px;
 }

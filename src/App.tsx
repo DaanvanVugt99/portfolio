@@ -4,7 +4,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   AudioLines,
-  Braces,
   Check,
   CheckCheck,
   Code2,
@@ -38,6 +37,7 @@ import { ProjectThumbnail } from './components/ProjectThumbnail'
 import { AboutPage } from './components/AboutPage'
 import { ContactPage } from './components/ContactPage'
 import { Github, Linkedin } from './components/SocialIcons'
+import { SkillGroups } from './components/SkillGroups'
 
 function Header() {
   const { t } = useTranslation()
@@ -213,7 +213,6 @@ function Pills({ items }: { items: string[] }) {
 
 function ExperienceCard() {
   const { t } = useTranslation()
-  const { backendTechnologies } = usePortfolio()
   return (
     <Card className="experience-card" id="experience">
       <div className="eyebrow experience-card-label">
@@ -240,25 +239,11 @@ function ExperienceCard() {
         <strong>
           3<span> {t('overview.years')}</span>
         </strong>
-        <p>
-          {t('overview.professional')}
-          <br />
-          {t('overview.at')} <span>Valk Digital</span>
-        </p>
+        <p>{t('skills.role')}</p>
       </div>
       <div className="experience-rule" />
-      <div className="capabilities">
-        <span>
-          <Braces size={16} /> {t('overview.fullstack')}
-        </span>
-        <span>
-          <Server size={16} /> {t('overview.backend')}
-        </span>
-        <span>
-          <Smartphone size={16} /> {t('overview.mobile')}
-        </span>
-      </div>
-      <Pills items={backendTechnologies} />
+      <SkillGroups compact />
+      <p className="experience-summary">{t('skills.summary')}</p>
     </Card>
   )
 }

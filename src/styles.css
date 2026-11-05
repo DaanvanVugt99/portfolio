@@ -361,9 +361,10 @@ p {
 }
 .experience-heading {
   display: flex;
-  align-items: center;
-  gap: 22px;
-  margin: 21px 0 19px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 18px 0;
 }
 .experience-heading strong {
   font-weight: 550;
@@ -377,34 +378,15 @@ p {
   letter-spacing: -1px;
 }
 .experience-heading p {
-  font-size: 10px;
-  line-height: 1.8;
-  color: var(--muted);
-}
-.experience-heading p span {
-  color: var(--foreground);
-  font-weight: 500;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--body-text);
 }
 .experience-rule {
   height: 1px;
   background: var(--border);
   margin-bottom: 19px;
-}
-.capabilities {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  margin-bottom: 21px;
-}
-.capabilities span {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  font-size: 11px;
-  color: var(--body-text);
-}
-.capabilities svg {
-  color: var(--muted);
 }
 .pills {
   display: flex;
@@ -1128,9 +1110,6 @@ p {
   .intro-card h1 {
     font-size: clamp(32px, 3.5vw, 42px);
   }
-  .experience-heading {
-    gap: 15px;
-  }
   .contact-links {
     gap: 12px;
   }
@@ -1141,7 +1120,7 @@ p {
   }
   .bento-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: 350px 350px auto;
+    grid-template-rows: 350px minmax(350px, auto) auto;
     gap: 16px;
   }
   .intro-card {
@@ -1179,25 +1158,8 @@ p {
   .intro-bottom {
     left: 28px;
   }
-  .experience-heading {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 16px;
-    margin-bottom: 15px;
-  }
-  .experience-heading p br {
-    display: none;
-  }
   .experience-heading strong {
     font-size: 42px;
-  }
-  .experience-card .pills {
-    gap: 4px;
-  }
-  .capabilities {
-    margin-bottom: 16px;
-    gap: 7px;
   }
   .vex-visual {
     height: 490px;
@@ -1397,21 +1359,8 @@ p {
     padding: 27px;
     min-height: 335px;
   }
-  .experience-heading {
-    gap: 20px;
-    margin-top: 22px;
-  }
   .experience-heading strong {
     font-size: 45px;
-  }
-  .experience-heading p {
-    font-size: 9px;
-  }
-  .capabilities {
-    font-size: 11px;
-  }
-  .experience-card .pills {
-    max-width: 300px;
   }
   .divergence-card {
     min-height: 260px;
