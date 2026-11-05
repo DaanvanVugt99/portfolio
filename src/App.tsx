@@ -24,6 +24,7 @@ import { Github, Linkedin } from './components/SocialIcons'
 import { siteNavigation } from './data/navigation'
 import { MobileNavigation } from './components/MobileNavigation'
 import { whenRouteContentReady } from './lib/routeContent'
+import { canonicalUrl } from './data/site'
 
 const OverviewPage = lazy(() =>
   import('./components/OverviewPage').then((module) => ({ default: module.OverviewPage })),
@@ -84,6 +85,26 @@ function PageEffects() {
   const previousLocation = useRef<{ pathname: string; hash: string } | null>(null)
   useEffect(() => {
     const project = projects.find((p) => pathname === `/projects/${p.slug}`)
+    const canonical = canonicalUrl(pathname)
+    let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
+    if (canonical) {
+      if (!link) {
+        link = document.createElement('link')
+        link.rel = 'canonical'
+        document.head.append(link)
+      }
+      link.href = canonical
+      robots?.remove()
+    } else {
+      link?.remove()
+      if (!robots) {
+        robots = document.createElement('meta')
+        robots.name = 'robots'
+        document.head.append(robots)
+      }
+      robots.content = 'noindex'
+    }
     document.title = project
       ? `${project.title} — Daan van Vugt`
       : pathname === '/projects'
