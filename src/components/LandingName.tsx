@@ -1,8 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react'
-import { landing, nameAppearance } from '../data/landing'
+import { landing, nameAppearance, defaultMotion, type MotionStyle } from '../data/landing'
 import { usePreferences } from '../state/Preferences'
 import type { NameScene } from '../graphics/nameScene'
-import { defaultMotion, type MotionStyle } from '../data/workshop'
 import { loadNameAssets } from '../graphics/nameAssets'
 import { useTranslation } from 'react-i18next'
 

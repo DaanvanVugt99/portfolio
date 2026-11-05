@@ -25,7 +25,6 @@ import { PreferencesProvider } from './state/Preferences'
 import { MotionToggle } from './components/PreferenceControls'
 import { Settings } from './components/Settings'
 import { LandingPage } from './components/LandingPage'
-import { WorkshopPage } from './components/WorkshopPage'
 import { vexShowcasePhones } from './data/vexScreenshots'
 import { ExperiencePage } from './components/ExperiencePage'
 import { BrandMark } from './components/BrandMark'
@@ -490,10 +489,36 @@ function Footer() {
   return (
     <footer className="site-footer">
       <span>© {new Date().getFullYear()} Daan van Vugt</span>
-      <MotionToggle />
-      <a href={profile.github} target="_blank" rel="noreferrer" aria-label={t('overview.github')}>
-        <Github size={16} />
-      </a>
+      <div className="footer-actions">
+        <MotionToggle />
+        <nav className="footer-socials" aria-label={t('footer.links')}>
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={t('overview.github')}
+            title={t('overview.github')}
+          >
+            <Github size={16} />
+          </a>
+          <a
+            href={profile.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={t('footer.linkedin')}
+            title={t('footer.linkedin')}
+          >
+            <Linkedin size={16} />
+          </a>
+          <a
+            href={`mailto:${profile.email}`}
+            aria-label={t('footer.email')}
+            title={t('footer.email')}
+          >
+            <Mail size={16} aria-hidden="true" />
+          </a>
+        </nav>
+      </div>
     </footer>
   )
 }
@@ -655,7 +680,6 @@ function App() {
         </a>
         <Routes>
           <Route path="/" element={<LandingGate />} />
-          <Route path="/workshop" element={<WorkshopPage />} />
           <Route element={<SiteLayout />}>
             <Route path="/portfolio" element={<PortfolioGate />} />
             <Route path="/projects" element={<ProjectsPage />} />

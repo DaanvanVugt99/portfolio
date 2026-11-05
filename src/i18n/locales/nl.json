@@ -11,8 +11,8 @@
   "motion": {
     "pause": "Animaties pauzeren",
     "play": "Animaties afspelen",
-    "reduced": "Minder beweging",
-    "deviceReduced": "Je apparaat heeft minder beweging ingeschakeld"
+    "reduced": "Minder animaties",
+    "deviceReduced": "Je apparaat staat ingesteld op minder animaties"
   },
   "navigation": {
     "home": "Home",
@@ -22,18 +22,22 @@
     "contact": "Contact",
     "skip": "Naar de inhoud",
     "openPortfolio": "Home openen",
-    "landing": "Startpagina",
     "back": "Terug naar projecten",
     "menu": "Menu",
     "openMenu": "Navigatiemenu openen",
     "closeMenu": "Navigatiemenu sluiten"
   },
   "profile": {
-    "role": "Softwareontwikkelaar",
-    "introduction": "Op zoek naar een functie als fullstack- of backendontwikkelaar."
+    "role": "Software developer",
+    "introduction": "Op zoek naar een baan als fullstack of backend developer."
+  },
+  "footer": {
+    "links": "Profielen en contact",
+    "linkedin": "Daan van Vugt op LinkedIn",
+    "email": "Mail Daan van Vugt"
   },
   "landing": {
-    "loading": "Visual laden",
+    "loading": "Animatie laden",
     "experience": "3 jaar professionele ervaring",
     "action": "Bekijk portfolio"
   },
@@ -42,20 +46,20 @@
     "viewProjects": "Bekijk projecten",
     "experience": "Ervaring",
     "years": "jaar",
-    "professional": "professionele ontwikkelervaring",
+    "professional": "professionele ervaring als developer",
     "at": "bij",
-    "fullstack": "Fullstackontwikkeling",
-    "backend": "Backendservices & integraties",
-    "mobile": "Native mobiele apps",
-    "database": "Databaseontwerp",
-    "delivery": "Testen & opleveren",
+    "fullstack": "Fullstack development",
+    "backend": "Backend services & integraties",
+    "mobile": "Native apps",
+    "database": "Database design",
+    "delivery": "Testing & deployments",
     "vexRead": "Lees over het Valk Exclusief-project",
-    "divergenceSummary": "Eigen systemen, ontwikkeltools en regressiecontroles.",
+    "divergenceSummary": "Eigen game mechanics, tooling en regression checks.",
     "explore": "Bekijk het project",
     "email": "E-mail",
     "pending": "volgt",
-    "emailPending": "Het openbare e-mailadres wordt na de ontwerpreview toegevoegd.",
-    "linkedinPending": "De LinkedIn-link wordt na de ontwerpreview toegevoegd.",
+    "emailPending": "Het e-mailadres volgt nog.",
+    "linkedinPending": "De LinkedIn-link volgt nog.",
     "github": "Daan van Vugt op GitHub"
   },
   "experience": {
@@ -65,17 +69,17 @@
     "listLabel": "Werk en opleiding, meest recente eerst",
     "to": "tot",
     "opportunity": {
-      "period": "Op zoek naar een nieuwe uitdaging",
+      "period": "Op zoek naar een nieuwe baan",
       "status": "Op zoek naar werk",
-      "title": "Fullstack- of backenddeveloper",
-      "description": "Op zoek naar mijn volgende baan. Ook geïnteresseerd in andere functies binnen softwareontwikkeling.",
+      "title": "Fullstack / backend developer",
+      "description": "Ik zoek mijn volgende baan als developer. Ook andere rollen binnen software development lijken me interessant.",
       "contact": "Neem contact op"
     },
     "origin": {
       "established": "Opgericht in"
     },
     "vexLink": "Valk Exclusief-app",
-    "metaDescription": "Het werk en de opleiding van Daan van Vugt: softwareontwikkeling bij Valk Digital, HBO-ICT aan Hogeschool van Arnhem en Nijmegen en VWO op het Titus Brandsmalyceum in Oss.",
+    "metaDescription": "Het werk en de opleiding van Daan van Vugt: software developer bij Valk Digital, HBO-ICT aan Hogeschool van Arnhem en Nijmegen en VWO op het Titus Brandsmalyceum in Oss.",
     "kinds": {
       "work": "Werkervaring",
       "study": "Hoger onderwijs",
@@ -83,17 +87,17 @@
     },
     "entries": {
       "valk": {
-        "qualification": "Softwareontwikkelaar",
+        "qualification": "Software developer",
         "bullets": [
-          "Webapps en native mobiele applicaties.",
-          "Backendservices en integraties.",
-          "Testen, uitrollen en onderhoud."
+          "Webapps en native apps.",
+          "Backend services en integraties.",
+          "Testing, deployments en onderhoud."
         ]
       },
       "han": {
         "qualification": "HBO-ICT · Software Engineering",
-        "description": "Software engineering, databases en datawarehousing.",
-        "status": "Opleidingsonderdelen afgerond; afstudeeropdracht niet afgerond. Geen diploma behaald."
+        "description": "Software engineering, databases en data warehousing.",
+        "status": "Alle vakken afgerond, maar de afstudeeropdracht niet. Geen diploma behaald."
       },
       "tbl": {
         "qualification": "VWO · Natuur & Techniek",
@@ -103,9 +107,9 @@
     }
   },
   "visuals": {
-    "vexProject": "Het Valk Exclusief-logo met geanimeerde appschermen voor hotelboekingen, zelf inchecken, digitale kamersleutels en beloningen.",
-    "vex": "Echte schermen van de Valk Exclusief-app met zelf inchecken, een digitale kamersleutel en beloningen. Decoratieve, conceptuele verbinding tussen app en services.",
-    "divergence": "Geanimeerde overworldbeelden uit Emerald Rogue: Divergence, met een decoratieve reeks voor code, bouwen en testen.",
+    "vexProject": "Het Valk Exclusief-logo met geanimeerde app-screenshots voor boekingen, online inchecken, digitale kamersleutels en beloningen.",
+    "vex": "Screenshots van de Valk Exclusief-app met online inchecken, een digitale kamersleutel en beloningen. Daarnaast een schematische weergave van de verbinding tussen app en services.",
+    "divergence": "Geanimeerde beelden van de overworld in Emerald Rogue: Divergence, met een decoratieve weergave van code, build en test.",
     "divergenceTitleScreen": "Het geanimeerde titelscherm van Pokémon Emerald Rogue: Divergence.",
     "titleScreen": "Titelscherm",
     "battle": "Gevecht",
@@ -116,16 +120,16 @@
     "divergenceOverworld": "Geanimeerde beelden van de overworld in Emerald Rogue: Divergence.",
     "gamePreviews": "Beelden uit de game",
     "divergenceThumbnail": "Een collage van stilstaande beelden van de hub, overworld en een gevecht in Emerald Rogue: Divergence.",
-    "vexThumbnail": "Schermen van de Valk Exclusief-app voor hotelboekingen en een digitale kamersleutel.",
+    "vexThumbnail": "Screenshots van de Valk Exclusief-app met hotelboekingen en een digitale kamersleutel.",
     "valkToGoThumbnail": "Een gast gebruikt de zelfbedieningskassa in een Valk to Go-shop.",
-    "hktdThumbnail": "Officiële HKTD-appbeelden met kamerstatussen en een housekeepingtaak."
+    "hktdThumbnail": "Officiële HKTD-screenshots met kamerstatussen en een taak voor housekeeping."
   },
   "caseStudy": {
     "involvement": "Mijn bijdrage",
     "links": "Projectlinks",
-    "privateSource": "Broncode niet openbaar",
+    "privateSource": "Source code niet openbaar",
     "other": "Ander project",
-    "credits": "Gebaseerd op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Deze pagina gaat over de Divergence-fork; het oorspronkelijke werk blijft toegeschreven aan de makers.",
+    "credits": "Mijn Divergence-fork bouwt voort op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Credits voor het oorspronkelijke werk gaan naar de makers.",
     "backend": "Gedeelde backend · Roomserve"
   },
   "links": {
@@ -138,63 +142,63 @@
     "vex": {
       "eyebrow": "Professioneel werk · iOS & Android",
       "description": "Met de Valk Exclusief-app kunnen hotelgasten boekingen beheren, online inchecken, digitale kamersleutels gebruiken en beloningen sparen. De app is beschikbaar voor iOS en Android.",
-      "role": "Bij Valk Digital werkte ik aan de React Native-app en de gedeelde Ruby on Rails-backend: van nieuwe functies en koppelingen tot testen en opleveren.",
+      "role": "Bij Valk Digital werkte ik aan zowel de React Native-app als de gedeelde Ruby on Rails-backend. Mijn werk liep van features en integraties tot tests en releases.",
       "contributions": [
-        "Appfuncties en koppelingen met backendservices gebouwd en onderhouden in React Native en TypeScript.",
-        "Meegewerkt aan de overstap van Redux Saga naar Redux Toolkit voor het state management.",
-        "Meegewerkt aan Roomserve-API’s, databaseaanpassingen en geautomatiseerde backendtests in Ruby on Rails.",
-        "Bijgedragen aan het testen, uitrollen en onderhouden van de app."
+        "Features en integraties met backend services gebouwd en onderhouden in React Native en TypeScript.",
+        "Gewerkt aan de migratie van Redux Saga naar Redux Toolkit voor state management.",
+        "Meegewerkt aan Roomserve-API’s, databasewijzigingen en geautomatiseerde backendtests in Ruby on Rails.",
+        "Gewerkt aan tests, deployments en onderhoud van de app."
       ],
-      "backend": "Valk Exclusief en HKTD maken gebruik van Roomserve, een gedeelde Ruby on Rails-backend. Die ondersteunt zowel de app voor hotelgasten als de app voor hotelmedewerkers.",
+      "backend": "Valk Exclusief en HKTD gebruiken Roomserve als gedeelde Ruby on Rails-backend. Die ondersteunt zowel de app voor hotelgasten als de app voor hotelmedewerkers.",
       "overview": {
         "summary": "Hotelboekingen, online inchecken, digitale kamersleutels en beloningen.",
-        "contribution": "Ontwikkeling van de mobiele app en Ruby on Rails-backend."
+        "contribution": "Gewerkt aan de mobiele app en Ruby on Rails-backend."
       }
     },
     "divergence": {
       "eyebrow": "Persoonlijk project · GBA / C",
-      "description": "Divergence is mijn eigen Game Boy Advance-project, geschreven in C. Het bouwt voort op Pokémon Emerald Rogue: een bestaande open-sourcegame waaraan ik mijn eigen spelmechanieken toevoeg.",
-      "role": "Ik ontwikkel Divergence als mijn eigen fork van Pokémon Emerald Rogue. Ik bouw verder op een grote bestaande C-codebase en onderhoud ook de tools waarmee ik de game bouw en controleer.",
+      "description": "Divergence is mijn eigen Game Boy Advance-project in C. Ik bouw voort op Pokémon Emerald Rogue, een bestaande open-sourcegame, en voeg daar mijn eigen game mechanics aan toe.",
+      "role": "Ik ontwikkel Divergence als mijn eigen fork van Pokémon Emerald Rogue. Ik bouw verder op een grote bestaande C-codebase en onderhoud de tooling voor builds en tests.",
       "contributions": [
-        "Eigen spelmechanieken ontwerpen en implementeren in C, binnen de bestaande engine op basis van decompilatie.",
-        "Python-ontwikkeltools en buildtools onderhouden naast de gamecode.",
-        "Wijzigingen debuggen in mGBA en gerichte regressiecontroles toevoegen."
+        "Eigen game mechanics ontwerpen en implementeren in C, binnen de bestaande decompilation-codebase.",
+        "Python tooling en build tools onderhouden naast de gamecode.",
+        "Wijzigingen debuggen in mGBA en gerichte regression checks toevoegen."
       ],
-      "tooling": "Python-ontwikkeltools",
-      "testing": "Regressietests",
+      "tooling": "Python tooling",
+      "testing": "Regression testing",
       "overview": {
         "summary": "Een Game Boy Advance-project dat een bestaande open-sourcegame uitbreidt.",
-        "contribution": "Eigen C-ontwikkeling, buildtools en regressiecontroles."
+        "contribution": "Eigen gameplay in C, build tooling en regression checks."
       }
     },
     "valk-to-go": {
       "eyebrow": "Professioneel werk · Fullstack",
-      "description": "Valk to Go biedt zelfbedieningswinkels in Van der Valk-hotels. Bij de software horen de kassa waarmee gasten afrekenen en een backoffice voor het beheren van de winkels.",
-      "role": "Bij Valk Digital werkte ik aan de frontend en backend van Valk to Go. Dat liep van de React-frontends tot de achterliggende functionaliteit in Elixir/Phoenix.",
+      "description": "Valk to Go biedt selfservicewinkels in Van der Valk-hotels. De software bestaat uit een checkout waarmee gasten afrekenen en een backoffice voor het winkelbeheer.",
+      "role": "Bij Valk Digital werkte ik fullstack aan Valk to Go: de React-frontends en de backend in Elixir/Phoenix.",
       "contributions": [
-        "React-interfaces voor de kassa en de backoffice voor winkelbeheer gebouwd en onderhouden.",
-        "Backendfunctionaliteit en API’s ontwikkeld en onderhouden in Elixir/Phoenix.",
-        "Bijgedragen aan het testen, opleveren en onderhouden van het bestaande systeem."
+        "React-frontends voor de checkout en backoffice gebouwd en onderhouden.",
+        "Backendfeatures en API’s ontwikkeld en onderhouden in Elixir/Phoenix.",
+        "Bijgedragen aan tests, releases en onderhoud van het bestaande systeem."
       ],
       "overview": {
-        "summary": "Zelfbedieningswinkels, kassasystemen en winkelbeheer voor hotels.",
-        "contribution": "Ontwikkeling van React-frontends en een Elixir/Phoenix-backend."
+        "summary": "Selfservicewinkels, checkouts en winkelbeheer voor hotels.",
+        "contribution": "Fullstack development met React en Elixir/Phoenix."
       }
     },
     "hktd": {
       "title": "HKTD — Housekeeping & technische dienst",
       "eyebrow": "Professioneel werk · Mobiel & backend",
-      "description": "HKTD is een mobiele app voor housekeeping en de technische dienst in Van der Valk-hotels. Medewerkers gebruiken de app tijdens hun werk om kamerstatussen en taken te bekijken.",
-      "role": "Bij Valk Digital werkte ik in het team aan de ontwikkeling en het onderhoud van HKTD. Mijn werk zat zowel in de mobiele app als in de backend die de app deelt met Valk Exclusief.",
+      "description": "HKTD heeft een mobiele app en een webapplicatie voor housekeeping en de technische dienst in Van der Valk-hotels. Medewerkers bekijken kamerstatussen en taken in de app. Supervisors gebruiken de backoffice om het werk te plannen en te beheren.",
+      "role": "Bij Valk Digital werkte ik aan de React Native-app en de backend die HKTD deelt met Valk Exclusief.",
       "contributions": [
-        "Functionaliteit voor de medewerkersapp gebouwd en onderhouden in React Native en TypeScript.",
-        "Meegewerkt aan Roomserve-API’s, databaseaanpassingen en geautomatiseerde backendtests in Ruby on Rails.",
-        "Problemen uitgezocht, bestaande functionaliteit onderhouden en bijgedragen aan testen en opleveren."
+        "Features voor hotelmedewerkers gebouwd en onderhouden in React Native en TypeScript.",
+        "Meegewerkt aan Roomserve-API’s, databasewijzigingen en geautomatiseerde backendtests in Ruby on Rails.",
+        "Bugs uitgezocht, bestaande functionaliteit onderhouden en bijgedragen aan tests en releases."
       ],
-      "backend": "HKTD en Valk Exclusief maken gebruik van Roomserve, een gedeelde Ruby on Rails-backend. Die ondersteunt zowel de medewerkersapp als de hotelapp voor gasten.",
+      "backend": "HKTD en Valk Exclusief gebruiken Roomserve als gedeelde Ruby on Rails-backend. Die ondersteunt zowel de medewerkersapp als de hotelapp voor gasten.",
       "overview": {
-        "summary": "Een operationele app voor housekeeping en de technische dienst.",
-        "contribution": "Mobiele ontwikkeling en werk aan gedeelde Rails-API’s, databases en tests."
+        "summary": "Een mobiele app voor hotelmedewerkers en een webbackoffice voor planning en beheer.",
+        "contribution": "Gewerkt aan de app en gedeelde Rails-API’s, databases en tests."
       }
     }
   },
@@ -204,48 +208,18 @@
     "back": "Terug naar Home"
   },
   "meta": {
-    "home": "Daan van Vugt — Softwareontwikkelaar",
-    "description": "Daan van Vugt. Softwareontwikkelaar met 3 jaar professionele ervaring in webapps, mobiele apps, backendservices en testen."
-  },
-  "workshop": {
-    "label": "Ontwerpen vergelijken",
-    "typeface": "Lettertype",
-    "movement": "Beweging",
-    "idle": "Rustige beweging zonder interactie",
-    "copied": "Link gekopieerd",
-    "copy": "Vergelijkingslink kopiëren",
-    "copyError": "Kopieer het adres uit je browser om deze combinatie te delen.",
-    "fonts": {
-      "space": "Hoekige details",
-      "outfit": "Rondere vormen",
-      "bricolage": "Meer onregelmatige details",
-      "original": "Vorige versie",
-      "originalName": "Oorspronkelijk lettertype"
-    },
-    "motions": {
-      "original": {
-        "name": "Origineel",
-        "description": "Kleine kanteling, snel stil"
-      },
-      "responsive": {
-        "name": "Responsief",
-        "description": "Meer beweging en terugvering"
-      },
-      "bouncy": {
-        "name": "Verend",
-        "description": "Losser, langer verend"
-      }
-    }
+    "home": "Daan van Vugt — Software developer",
+    "description": "Daan van Vugt. Software developer met 3 jaar professionele ervaring in webapps, mobiele apps, backend services en testing."
   },
   "work": {
     "title": "Mijn werk",
     "back": "Terug naar Home",
-    "technologies": "Technologieën",
+    "technologies": "Tech stack",
     "categories": {
       "professional": "Professioneel werk",
       "personal": "Persoonlijk project"
     },
-    "metaDescription": "Projecten van Daan van Vugt: mobiele apps, fullstack-webontwikkeling, gedeelde backendservices en een persoonlijk C-project."
+    "metaDescription": "Projecten van Daan van Vugt: mobiele apps, fullstack web development, gedeelde backend services en een persoonlijk C-project."
   },
   "about": {
     "title": "Over mij",
@@ -255,21 +229,21 @@
     "outsideWork": "Buiten mijn werk",
     "viewWork": "Bekijk mijn werk",
     "contact": "Neem contact op",
-    "metaDescription": "Over Daan van Vugt: softwareontwikkeling voor mobiel en web, games maken, bass music produceren en film.",
+    "metaDescription": "Over Daan van Vugt: software developer, games maken, bass music produceren en naar de bioscoop gaan.",
     "biography": {
-      "introduction": "Ik ben Daan van Vugt, softwaredeveloper met drie jaar ervaring met mobiele apps en webapplicaties. Bij <experience>Valk Digital</experience> werkte ik in een klein team en was ik met zowel frontend als backend bezig. De ene dag verbeterde ik de boekingsflow van de hotelapp in React Native. De andere dag zocht ik uit hoe housekeepingtaken weer goed gesynchroniseerd konden worden zodra een apparaat weer online kwam, of waarom een pagina in de backoffice zo traag was.",
-      "approach": "Ik duik graag in een probleem om uit te zoeken waar het misgaat. Daarna wil ik het ook afmaken: oplossen, testen en naar productie brengen. Ik werk graag aan zowel frontend als backend en probeer code wat overzichtelijker achter te laten. Soms door een component simpeler te maken, soms door een test te schrijven voor een bug die ik net heb gevonden.",
-      "personal": "Buiten mijn werk maak ik games, produceer ik bass music in Ableton Live en ga ik graag naar de bioscoop. Ik werk aan <divergence>Divergence</divergence>, een project voor de Game Boy Advance in C. Daarnaast ben ik Phantasm aan het ontwerpen, een tactische autobattler. Ik kan me een hele avond bezighouden met een spelmechaniek bijschaven, een basgeluid precies goed krijgen in een track of een film kijken op het grote doek."
+      "introduction": "Ik ben Daan van Vugt, software developer met drie jaar ervaring in het bouwen van mobiele apps en webapplicaties. Bij <experience>Valk Digital</experience> werkte ik in een klein team aan zowel frontend als backend. De ene dag verbeterde ik de booking flow van de hotelapp in React Native. De andere dag zocht ik uit hoe we housekeepingtaken konden syncen zodra een apparaat weer online kwam, of waarom een pagina in de backoffice zo traag was.",
+      "approach": "Mijn werk liep van interfaces tot de API’s en databases erachter. Of ik nu aan frontend of backend werk, ik probeer de code overzichtelijker achter te laten dan ik hem aantrof. Soms door een component simpeler te maken, soms door een test toe te voegen voor een bug die ik net heb uitgezocht.",
+      "personal": "Buiten mijn werk maak ik games, produceer ik bass music in Ableton Live en ga ik graag naar de bioscoop. Ik werk aan <divergence>Divergence</divergence>, een Game Boy Advance-project in C. Daarnaast ontwerp ik Phantasm, een tactical autobattler. Ik kan prima een hele avond sleutelen aan een game mechanic, een bass sound goed krijgen in een track of een film kijken op het grote doek."
     },
     "card": {
-      "description": "Bij Valk Digital werkte ik drie jaar aan mobiele apps, webapplicaties en backendservices. Ik zoek graag uit waar iets misgaat en zorg dat de oplossing ook echt in productie komt.",
+      "description": "Bij Valk Digital werkte ik drie jaar aan mobiele apps, webapplicaties en backend services. Mijn werk liep van interfaces tot de API’s en databases erachter.",
       "action": "Meer over mij"
     }
   },
   "contact": {
     "formLabel": "Stuur Daan een bericht",
     "back": "Terug naar Home",
-    "introduction": "Stuur me een bericht via het formulier, of mail me rechtstreeks.",
+    "introduction": "Stuur me een bericht via het formulier, of mail me direct.",
     "metaDescription": "Neem contact op met Daan van Vugt via e-mail, LinkedIn of het contactformulier.",
     "fields": {
       "name": "Naam",
@@ -280,11 +254,11 @@
     "sending": "Je bericht wordt verstuurd...",
     "retry": "Probeer opnieuw",
     "unavailable": "Het formulier is nog niet beschikbaar.",
-    "emailDirectly": "Mail me rechtstreeks.",
-    "processor": "Formspree verwerkt je naam, e-mailadres en bericht om je bericht te bezorgen.",
+    "emailDirectly": "Mail me direct.",
+    "processor": "Je bericht wordt via Formspree verstuurd, samen met je naam en e-mailadres.",
     "privacy": "Privacybeleid",
     "successTitle": "Bericht verstuurd",
-    "successMessage": "Bedankt voor je bericht. Het is succesvol verzonden.",
+    "successMessage": "Bedankt! Je bericht is verstuurd.",
     "sendAnother": "Nog een bericht sturen",
     "errors": {
       "required": "Vul dit veld in.",
@@ -295,25 +269,25 @@
     }
   },
   "skills": {
-    "title": "Technologieën & tools",
-    "context": "Gebruikt in mijn werk bij Valk Digital.",
-    "role": "Softwareontwikkelaar bij Valk Digital",
-    "summary": "Geautomatiseerd testen · CI/CD · Productiemonitoring",
-    "integrationTests": "Integratietests",
+    "title": "Tech stack & tooling",
+    "context": "Gebruikt tijdens mijn werk bij Valk Digital.",
+    "role": "Software developer bij Valk Digital",
+    "summary": "Automated testing · CI/CD · Production monitoring",
+    "integrationTests": "Integration tests",
     "groups": {
       "backend": "Backend & data",
       "web": "Web",
-      "mobile": "Mobiel",
-      "testing": "Testen",
-      "delivery": "Opleveren",
+      "mobile": "Mobile",
+      "testing": "Testing",
+      "delivery": "CI/CD & releases",
       "monitoring": "Monitoring"
     },
     "compact": {
       "backend": "Backend",
       "web": "Web",
-      "mobile": "Mobiel",
-      "testing": "Testen",
-      "delivery": "Opleveren",
+      "mobile": "Mobile",
+      "testing": "Testing",
+      "delivery": "CI/CD & releases",
       "monitoring": "Monitoring"
     },
     "additional": {

@@ -20,8 +20,7 @@ import {
 } from 'three'
 import { FontLoader, type FontData } from 'three/addons/loaders/FontLoader.js'
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
-import { landing, nameAppearance as art } from '../data/landing'
-import { defaultMotion, type MotionStyle } from '../data/workshop'
+import { landing, nameAppearance as art, defaultMotion, type MotionStyle } from '../data/landing'
 
 type ResolvedTheme = 'light' | 'dark'
 export type NameScene = {

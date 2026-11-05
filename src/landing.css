@@ -1,4 +1,11 @@
 /* Landing-specific surfaces. The overview keeps its original bento palette. */
+@font-face {
+  font-family: 'Portfolio Space Grotesk';
+  src: url('/fonts/space-grotesk-bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
 :root {
   --landing-background: #fff;
   --landing-blue: #294cde;
@@ -76,17 +83,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: clamp(76px, 14vw, 195px);
-  font-weight: 750;
+  font-family: var(--name-font), 'Inter Variable', sans-serif;
+  font-size: clamp(25px, 8.3vw, 135px);
+  font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
   color: var(--landing-blue);
   margin: 0;
   pointer-events: none;
   opacity: 0;
 }
 .name-fallback span:last-child {
-  font-size: 0.86em;
+  font-size: inherit;
 }
 .name-stage[data-scene-status='fallback'] .name-fallback {
   opacity: 1;
@@ -252,7 +261,7 @@
     height: 48svh;
   }
   .name-fallback {
-    font-size: clamp(70px, 18vw, 112px);
+    font-size: 8vw;
   }
   .landing-details {
     padding: 16px 0 40px;

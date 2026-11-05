@@ -757,16 +757,35 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
   color: var(--muted);
   font-size: 9px;
   padding: 28px 2px 8px;
 }
-.site-footer > span:nth-child(2) {
-  margin-left: auto;
-  margin-right: 30px;
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.site-footer .footer-actions .motion-toggle {
+  margin: 0;
+}
+.footer-socials {
+  display: flex;
+  gap: 4px;
 }
 .site-footer a {
-  display: flex;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+.site-footer a:hover {
+  color: var(--primary);
+  background: var(--subtle);
 }
 .skip-link {
   position: fixed;
@@ -1331,8 +1350,15 @@ p {
     font-size: 8px;
     padding-top: 25px;
   }
-  .site-footer > span:nth-child(2) {
-    display: none;
+  .footer-actions {
+    gap: 10px;
+  }
+  .site-footer .footer-actions .motion-toggle {
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    gap: 0;
+    font-size: 0;
   }
   .project-page {
     padding-top: 5px;

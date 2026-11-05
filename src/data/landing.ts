@@ -2,8 +2,34 @@ export const landing = {
   lines: ['Daan van Vugt'],
   href: '/portfolio',
   font: '/fonts/space-grotesk-bold.typeface.json',
-  fontFamily: 'Workshop Space',
+  fontFamily: 'Portfolio Space Grotesk',
   idleMotion: true,
+}
+
+export type MotionStyle = {
+  id: string
+  maxTilt: number
+  hoverDepth: number
+  pressDepth: number
+  travelX: number
+  travelY: number
+  spring: number
+  damping: number
+  influenceRadius: number
+  releaseImpulse: number
+}
+
+export const defaultMotion: MotionStyle = {
+  id: 'bouncy',
+  maxTilt: (Math.PI * 20) / 180,
+  hoverDepth: 0.27,
+  pressDepth: 0.25,
+  travelX: 0.15,
+  travelY: 0.13,
+  spring: 80,
+  damping: 8.5,
+  influenceRadius: 0.8,
+  releaseImpulse: 1.1,
 }
 
 // Art direction and interaction settings, shared by all screen sizes.

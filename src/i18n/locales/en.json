@@ -22,7 +22,6 @@
     "contact": "Contact",
     "skip": "Skip to content",
     "openPortfolio": "Open Home",
-    "landing": "Landing page",
     "back": "Back to projects",
     "menu": "Menu",
     "openMenu": "Open navigation menu",
@@ -31,6 +30,11 @@
   "profile": {
     "role": "Software developer",
     "introduction": "Open to fullstack and backend development roles."
+  },
+  "footer": {
+    "links": "Profiles and contact",
+    "linkedin": "Daan van Vugt on LinkedIn",
+    "email": "Email Daan van Vugt"
   },
   "landing": {
     "loading": "Loading visual",
@@ -184,7 +188,7 @@
     "hktd": {
       "title": "HKTD — Housekeeping & technical services",
       "eyebrow": "Professional work",
-      "description": "HKTD is a mobile app for housekeeping and technical-services staff at Van der Valk hotels. It brings room statuses and hotel tasks into an app staff can use during their work.",
+      "description": "HKTD includes a mobile app for housekeeping and technical services staff at Van der Valk hotels, plus a web back office. Staff use the app to view room statuses and tasks, while supervisors use the back office to plan and manage the work.",
       "role": "At Valk Digital, I developed and maintained HKTD as part of the team. My involvement covered the mobile application and backend work shared with Valk Exclusief.",
       "contributions": [
         "Built and maintained staff-app functionality in React Native and TypeScript.",
@@ -193,7 +197,7 @@
       ],
       "backend": "HKTD and Valk Exclusief connect to Roomserve, a shared Ruby on Rails backend. It supports both the staff application and the guest-facing hotel app.",
       "overview": {
-        "summary": "An operational app for housekeeping and technical-services staff.",
+        "summary": "Mobile app for hotel staff and a web back office for planning and managing work.",
         "contribution": "Mobile development and shared Rails API, database, and test work."
       }
     }
@@ -206,36 +210,6 @@
   "meta": {
     "home": "Daan van Vugt — Software developer",
     "description": "Daan van Vugt. Software developer with 3 years of professional experience in web and mobile applications, backend services, and testing."
-  },
-  "workshop": {
-    "label": "Design comparison",
-    "typeface": "Typeface",
-    "movement": "Movement",
-    "idle": "Slow idle movement",
-    "copied": "Link copied",
-    "copy": "Copy comparison link",
-    "copyError": "Copy the address from your browser to share this combination.",
-    "fonts": {
-      "space": "Angular details",
-      "outfit": "Rounder shapes",
-      "bricolage": "More irregular detail",
-      "original": "Previous version",
-      "originalName": "Original font"
-    },
-    "motions": {
-      "original": {
-        "name": "Original",
-        "description": "Small tilt, quick settle"
-      },
-      "responsive": {
-        "name": "Responsive",
-        "description": "More travel and rebound"
-      },
-      "bouncy": {
-        "name": "Bouncy",
-        "description": "Looser, longer spring"
-      }
-    }
   },
   "work": {
     "title": "My work",
@@ -258,11 +232,11 @@
     "metaDescription": "About Daan van Vugt: software development across mobile and web, making games, producing bass music, and cinema.",
     "biography": {
       "introduction": "Hi, I’m Daan van Vugt, a software developer with three years of experience building mobile apps and web tools. At <experience>Valk Digital</experience>, I worked across the stack in a small team. Some days I was polishing a hotel booking flow in React Native. Other days I was figuring out how to sync housekeeping tasks after a device came back online or why a back-office page was slow.",
-      "approach": "I like getting to the bottom of a problem and seeing the fix through to release. I’m happy moving between frontend and backend, and I tend to leave the code a little easier to work with than I found it, whether that means simplifying a component or adding a test for a bug I just tracked down.",
+      "approach": "My work ranged from interfaces to the APIs and databases behind them. I’m happy moving between frontend and backend, and I tend to leave the code a little easier to work with than I found it, whether that means simplifying a component or adding a test for a bug I just tracked down.",
       "personal": "Outside work, I make games, produce bass music in Ableton Live, and love going to the cinema. I’m building <divergence>Divergence</divergence>, a Game Boy Advance project written in C, and designing Phantasm, a tactical autobattler. I can happily spend an evening tweaking a game mechanic, getting a bass sound to sit right in a track, or catching a film on the big screen."
     },
     "card": {
-      "description": "I spent three years at Valk Digital building mobile apps, web applications, and backend services. I like figuring out what goes wrong and seeing the fix through to production.",
+      "description": "I spent three years at Valk Digital building mobile apps, web applications, and backend services. My work ranged from interfaces to the APIs and databases behind them.",
       "action": "More about me"
     }
   },

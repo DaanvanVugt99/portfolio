@@ -17,7 +17,6 @@
 - Divergence gameplay previews: battle, hub, and overworld GIF recordings supplied by Daan van Vugt, configured to loop continuously with their original frames and timing. Static thumbnails use the first frame of each recording.
 - Inter is provided by Fontsource, with its OFL license in the dependency.
 - Cormorant Garamond is provided by Fontsource, with its OFL license in the dependency.
-- Helvetiker Bold comes from Three.js's example fonts. Its permission notice is in `public/fonts/HELVETIKER-LICENSE.txt`.
-- Space Grotesk, Outfit, and Bricolage Grotesque come from Google Fonts. Original OFL notices and source metadata accompany the derived fonts in `public/fonts/`.
+- Space Grotesk comes from Google Fonts. Its OFL notice accompanies the derived landing-page font in `public/fonts/`.
 
 - Experience logos: [Valk Digital's official LinkedIn profile](https://www.linkedin.com/company/valkdigital/), [HAN's official website](https://www.han.nl/images/logo/han_university.svg), and [Titus Brandsmalyceum's official website](https://tbl.hethooghuis.nl/wp-content/uploads/sites/6/2018/07/logo.png). Logos belong to their respective organisations; original artwork and colours are retained.
