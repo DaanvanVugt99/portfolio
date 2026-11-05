@@ -692,14 +692,18 @@ p {
 .contact-card {
   grid-column: 8/13;
   grid-row: 7;
-  padding: 29px 28px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  padding: 28px;
   background: linear-gradient(135deg, var(--card), var(--subtle));
 }
 .contact-card h2 {
-  font-size: 27px;
+  font-size: 26px;
   letter-spacing: -1px;
   font-weight: 500;
-  margin: 10px 0 4px;
+  line-height: 1.2;
+  margin: 0;
 }
 .contact-card p {
   font-size: 10px;
@@ -713,17 +717,27 @@ p {
   color: var(--primary);
 }
 .contact-links {
-  display: flex;
-  gap: 17px;
-  flex-wrap: wrap;
-  margin-top: 24px;
-  font-size: 10px;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(44px, 1fr));
+  gap: 0;
+  flex: 1;
+  margin-top: 18px;
+  font-size: 14px;
 }
 .contact-links a,
 .pending-link {
   display: flex;
-  gap: 5px;
+  gap: 12px;
   align-items: center;
+  min-height: 44px;
+  padding: 10px 0;
+  width: 100%;
+}
+.contact-links > :not(:first-child) {
+  border-top: 1px solid var(--border);
+}
+.contact-links a > svg:last-child {
+  margin-left: auto;
 }
 .contact-links a:hover {
   color: var(--primary);
@@ -1082,9 +1096,6 @@ p {
   .intro-card h1 {
     font-size: clamp(32px, 3.5vw, 42px);
   }
-  .contact-links {
-    gap: 12px;
-  }
 }
 @media (max-width: 1000px) and (min-width: 701px) {
   .site-shell {
@@ -1182,14 +1193,6 @@ p {
   }
   .contact-card h2 {
     max-width: 180px;
-  }
-  .contact-links {
-    flex-direction: column;
-    gap: 12px;
-  }
-  .contact-links a,
-  .pending-link {
-    width: max-content;
   }
   .case-columns {
     gap: 35px;
@@ -1368,11 +1371,7 @@ p {
   }
   .contact-card {
     padding: 28px;
-    min-height: 235px;
-  }
-  .contact-card h2 {
-    font-size: 30px;
-    margin-top: 14px;
+    min-height: 260px;
   }
   .contact-card p {
     font-size: 11px;
@@ -1380,10 +1379,6 @@ p {
   .contact-symbol {
     right: 27px;
     top: 65px;
-  }
-  .contact-links {
-    gap: 16px;
-    margin-top: 25px;
   }
   .review-note {
     font-size: 8px;

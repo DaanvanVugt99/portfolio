@@ -449,7 +449,8 @@ function ContactCard() {
       <div className="contact-links">
         {profile.email ? (
           <a href={`mailto:${profile.email}`}>
-            <Mail size={15} /> {t('overview.email')} <ArrowUpRight size={12} />
+            <Mail size={18} aria-hidden="true" /> {t('overview.email')}{' '}
+            <ArrowUpRight size={16} aria-hidden="true" />
           </a>
         ) : (
           <span className="pending-link" title={t('overview.emailPending')}>
@@ -457,11 +458,11 @@ function ContactCard() {
           </span>
         )}
         <a href={profile.github} target="_blank" rel="noreferrer">
-          <Github size={15} /> GitHub <ArrowUpRight size={12} />
+          <Github size={18} /> GitHub <ArrowUpRight size={16} aria-hidden="true" />
         </a>
         {profile.linkedin ? (
           <a href={profile.linkedin} target="_blank" rel="noreferrer">
-            <Linkedin size={15} /> LinkedIn <ArrowUpRight size={12} />
+            <Linkedin size={18} /> LinkedIn <ArrowUpRight size={16} aria-hidden="true" />
           </a>
         ) : (
           <span className="pending-link" title={t('overview.linkedinPending')}>
