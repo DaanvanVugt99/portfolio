@@ -56,8 +56,7 @@
     "pending": "to add",
     "emailPending": "The public email address will be added after design review.",
     "linkedinPending": "The LinkedIn URL will be added after design review.",
-    "github": "Daan van Vugt on GitHub",
-    "preview": "Design preview · Project stories are being refined."
+    "github": "Daan van Vugt on GitHub"
   },
   "experience": {
     "title": "Experience & education",
@@ -106,19 +105,25 @@
   "visuals": {
     "vexProject": "Valk Exclusief logo and animated app screens showing hotel bookings, self check-in, digital room keys, and rewards.",
     "vex": "Actual Valk Exclusief app screens showing self check-in, a digital room key, and rewards. Decorative conceptual app and services connection.",
-    "divergence": "A real development render of Divergence’s laboratory map, alongside a conceptual code, build, test sequence.",
-    "mapAlt": "A development render of the laboratory map in Emerald Rogue: Divergence",
-    "development": "Development preview",
-    "map": "Map development",
+    "divergence": "Animated overworld footage from Emerald Rogue: Divergence, with a decorative code, build, test sequence.",
+    "divergenceTitleScreen": "The animated Pokémon Emerald Rogue: Divergence title screen.",
+    "titleScreen": "Title screen",
+    "battle": "Battle",
+    "hub": "Hub",
+    "overworld": "Overworld",
+    "divergenceBattle": "An animated battle preview from Emerald Rogue: Divergence.",
+    "divergenceHub": "An animated preview of the hub in Emerald Rogue: Divergence.",
+    "divergenceOverworld": "An animated overworld preview from Emerald Rogue: Divergence.",
+    "gamePreviews": "Game previews",
+    "divergenceThumbnail": "A collage of stills showing the hub, overworld, and a battle in Emerald Rogue: Divergence.",
     "vexThumbnail": "Valk Exclusief app previews showing hotel bookings and a digital room key.",
     "valkToGoThumbnail": "A guest using the self-service checkout in a Valk to Go shop.",
     "hktdThumbnail": "Official HKTD app previews showing room states and a housekeeping task."
   },
   "caseStudy": {
-    "involvement": "My involvement",
+    "involvement": "My contribution",
     "links": "Project links",
-    "draft": "Case study draft",
-    "draftNote": "Case-study draft · Details to be completed together after homepage review.",
+    "privateSource": "Source code not publicly available",
     "other": "Other project",
     "credits": "Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited to its contributors.",
     "backend": "Shared backend · Roomserve"
@@ -132,30 +137,29 @@
   "projects": {
     "vex": {
       "eyebrow": "Professional work",
-      "description": "An iOS and Android hotel app for bookings, online check-in, digital room keys, and rewards.",
-      "role": "App development alongside a colleague, plus work on the shared Roomserve backend at Valk Digital.",
+      "description": "The Valk Exclusief app lets hotel guests manage bookings, check in online, use digital room keys, and collect rewards. It is available on iOS and Android.",
+      "role": "At Valk Digital, I worked across the React Native app and its shared Ruby on Rails backend, from feature development and integrations to testing and delivery.",
       "contributions": [
-        "Worked across the entire application alongside a colleague.",
-        "Built and maintained app features and backend integrations.",
-        "Contributed to testing, deployment, and ongoing maintenance."
+        "Built and maintained app features and integrations with backend services in React Native and TypeScript.",
+        "Worked on migrating state management from Redux Saga to Redux Toolkit.",
+        "Contributed to Roomserve APIs, database changes, and automated backend tests in Ruby on Rails.",
+        "Contributed to app testing, deployments, and ongoing maintenance."
       ],
-      "nextStory": "Next: choose a feature or integration to walk through, including the problem, your decisions, and how you tested it.",
-      "backend": "Valk Exclusief and HKTD use Roomserve, a shared Ruby on Rails backend. My work included APIs, database work, and automated tests.",
+      "backend": "Valk Exclusief and HKTD connect to Roomserve, a shared Ruby on Rails backend. It supports both the guest-facing app and the app used by hotel staff.",
       "overview": {
         "summary": "Hotel bookings, online check-in, digital room keys, and rewards.",
-        "contribution": "App and Rails backend development, alongside a colleague."
+        "contribution": "Mobile app development and Ruby on Rails backend work."
       }
     },
     "divergence": {
       "eyebrow": "Personal project",
-      "description": "A personal C project extending Pokémon Emerald Rogue with custom game systems, tooling, and regression checks.",
-      "role": "Personal development on a standalone fork of Pokémon Emerald Rogue.",
+      "description": "Divergence is my personal Game Boy Advance project written in C. It builds on Pokémon Emerald Rogue, adding my own gameplay systems to an existing open-source game.",
+      "role": "I’m developing Divergence as my own fork of Pokémon Emerald Rogue. The work involves understanding and extending a substantial existing C codebase, alongside maintaining the tools I use to build and check the game.",
       "contributions": [
-        "Extends an existing decompilation-based codebase with custom game systems.",
-        "Includes project-specific changes, build tooling, and focused regression checks.",
-        "Maintains clear project documentation and upstream credits."
+        "Design and implement custom gameplay systems in C within the existing decompilation-based engine.",
+        "Maintain Python development and build tools alongside the game code.",
+        "Debug changes in mGBA and add focused regression checks."
       ],
-      "nextStory": "Next: select a system or bug fix that best demonstrates your engineering decisions.",
       "tooling": "Python tooling",
       "testing": "Regression testing",
       "overview": {
@@ -165,12 +169,12 @@
     },
     "valk-to-go": {
       "eyebrow": "Professional work",
-      "description": "Self-service shops at Van der Valk hotels, with checkout systems and a back office for shop management.",
-      "role": "Full-stack development across React frontends and an Elixir/Phoenix backend at Valk Digital.",
+      "description": "Valk to Go provides self-service shops at Van der Valk hotels. The software includes the checkout guests use to pay and a back office for managing the shops.",
+      "role": "At Valk Digital, I worked across the stack on the software behind Valk to Go. My involvement spanned the React frontends and the Elixir/Phoenix backend that supports them.",
       "contributions": [
-        "Worked on React frontends for the back office and checkout systems.",
+        "Built and maintained React interfaces for the checkout and shop-management back office.",
         "Developed and maintained backend functionality and APIs in Elixir/Phoenix.",
-        "Contributed to testing, delivery, and ongoing maintenance."
+        "Contributed to testing, delivery, and maintenance of the existing system."
       ],
       "overview": {
         "summary": "Self-service hotel shops, checkout systems, and shop management.",
@@ -180,14 +184,14 @@
     "hktd": {
       "title": "HKTD — Housekeeping & technical services",
       "eyebrow": "Professional work",
-      "description": "A mobile app for housekeeping and technical-services staff at Van der Valk hotels.",
-      "role": "Development and maintenance of the staff app and its shared backend at Valk Digital.",
+      "description": "HKTD is a mobile app for housekeeping and technical-services staff at Van der Valk hotels. It brings room statuses and hotel tasks into an app staff can use during their work.",
+      "role": "At Valk Digital, I developed and maintained HKTD as part of the team. My involvement covered the mobile application and backend work shared with Valk Exclusief.",
       "contributions": [
-        "Worked on the React Native and TypeScript application for hotel staff.",
-        "Contributed to Roomserve APIs, database work, and automated tests in Ruby on Rails.",
-        "Maintained existing functionality and contributed to testing and delivery."
+        "Built and maintained staff-app functionality in React Native and TypeScript.",
+        "Contributed to Roomserve APIs, database changes, and automated backend tests in Ruby on Rails.",
+        "Investigated issues, maintained existing behaviour, and contributed to testing and delivery."
       ],
-      "backend": "Valk Exclusief and HKTD use Roomserve, a shared Ruby on Rails backend. My work included APIs, database work, and automated tests.",
+      "backend": "HKTD and Valk Exclusief connect to Roomserve, a shared Ruby on Rails backend. It supports both the staff application and the guest-facing hotel app.",
       "overview": {
         "summary": "An operational app for housekeeping and technical-services staff.",
         "contribution": "Mobile development and shared Rails API, database, and test work."

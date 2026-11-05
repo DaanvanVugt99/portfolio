@@ -13,7 +13,8 @@
 - Header reference: [shadcn.io Sticky Blur Navbar](https://www.shadcn.io/blocks/navbar-sticky-blur). The sticky header is custom; premium block code is not included.
 - VEX screenshots: five original images from [Valk Exclusief's Google Play listing](https://play.google.com/store/apps/details?id=nl.valkexclusief), covering the home screen, digital room key, vouchers, room selection, and hotel search. Images belong to Valk Digital / Valk Exclusief.
 - Valk Exclusief logo: [official brand asset](https://mediabank.valkenhorst.nl/dist/img/logos/valk/valk-logo-branding.svg), used on [Valk Exclusief's website](https://www.valkexclusief.nl/). The logo belongs to Valk Exclusief.
-- Divergence image: a laboratory map development render from [Daan's Divergence fork](https://github.com/DaanvanVugt99/pokeemerald-rogue), built on work by pret, RHH, and Pokabbie.
+- Divergence title-screen animation: [Daan's Divergence website](https://github.com/DaanvanVugt99/divergence-webpage/blob/main/public/titlescreen.mp4). The static poster is the first frame of its accompanying title-screen GIF; the gallery's window framing is adapted from the website's [title-screen component](https://github.com/DaanvanVugt99/divergence-webpage/blob/main/components/title-screen-window.tsx).
+- Divergence gameplay previews: battle, hub, and overworld GIF recordings supplied by Daan van Vugt, configured to loop continuously with their original frames and timing. Static thumbnails use the first frame of each recording.
 - Inter is provided by Fontsource, with its OFL license in the dependency.
 - Cormorant Garamond is provided by Fontsource, with its OFL license in the dependency.
 - Helvetiker Bold comes from Three.js's example fonts. Its permission notice is in `public/fonts/HELVETIKER-LICENSE.txt`.

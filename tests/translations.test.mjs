@@ -36,7 +36,12 @@ test('Both languages resolve every translation key, including contribution lists
     for (const [key, value] of entries(resource)) {
       assert.equal(instance.t(key), value, `${language}: ${key}`)
     }
-    assert.equal(instance.t('projects.vex.contributions', { returnObjects: true }).length, 3)
+    for (const [slug, project] of Object.entries(resource.projects)) {
+      assert.deepEqual(
+        instance.t(`projects.${slug}.contributions`, { returnObjects: true }),
+        project.contributions,
+      )
+    }
   }
   await instance.changeLanguage('fr')
   assert.equal(instance.t('landing.action'), en.landing.action)

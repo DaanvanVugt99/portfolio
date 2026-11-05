@@ -9,11 +9,11 @@ import {
   Database,
   ExternalLink,
   Layers3,
+  LockKeyhole,
   Mail,
   Server,
   Smartphone,
   Terminal,
-  Workflow,
 } from 'lucide-react'
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { Button } from './components/ui/button'
@@ -39,6 +39,8 @@ import { SkillGroups } from './components/SkillGroups'
 import { aboutPortrait } from './data/about'
 import { siteNavigation } from './data/navigation'
 import { MobileNavigation } from './components/MobileNavigation'
+import { DivergenceProjectVisual } from './components/DivergenceProjectVisual'
+import { DivergenceGifPreview } from './components/DivergenceGifPreview'
 
 function Header() {
   const { t } = useTranslation()
@@ -389,8 +391,11 @@ function DivergenceCard() {
   return (
     <Card className="divergence-card project-card">
       <MotionRegion className="divergence-visual" label={t('visuals.divergence')}>
-        <div className="map-frame">
-          <img src="/assets/divergence-lab.png" alt="" width="320" height="256" loading="lazy" />
+        <div className="overworld-frame">
+          <DivergenceGifPreview
+            src="/assets/divergence-overworld.gif"
+            poster="/assets/divergence-overworld-poster.png"
+          />
         </div>
         <BuildSequence />
       </MotionRegion>
@@ -508,38 +513,16 @@ function OverviewPage() {
         <AboutCard />
         <ContactCard />
       </main>
-      <div className="review-note">
-        <span /> {t('overview.preview')}
-      </div>
     </>
   )
 }
 
 function ProjectDetailVisual({ project }: { project: Project }) {
-  const { t } = useTranslation()
   switch (project.slug) {
     case 'vex':
       return <VexProjectVisual />
     case 'divergence':
-      return (
-        <div className="divergence-detail-visual">
-          <img
-            src="/assets/divergence-lab.png"
-            width="320"
-            height="256"
-            alt={t('visuals.mapAlt')}
-          />
-          <div>
-            <span className="eyebrow">{t('visuals.development')}</span>
-            <h2>
-              Divergence
-              <br />
-              {t('visuals.map')}
-            </h2>
-            <BuildSequence />
-          </div>
-        </div>
-      )
+      return <DivergenceProjectVisual />
     case 'valk-to-go':
     case 'hktd':
       return (
@@ -577,42 +560,38 @@ function ProjectPage({ project }: { project: Project }) {
       )}
       <div className="case-columns">
         <section>
-          <div className="eyebrow">{t('caseStudy.involvement')}</div>
-          <h2>{project.role}</h2>
+          <h2>{t('caseStudy.involvement')}</h2>
+          <p className="project-role">{project.role}</p>
           <ul className="contribution-list">
             {project.contributions.map((item) => (
               <li key={item}>
-                <Check size={16} />
+                <Check size={16} aria-hidden="true" />
                 {item}
               </li>
             ))}
           </ul>
         </section>
-        {project.links.length > 0 && (
+        {(project.links.length > 0 || project.sourceVisibility === 'private') && (
           <aside>
-            <div className="eyebrow">{t('caseStudy.links')}</div>
+            <h2 className="eyebrow">{t('caseStudy.links')}</h2>
             {project.links.map((link) => (
               <Button asChild variant="outline" key={link.href}>
                 <a href={link.href} target="_blank" rel="noreferrer">
                   {link.label}
-                  <ExternalLink size={14} />
+                  <ExternalLink size={14} aria-hidden="true" />
                 </a>
               </Button>
             ))}
+            {project.sourceVisibility === 'private' && (
+              <span className="project-source-status">
+                <LockKeyhole size={15} aria-hidden="true" />
+                {t('caseStudy.privateSource')}
+              </span>
+            )}
           </aside>
         )}
       </div>
       {project.slug === 'divergence' && <p className="credits">{t('caseStudy.credits')}</p>}
-      {project.nextStory && (
-        <section className="story-placeholder">
-          <Workflow size={22} />
-          <div>
-            <h2>{t('caseStudy.draft')}</h2>
-            <p>{project.nextStory}</p>
-            <span>{t('caseStudy.draftNote')}</span>
-          </div>
-        </section>
-      )}
       <Link to={`/projects/${other.slug}`} className="next-project">
         <span>
           <small>{t('caseStudy.other')}</small>

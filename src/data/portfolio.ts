@@ -1,13 +1,13 @@
 export type ProjectSlug = 'vex' | 'valk-to-go' | 'hktd' | 'divergence'
 
 export type ProjectThumbnail = {
-  kind: 'phones' | 'store-previews' | 'photo' | 'map'
+  kind: 'phones' | 'store-previews' | 'photo' | 'collage'
   sources: string[]
   altKey:
     | 'visuals.vexThumbnail'
     | 'visuals.valkToGoThumbnail'
     | 'visuals.hktdThumbnail'
-    | 'visuals.mapAlt'
+    | 'visuals.divergenceThumbnail'
 }
 
 export type Project = {
@@ -24,7 +24,7 @@ export type Project = {
   overviewTechnologies: string[]
   contributions: string[]
   links: { label: string; href: string }[]
-  nextStory?: string
+  sourceVisibility: 'public' | 'private'
 }
 
 export const profile = {
@@ -36,7 +36,13 @@ export const profile = {
 
 type ProjectDefinition = Pick<
   Project,
-  'slug' | 'title' | 'category' | 'thumbnail' | 'technologies' | 'overviewTechnologies'
+  | 'slug'
+  | 'title'
+  | 'category'
+  | 'thumbnail'
+  | 'technologies'
+  | 'overviewTechnologies'
+  | 'sourceVisibility'
 > & {
   links: { label: 'appStore' | 'googlePlay' | 'code' | 'product'; href: string }[]
 }
@@ -46,6 +52,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     slug: 'vex',
     title: 'Valk Exclusief',
     category: 'professional',
+    sourceVisibility: 'private',
     thumbnail: {
       kind: 'phones',
       sources: ['/assets/vex-home.png', '/assets/vex-room-key.png'],
@@ -68,6 +75,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     slug: 'valk-to-go',
     title: 'Valk to Go',
     category: 'professional',
+    sourceVisibility: 'private',
     thumbnail: {
       kind: 'photo',
       sources: ['/assets/valk-to-go-shop.jpg'],
@@ -86,6 +94,7 @@ export const projectDefinitions: ProjectDefinition[] = [
     slug: 'hktd',
     title: 'HKTD',
     category: 'professional',
+    sourceVisibility: 'private',
     thumbnail: {
       kind: 'store-previews',
       sources: ['/assets/hktd-screen-3.png', '/assets/hktd-screen-2.png'],
@@ -101,10 +110,15 @@ export const projectDefinitions: ProjectDefinition[] = [
     slug: 'divergence',
     title: 'Emerald Rogue: Divergence',
     category: 'personal',
+    sourceVisibility: 'public',
     thumbnail: {
-      kind: 'map',
-      sources: ['/assets/divergence-lab.png'],
-      altKey: 'visuals.mapAlt',
+      kind: 'collage',
+      sources: [
+        '/assets/divergence-hub-poster.png',
+        '/assets/divergence-overworld-poster.png',
+        '/assets/divergence-battle-poster.png',
+      ],
+      altKey: 'visuals.divergenceThumbnail',
     },
     technologies: ['C', 'Python', 'mGBA'],
     overviewTechnologies: ['C', 'Python', 'mGBA'],
