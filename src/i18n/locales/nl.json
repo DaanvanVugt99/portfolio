@@ -15,13 +15,13 @@
     "deviceReduced": "Je apparaat heeft minder beweging ingeschakeld"
   },
   "navigation": {
-    "home": "Daan van Vugt, startpagina",
+    "home": "Home",
     "label": "Hoofdnavigatie",
-    "work": "Projecten",
+    "work": "Mijn werk",
     "about": "Over mij",
     "contact": "Contact",
     "skip": "Naar de inhoud",
-    "openPortfolio": "Portfolio-overzicht openen",
+    "openPortfolio": "Home openen",
     "landing": "Startpagina",
     "back": "Terug naar projecten"
   },
@@ -38,7 +38,7 @@
     "action": "Bekijk portfolio"
   },
   "overview": {
-    "title": "Portfolio",
+    "title": "Home",
     "viewProjects": "Bekijk projecten",
     "experience": "Ervaring",
     "years": "jaar",
@@ -61,7 +61,7 @@
   },
   "experience": {
     "title": "Werk & opleiding",
-    "back": "Terug naar portfolio",
+    "back": "Terug naar Home",
     "cardLink": "Bekijk de tijdlijn van werk en opleiding",
     "listLabel": "Werk en opleiding, meest recente eerst",
     "to": "tot",
@@ -197,7 +197,7 @@
   "notFound": {
     "title": "Pagina niet gevonden.",
     "description": "Deze pagina bestaat niet.",
-    "back": "Terug naar het portfolio"
+    "back": "Terug naar Home"
   },
   "meta": {
     "home": "Daan van Vugt — Softwareontwikkelaar",
@@ -234,8 +234,8 @@
     }
   },
   "work": {
-    "title": "Projecten",
-    "back": "Portfolio-overzicht",
+    "title": "Mijn werk",
+    "back": "Terug naar Home",
     "technologies": "Technologieën",
     "categories": {
       "professional": "Professioneel werk",
@@ -245,7 +245,7 @@
   },
   "about": {
     "title": "Over mij",
-    "back": "Portfolio-overzicht",
+    "back": "Terug naar Home",
     "cardLink": "Over Daan van Vugt",
     "portraitAlt": "Portret van Daan van Vugt",
     "outsideWork": "Buiten mijn werk",
@@ -260,7 +260,7 @@
   },
   "contact": {
     "formLabel": "Stuur Daan een bericht",
-    "back": "Portfolio-overzicht",
+    "back": "Terug naar Home",
     "introduction": "Stuur me een bericht via het formulier, of mail me rechtstreeks.",
     "metaDescription": "Neem contact op met Daan van Vugt via e-mail, LinkedIn of het contactformulier.",
     "fields": {

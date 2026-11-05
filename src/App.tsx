@@ -43,7 +43,11 @@ function Header() {
   const { t } = useTranslation()
   return (
     <StickyHeader className="site-header">
-      <Link className="identity" to="/" aria-label={t('navigation.home')}>
+      <Link
+        className="identity"
+        to="/portfolio"
+        aria-label={`${profile.name}, ${t('navigation.home')}`}
+      >
         <span className="monogram">
           <BrandMark />
         </span>
@@ -52,6 +56,7 @@ function Header() {
         </span>
       </Link>
       <nav aria-label={t('navigation.label')}>
+        <Link to="/portfolio">{t('navigation.home')}</Link>
         <Link to="/projects">{t('navigation.work')}</Link>
         <Link to="/about">{t('navigation.about')}</Link>
         <Link to="/contact">

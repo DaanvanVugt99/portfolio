@@ -15,13 +15,13 @@
     "deviceReduced": "Reduced motion enabled by your device"
   },
   "navigation": {
-    "home": "Daan van Vugt, home",
+    "home": "Home",
     "label": "Main navigation",
-    "work": "Work",
+    "work": "My work",
     "about": "About",
     "contact": "Contact",
     "skip": "Skip to content",
-    "openPortfolio": "Open portfolio overview",
+    "openPortfolio": "Open Home",
     "landing": "Landing page",
     "back": "Back to projects"
   },
@@ -38,7 +38,7 @@
     "action": "View portfolio"
   },
   "overview": {
-    "title": "Portfolio",
+    "title": "Home",
     "viewProjects": "View projects",
     "experience": "Experience",
     "years": "years",
@@ -61,7 +61,7 @@
   },
   "experience": {
     "title": "Experience & education",
-    "back": "Back to portfolio",
+    "back": "Back to Home",
     "cardLink": "View work and education timeline",
     "listLabel": "Work and education, most recent first",
     "to": "to",
@@ -131,7 +131,7 @@
   },
   "projects": {
     "vex": {
-      "eyebrow": "Professional work · iOS & Android",
+      "eyebrow": "Professional work",
       "description": "An iOS and Android hotel app for bookings, online check-in, digital room keys, and rewards.",
       "role": "App development alongside a colleague, plus work on the shared Roomserve backend at Valk Digital.",
       "contributions": [
@@ -147,7 +147,7 @@
       }
     },
     "divergence": {
-      "eyebrow": "Personal project · GBA / C",
+      "eyebrow": "Personal project",
       "description": "A personal C project extending Pokémon Emerald Rogue with custom game systems, tooling, and regression checks.",
       "role": "Personal development on a standalone fork of Pokémon Emerald Rogue.",
       "contributions": [
@@ -164,7 +164,7 @@
       }
     },
     "valk-to-go": {
-      "eyebrow": "Professional work · Full-stack",
+      "eyebrow": "Professional work",
       "description": "Self-service shops at Van der Valk hotels, with checkout systems and a back office for shop management.",
       "role": "Full-stack development across React frontends and an Elixir/Phoenix backend at Valk Digital.",
       "contributions": [
@@ -179,7 +179,7 @@
     },
     "hktd": {
       "title": "HKTD — Housekeeping & technical services",
-      "eyebrow": "Professional work · Mobile & backend",
+      "eyebrow": "Professional work",
       "description": "A mobile app for housekeeping and technical-services staff at Van der Valk hotels.",
       "role": "Development and maintenance of the staff app and its shared backend at Valk Digital.",
       "contributions": [
@@ -197,7 +197,7 @@
   "notFound": {
     "title": "Page not found.",
     "description": "This page does not exist.",
-    "back": "Back to the portfolio"
+    "back": "Back to Home"
   },
   "meta": {
     "home": "Daan van Vugt — Software developer",
@@ -234,8 +234,8 @@
     }
   },
   "work": {
-    "title": "Work",
-    "back": "Portfolio overview",
+    "title": "My work",
+    "back": "Back to Home",
     "technologies": "Technologies",
     "categories": {
       "professional": "Professional work",
@@ -245,7 +245,7 @@
   },
   "about": {
     "title": "About me",
-    "back": "Portfolio overview",
+    "back": "Back to Home",
     "cardLink": "About Daan van Vugt",
     "portraitAlt": "Portrait of Daan van Vugt",
     "outsideWork": "Outside work",
@@ -260,7 +260,7 @@
   },
   "contact": {
     "formLabel": "Send Daan a message",
-    "back": "Portfolio overview",
+    "back": "Back to Home",
     "introduction": "Send me a message using the form, or email me directly.",
     "metaDescription": "Contact Daan van Vugt by email, LinkedIn, or the contact form.",
     "fields": {
