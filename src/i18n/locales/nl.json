@@ -270,15 +270,15 @@
   "divergenceCaseStudy": {
     "eyebrow": "Case study",
     "title": "Ascension-systeem",
-    "introduction": "Ik verving losse moeilijkheidsinstellingen door cumulatieve A0–A20-regels in C, inclusief het genereren van tegenstanders, het regeloverzicht, progressie en opgeslagen runs.",
+    "introduction": "Ik bouwde een moeilijkheidssysteem met niveaus van A0 tot A20 in C. Bij elk niveau komen er regels bij, met gevolgen voor tegenstanders, progressie en het opslaan van runs.",
     "action": "Bekijk case study",
     "context": {
       "title": "Het probleem",
-      "body": "De bestaande game had moeilijkheidspresets en losse opties. Ik wilde een opbouw waarbij elk niveau een duidelijke regel toevoegt en eerdere regels actief blijven. Die wijziging raakte meer dan gevechten: ook de setup, beloningen, records en replays gebruikten de moeilijkheidsinstellingen."
+      "body": "De game had al moeilijkheidspresets en losse opties. Ik wilde daar één opbouw van maken: een niveau hoger, een regel erbij, en de eerdere regels blijven gelden. De moeilijkheid zat ook verwerkt in beloningen, records en replays, dus die onderdelen moesten mee veranderen."
     },
     "scope": {
       "title": "De oplossing",
-      "body": "Ik introduceerde één resolver voor de geldende regels en koppelde die aan het genereren van tegenstanders en het regeloverzicht. Een run gebruikt een gevalideerde configuratie-snapshot, los van de bewerkbare setup. Zo gebruiken die onderdelen hetzelfde gekozen niveau."
+      "body": "Eén resolver bepaalt de regels voor zowel de generator als het regeloverzicht. Bij de start krijgt een run een eigen kopie van de gecontroleerde instellingen. De speler kan daarna de setup voor een volgende run aanpassen zonder de lopende run te veranderen."
     },
     "flow": {
       "label": "Verloop van de regels: gekozen niveau, resolver, tegenstanders genereren en run-snapshot",
@@ -291,61 +291,61 @@
     "stages": {
       "rules": {
         "label": "Regels",
-        "technology": "C · Rule resolution · Gedeeld regeloverzicht",
-        "title": "De cumulatieve regels op één plek bepalen",
-        "body": "RogueAscension_Resolve zet een niveau om in een compacte rules-struct. Drempelwaarden bepalen welke tegenstanders profiel-natures, movesets en items krijgen, naast teamgrootte en andere aanpassingen. Eerdere upgrades blijven op hogere niveaus actief.",
-        "detail": "Zowel het genereren van tegenstanders als het regeloverzicht gebruikt deze resolver. De interface hoeft de betekenis van een moeilijkheidsniveau dus niet apart te bepalen."
+        "technology": "C · Rules resolver",
+        "title": "De regels op één plek vastleggen",
+        "body": "RogueAscension_Resolve krijgt een niveau en geeft een compacte struct met de bijbehorende regels terug. Zo krijgen boss aces vanaf A2 de nature uit een profiel, en geldt dat op hogere niveaus voor meer tegenstanders. Movesets, items en teamgrootte hebben elk hun eigen drempels.",
+        "detail": "De generator en het regeloverzicht gebruiken allebei deze functie. Als ik een regel aanpas, hoef ik die logica dus niet op twee plekken bij te werken. De speler ziet dezelfde regels als waarmee de game werkt."
       },
       "generation": {
-        "label": "Generatie",
-        "technology": "C · Competitive profiles · Onafhankelijke upgrades",
-        "title": "Profielselectie en toepassing scheiden",
-        "body": "De bestaande engine koos competitive profiles met een nature, moves, ability en held item. Als dat hele profiel tegelijk wordt toegepast, worden upgrades eerder actief dan het bedoelde Ascension-niveau.",
-        "detail": "Ik maakte die eigenschappen afzonderlijk toepasbaar. Op A2 kan een boss ace de nature uit het gekozen profiel krijgen, met behoud van de gewone moves en zonder regulier profiel-item. De generator bewaakt ook legale moves en behoudt een basisconfiguratie als een profiel ontbreekt."
+        "label": "Tegenstanders",
+        "technology": "C · Competitive profiles",
+        "title": "Delen van een bestaand profiel gebruiken",
+        "body": "De engine had al competitive profiles: een combinatie van nature, moves, ability en held item voor een Pokémon. Die wilde ik hergebruiken, maar een volledig profiel geeft meerdere upgrades tegelijk. Voor Ascension moesten die juist op verschillende niveaus beschikbaar worden.",
+        "detail": "Ik heb het kiezen van een profiel losgetrokken van het toepassen ervan. Op A2 kan een boss ace bijvoorbeeld de nature uit het profiel krijgen. De moveset en het held item volgen pas op latere niveaus. De generator bewaakt geldige moves en gebruikt een basisconfiguratie als er geen profiel is."
       },
       "persistence": {
         "label": "Saves & replays",
-        "technology": "C · Configuratie-snapshots · Versiecontrole",
-        "title": "Actieve regels loshouden van de setup",
-        "body": "Gevalideerde instellingen worden naar de actieve runconfiguratie gekopieerd. Aanpassingen aan de onthouden setup mogen een lopend avontuur niet veranderen. Save round-trip-tests controleren dat beide configuraties gescheiden blijven.",
-        "detail": "Een replay bevat de seed, configuratie en regelversie. De loader weigert een incompatibele regelversie, zodat dezelfde seed niet onder een andere Ascension-ruleset wordt geïnterpreteerd."
+        "technology": "C · Save data · Replayversies",
+        "title": "De instellingen van een run vasthouden",
+        "body": "Bij de start controleer ik de setup en kopieer ik die naar de actieve runconfiguratie. Latere aanpassingen aan de setup staan daar los van. De tests controleren of beide configuraties na opslaan en laden hetzelfde blijven.",
+        "detail": "Voor een replay is alleen een seed niet genoeg: als de regels veranderen, kan dezelfde seed anders uitpakken. Daarom sla ik ook de configuratie en regelversie op. Een replay met een incompatibele versie wordt geweigerd."
       }
     },
     "tradeoff": {
-      "title": "Afweging voor compatibiliteit",
-      "body": "Deze vervanging wijzigde bewust het saveformaat en vereiste een nieuwe save. Versiecontroles weigeren ook oudere incompatibele replays; alleen een seed bewaart niet de regels van een run."
+      "title": "Oudere saves",
+      "body": "Ik koos ervoor het saveformaat te vervangen. Voor deze update was dus een nieuwe save nodig. Ook oudere, incompatibele replays worden geweigerd, in plaats van ze met andere regels af te spelen."
     },
     "architecture": {
       "title": "Architectuurkeuzes",
       "resolver": {
         "title": "Pure rules resolver",
-        "body": "De resolver bepaalt een rules-struct met vaste grootte op basis van een niveau, zonder globale state te wijzigen. Gameplay en presentatie gebruiken dezelfde berekening."
+        "body": "De resolver krijgt een niveau en geeft een rules-struct met vaste grootte terug, zonder globale state aan te passen. Die berekening kan ik direct testen en gebruiken in zowel de gameplay als de interface."
       },
       "composition": {
         "title": "Onafhankelijke upgrades",
-        "body": "Profielselectie en het toepassen van eigenschappen zijn gescheiden. Elke upgrade heeft een eigen drempel, zodat het activeren van één eigenschap niet de rest meeneemt."
+        "body": "Een profiel kiezen betekent niet dat alles eruit wordt toegepast. Nature, moves en items worden apart afgehandeld, zodat ze elk op hun eigen niveau beschikbaar kunnen worden."
       },
       "snapshots": {
         "title": "Configuratie-snapshots",
-        "body": "De bewerkbare setup, actieve runinstellingen en replayrecords hebben elk een eigen levensduur. Door gevalideerde instellingen bij de start te kopiëren, veranderen latere setupwijzigingen de actieve run niet."
+        "body": "De setup mag veranderen; de instellingen van een lopende run moeten vaststaan. Ik kopieer de gecontroleerde configuratie bij de start en sla die apart op van de setup voor de volgende run."
       }
     },
     "testing": {
       "title": "Tests",
-      "introduction": "De tests controleren de regels zelf en de aansluiting op gegenereerde tegenstanders, de interface en opgeslagen state.",
+      "introduction": "Ik testte de drempels per niveau en controleerde vervolgens hoe de generator, saves en interface die regels gebruiken.",
       "thresholds": {
         "title": "Alle 21 niveaus",
-        "body": "Expliciete verwachte drempels, cumulatieve upgrades, statlimieten en teamcapaciteit voor A0–A20.",
+        "body": "Voor elk niveau van A0 tot A20 controleer ik de verwachte upgrades, statlimieten en teamgrootte. Op hogere niveaus moeten de eerdere upgrades blijven gelden.",
         "tool": "C-testharness · Regelmatrix"
       },
       "generation": {
         "title": "Gegenereerde tegenstanders",
-        "body": "Onafhankelijke profieleigenschappen, verschillende soorten bosses en runfasen, vaste boss aces en uitgesloten teams van services.",
+        "body": "Tests genereren tegenstanders met vaste seeds, voor verschillende soorten bosses en fases van een run. Ze controleren welke delen van een profiel worden toegepast, of de boss ace op zijn plek blijft en of teams van services worden overgeslagen.",
         "tool": "C-testharness · Generatie met seed"
       },
       "persistence": {
-        "title": "State & presentatie",
-        "body": "Save round trips, replayconfiguratie, afzonderlijke progressierecords, read-only actieve regels en tekstbreedte in het GBA-regelvenster.",
+        "title": "Saves, replays & UI",
+        "body": "Ik controleer instellingen na opslaan en laden, replayconfiguraties en aparte progressierecords. Ook test ik of het bekijken van actieve regels ze niet verandert en of de tekst op het GBA-scherm past.",
         "tool": "C-testharness · Integratiechecks"
       }
     },
@@ -358,25 +358,25 @@
       "party": "Teamgrootte bosses",
       "random": "Willekeurige natures",
       "neutral": "Neutrale natures",
-      "effective": "Selectie van de geldende regels op A{{level}}; overige aanpassingen weggelaten.",
+      "effective": "Voorbeeldregels op A{{level}}. Andere aanpassingen staan hier niet bij.",
       "profile": "Profiel toepassen",
-      "selectedProfile": "Eén gekozen profiel",
+      "selectedProfile": "Gekozen competitive profile",
       "bossAce": "Boss ace · laatste Pokémon van een bossteam",
       "apply": "Profiel gebruiken",
       "keepBasic": "Basis behouden",
-      "independent": "Nature, moves en items hebben elk eigen drempels.",
+      "independent": "Elke eigenschap komt op een eigen niveau beschikbaar.",
       "snapshot": "Run- en replay-state",
-      "hub": "Bewerkbare hub-setup",
+      "hub": "Setup voor de volgende run",
       "active": "Actieve run-snapshot",
       "replay": "Replayrecord",
       "replayFields": "Seed · A{{level}} · versie",
-      "separate": "De onthouden setup kan afwijken van de actieve run.",
+      "separate": "De setup voor de volgende run aanpassen verandert deze run niet.",
       "versionCheck": "Regelversie van de replay",
       "current": "Gelijke versie",
       "older": "Oudere versie",
       "restore": "Opgeslagen configuratie herstellen",
       "reject": "Incompatibele replay weigeren",
-      "caption": "Vereenvoudigde illustratie van de implementatie."
+      "caption": "Vereenvoudigd voorbeeld van hoe de code werkt."
     },
     "scopes": {
       "none": "Geen profiel-upgrade",
@@ -391,30 +391,30 @@
     },
     "results": {
       "title": "Resultaten",
-      "implementationTitle": "Geïmplementeerd gedrag",
-      "implementation": "A0–A20 gebruiken een gedeelde rules-resolver. Upgrades voor tegenstanders en het regeloverzicht gebruiken dezelfde regels. Actieve configuratie, progressie en replays worden expliciet opgeslagen.",
-      "recorded": "Vastgelegde validatie · {{date}}",
-      "validation": "De gedocumenteerde versie slaagde voor {{count}} gerichte Ascension-tests en een incrementele build van de speelbare ROM.",
-      "limit": "Deze checks controleren de implementatie. De moeilijkheidsbalans blijft afhankelijk van playtests."
+      "implementationTitle": "Wat er veranderde",
+      "implementation": "De losse moeilijkheidsopties zijn vervangen door één opbouw van A0 tot A20. Tegenstanders en het regeloverzicht gebruiken dezelfde regels. Elke run houdt zijn eigen instellingen bij opslaan, laden en het vastleggen van een replay.",
+      "recorded": "Testresultaten · {{date}}",
+      "validation": "Op deze versie slaagden alle {{count}} gerichte Ascension-tests en een incrementele build van de speelbare ROM.",
+      "limit": "Dat deze tests slagen, zegt nog niet of elk niveau goed gebalanceerd is. Daarvoor blijven playtests nodig."
     },
     "sources": {
       "rules": "Rules-resolver",
       "tests": "Regressietests",
-      "validation": "Validatieverslag"
+      "validation": "Vastgelegde testresultaten"
     }
   },
   "vexCaseStudy": {
     "eyebrow": "Case study",
-    "title": "Configureerbare groepen voor aanbiedingen",
-    "introduction": "Ik voegde configureerbare groepen toe aan de verwerking van arrangementen in Roomserve en aan de React Native-app, inclusief deep links en ondersteuning voor oudere appversies.",
+    "title": "Arrangementen groeperen",
+    "introduction": "Ik voegde groepen toe aan Roomserve en de React Native-app, zodat campagnelinks een specifieke selectie hotelarrangementen konden openen.",
     "action": "Bekijk case study",
     "context": {
-      "title": "De vraag en de databron",
-      "body": "Marketing had links nodig die een specifieke selectie arrangementen openden, zoals zomeraanbiedingen. De arrangementen kwamen uit de XML-feed van het webteam, die Roomserve omzette naar de app-API. De bestaande selectie bepaalde aan de hand van de URL’s welke aanbiedingen uitgelicht of last minute waren."
+      "title": "Wat er nodig was",
+      "body": "Marketing wilde links naar selecties zoals zomeraanbiedingen. De arrangementen kwamen uit de XML-feed van het webteam, die Roomserve omzette naar data voor de app. Roomserve bepaalde al aan de hand van URL’s welke aanbiedingen uitgelicht of last minute waren, maar andere groepen waren nog niet instelbaar."
     },
     "scope": {
-      "title": "Waarom de mapping in Roomserve?",
-      "body": "Roomserve verwerkte de feed al voor de app. Ik voegde daar configureerbare mappings van URL-paden toe, op basis van de bestaande feeddata en zonder een nieuw veld in de bron nodig te hebben. De app kon vervolgens op groepsnaam filteren, zonder zelf XML te verwerken of websitepaden te hard-coden."
+      "title": "Mapping in Roomserve",
+      "body": "Roomserve verwerkte de feed al, dus daar heb ik de groepsindeling toegevoegd. De mapping gebruikt de bestaande URL-paden, waardoor er geen nieuw veld vanuit het webteam nodig was. De app hoeft alleen de groepsnaam te kennen om te filteren, niet de XML of de websitepaden."
     },
     "flow": {
       "label": "Dataverloop: XML-feed van het webteam, mapping in Roomserve, app-API en filtering in React Native",
@@ -428,42 +428,42 @@
       "backend": {
         "label": "Backend",
         "technology": "Ruby on Rails · Feed mapping · Cache",
-        "title": "URL-paden mappen in de backend",
-        "body": "Ik voegde een admin-editor toe voor groepsnamen en URL-prefixes. De mapper sloeg feed-items buiten de herkende paden al over. Ik breidde dat filter uit met de ingestelde groepspaden, zodat campagneaanbiedingen behouden bleven voordat hun arrangementdata aan groepen werd gekoppeld.",
-        "detail": "Doordat de mappings in instellingen staan, vraagt een nieuwe selectie niet om een extra app-filter. Een wijziging maakt de aanbiedingen-cache ongeldig; zonder wijziging blijft die behouden."
+        "title": "Groepen instellen in de backend",
+        "body": "Ik maakte een admin-editor om groepsnamen aan URL-prefixes te koppelen. De feed-mapper sloeg items buiten de herkende paden al over. Ik breidde dat filter uit met de ingestelde paden en koppelde daarna de bijbehorende groepen aan elk arrangement.",
+        "detail": "Een nieuwe selectie kan zo via de instellingen worden toegevoegd, zonder een extra filter in de app te bouwen. Een aangepaste mapping leegt de aanbiedingen-cache. Als de instellingen niet veranderen, blijft de cache staan."
       },
       "app": {
         "label": "App",
         "technology": "React Native · TypeScript · Redux",
-        "title": "Marketinglinks en dealfilters",
-        "body": "Een campagnelink kon een specifieke groep arrangementen openen in het bestaande Deals-overzicht. Ik paste de app-linkgenerator aan zodat die een groepsnaam accepteert, ook voor links in het formaat voor Bloomreach-acties.",
-        "detail": "De linkhandler geeft de groep door aan de navigatie. De Redux-selector haalt vervolgens de bijbehorende arrangementen uit de geladen data. Zonder groep toont het overzicht alle deals. Een arrangement kan in meerdere groepen vallen; het bestaande bannergedrag blijft behouden."
+        "title": "Een groep openen via een campagnelink",
+        "body": "Ik paste de app-linkgenerator aan zodat die een groepsnaam accepteert, ook in het linkformaat voor Bloomreach-acties. Zo opent een campagnelink het bestaande Deals-overzicht met de juiste groep geselecteerd.",
+        "detail": "De linkhandler geeft de groep mee aan de navigatie. Een Redux-selector filtert de arrangementen die al in de app geladen zijn. Zonder groep zie je alle deals. Een arrangement kan in meerdere groepen zitten, en de bestaande bannerselectie blijft werken."
       },
       "compatibility": {
         "label": "Compatibiliteit",
         "technology": "API-compatibiliteit · Deep links",
-        "title": "Backward compatibility",
-        "body": "Oudere appversies lezen nog de flags voor uitgelichte aanbiedingen en last minutes. De backend behoudt die daarom naast de nieuwe groepsinformatie.",
-        "detail": "Ook al gepubliceerde links met highlighted=true moesten blijven werken. De app vertaalt die naar een groep, waarbij een expliciete group-parameter voorrang krijgt."
+        "title": "Oudere apps en links blijven werken",
+        "body": "Oudere appversies gebruiken nog de flags voor uitgelichte aanbiedingen en last minutes. Die velden heb ik in de API-response laten staan, naast de nieuwe groepsdata.",
+        "detail": "Gepubliceerde links met highlighted=true moesten ook blijven werken. De app vertaalt die parameter naar de groep highlighted. Staat er ook een expliciete group-parameter in de link, dan krijgt die voorrang."
       }
     },
     "tradeoff": {
-      "title": "Afweging",
-      "body": "De mapping hangt af van websitepaden. Als die veranderen, moeten de instellingen mee veranderen. Door die afhankelijkheid in Roomserve te houden, hoeft de app dezelfde logica niet te bevatten."
+      "title": "Afhankelijkheid van websitepaden",
+      "body": "Als een websitepad verandert, moet de mapping mee veranderen. Die afhankelijkheid blijft in Roomserve, zodat de app niet zelf dezelfde paden hoeft te verwerken."
     },
     "architecture": {
       "title": "Architectuurkeuzes",
       "adapter": {
         "title": "Data adapter",
-        "body": "De bestaande feed-mapper in Roomserve vertaalt XML en websitepaden naar arrangementdata voor de app. De groepsindeling blijft op die grens tussen de systemen."
+        "body": "Roomserve zette de XML van het webteam al om naar arrangementdata voor de app. Ik hield de groepsindeling in die mapper, zodat de app niets over de websitepaden hoeft te weten."
       },
       "configuration": {
-        "title": "Configuration-driven rules",
-        "body": "Groepsnamen en pad-mappings staan in de backend-instellingen. De app gebruikt die namen, zonder een apart hard-coded filter per campagne."
+        "title": "Configuration-driven mapping",
+        "body": "Groepsnamen en paden staan in de backend-instellingen. Een nieuwe campagnegroep vraagt dus niet om een extra hard-coded filter in de app."
       },
       "selectors": {
         "title": "Derived state · Redux selectors",
-        "body": "Ik breidde de bestaande selector uit om de zichtbare deals te bepalen uit de geladen arrangementen en de groepsparameter van de route. De filterlogica blijft zo buiten de renderingcode van het scherm."
+        "body": "Ik breidde de bestaande Redux-selector uit om geladen arrangementen te filteren op de groepsparameter van de route. Het scherm toont het resultaat, zonder zelf de filtering te doen."
       }
     },
     "visual": {
@@ -483,7 +483,7 @@
       "groupLink": "Link met groep",
       "sameFilter": "Dezelfde groepsselectie",
       "apiFlags": "Behouden voor oudere appversies",
-      "caption": "Vereenvoudigde illustratie met voorbeelddata."
+      "caption": "Vereenvoudigd voorbeeld met fictieve aanbiedingen."
     },
     "groups": {
       "all": "Alles",
@@ -497,20 +497,20 @@
     },
     "testing": {
       "title": "Tests",
-      "introduction": "Ik voegde model-, request- en componenttests toe en paste de Maestro app-link-flow aan.",
+      "introduction": "Ik voegde tests toe voor de backend en de app en paste de Maestro-flow voor app-links aan.",
       "backend": {
         "title": "Instellingen & API",
-        "body": "Validatie van instellingen, cache-invalidatie, behoud van ingestelde feedpaden, groepsinformatie en de oude flags in API-responses.",
+        "body": "Deze tests controleren de instellingen, cache-invalidatie en het meenemen van ingestelde feedpaden. API-tests controleren of de groepen en de oude flags in de responses staan.",
         "tool": "RSpec · Model- en requesttests"
       },
       "app": {
         "title": "Filtering & banners",
-        "body": "Ongefilterde en gefilterde lijsten, overlappende groepen, ontbrekende groepsdata en bannerselectie.",
+        "body": "Ik testte alle deals, gefilterde groepen, arrangementen in meerdere groepen en ontbrekende groepsdata. Daarbij controleerde ik ook welke banners verschijnen.",
         "tool": "Jest · Componenttests"
       },
       "links": {
         "title": "Navigatie via app-links",
-        "body": "Het volledige Deals-overzicht, een link met campagnegroep en de bijbehorende oude highlighted-link.",
+        "body": "De Maestro-flow opent alle deals, een campagnegroep en dezelfde selectie via een oudere highlighted-link.",
         "tool": "Maestro · App-link-flow"
       }
     }
