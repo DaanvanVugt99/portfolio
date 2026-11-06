@@ -7,12 +7,12 @@ type ResponsivePortrait = {
 }
 
 export const aboutPortrait: ResponsivePortrait = {
-  src: '/assets/daan-800.webp',
+  src: '/assets/daan-portrait-800.webp',
   width: 800,
   height: 800,
   sources: [
-    { src: '/assets/daan-400.webp', width: 400 },
-    { src: '/assets/daan-800.webp', width: 800 },
+    { src: '/assets/daan-portrait-400.webp', width: 400 },
+    { src: '/assets/daan-portrait-800.webp', width: 800 },
   ],
   sizes: '(min-width: 396px) 360px, calc(100vw - 36px)',
 }
