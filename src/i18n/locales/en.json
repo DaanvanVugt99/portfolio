@@ -267,6 +267,118 @@
       "checkFields": "Please check the highlighted fields."
     }
   },
+  "vexCaseStudy": {
+    "eyebrow": "Case study",
+    "title": "Configurable offer groups",
+    "introduction": "I added configurable grouping to Roomserve’s package-feed mapping and the React Native app, including deep links and support for older app versions.",
+    "action": "Read case study",
+    "context": {
+      "title": "Requirement and data source",
+      "body": "Marketing needed links that opened specific collections of deal packages, such as summer offers. Packages came from the web team’s XML feed, which Roomserve mapped into the app API. The existing selection logic derived highlighted and last-minute flags from the feed entries’ URLs."
+    },
+    "scope": {
+      "title": "Why map groups in Roomserve?",
+      "body": "Roomserve already adapted the feed for the app. I added configurable URL-path mappings there, using the existing feed data without requiring a new upstream field. The app could then filter by group name, without interpreting XML or hard-coding website paths."
+    },
+    "flow": {
+      "label": "Data flow: web team XML feed, Roomserve mapping, app API, React Native filtering",
+      "feed": "Web team · XML feed",
+      "mapping": "Roomserve · Mapping",
+      "api": "App API · Groups",
+      "filtering": "React Native · Filter"
+    },
+    "explore": "Implementation details",
+    "stages": {
+      "backend": {
+        "label": "Backend",
+        "technology": "Ruby on Rails · Feed mapping · Cache",
+        "title": "URL-path mapping in the backend",
+        "body": "I added an admin editor for group names and URL-path prefixes. The mapper already excluded feed entries outside its recognised paths. I extended that filter to include the configured group paths, so campaign entries were kept before assigning groups to their package data.",
+        "detail": "Keeping the mappings in settings allows new collections without adding another app filter. Changes invalidate the offers cache; unchanged settings leave it intact."
+      },
+      "app": {
+        "label": "App",
+        "technology": "React Native · TypeScript · Redux",
+        "title": "Marketing links and deal filters",
+        "body": "A campaign link could open a specific group of packages in the existing Deals overview. I updated the app-link generator to accept a group name, including links formatted for Bloomreach actions.",
+        "detail": "The link handler passes the group into navigation, and the Redux selector derives the matching packages from the loaded data. Without a group, the overview shows all deals. A package can belong to several groups; existing banner behaviour is preserved."
+      },
+      "compatibility": {
+        "label": "Compatibility",
+        "technology": "API compatibility · Deep links",
+        "title": "Backward compatibility",
+        "body": "Older app versions still read the highlighted and last-minute flags, so the backend retains them alongside the new group information.",
+        "detail": "Already-published highlighted=true links also needed to keep working. The app maps them to a group, with an explicit group parameter taking precedence."
+      }
+    },
+    "tradeoff": {
+      "title": "Trade-off",
+      "body": "The mapping depends on website paths. If those paths change, the settings need updating. Keeping that dependency in Roomserve avoids duplicating it in the app."
+    },
+    "architecture": {
+      "title": "Architectural choices",
+      "adapter": {
+        "title": "Data adapter",
+        "body": "The existing Roomserve feed mapper translates XML and website-specific paths into app-facing package data. Grouping stays at that boundary."
+      },
+      "configuration": {
+        "title": "Configuration-driven rules",
+        "body": "Group names and path mappings are server-side settings. The app uses those names without a separate hard-coded filter for each campaign."
+      },
+      "selectors": {
+        "title": "Derived state · Redux selectors",
+        "body": "I extended the existing selector to derive visible deals from the loaded packages and the route’s group parameter, keeping filtering logic out of the screen’s rendering code."
+      }
+    },
+    "visual": {
+      "feed": "Web team’s XML feed",
+      "feedData": "Entry URL + package data",
+      "configuration": "Roomserve · Path mappings",
+      "mapping": "App API",
+      "membership": "Package data + group membership",
+      "cache": "Relevant settings change → invalidate offers cache",
+      "filter": "Marketing deep links",
+      "filterLabel": "Choose an example campaign link",
+      "exampleLink": "Example deep link",
+      "dealsOverview": "Deals overview · Matching packages",
+      "matchCount": "{{count}} of {{total}} example packages shown",
+      "linkInputs": "Two link formats",
+      "existing": "Existing link",
+      "groupLink": "Group link",
+      "sameFilter": "The same group selection",
+      "apiFlags": "Retained for older app versions",
+      "caption": "Simplified illustration with example data."
+    },
+    "groups": {
+      "all": "All",
+      "summer-sale": "Summer",
+      "last-minutes": "Last minute"
+    },
+    "offers": {
+      "summer": "Summer offer",
+      "lastMinute": "Last-minute offer",
+      "both": "Summer + last minute"
+    },
+    "testing": {
+      "title": "Tests",
+      "introduction": "I added model, request and component tests, and updated the Maestro app-link flow.",
+      "backend": {
+        "title": "Settings & API",
+        "body": "Settings validation, cache invalidation, inclusion of configured feed paths, group information and the legacy flags in API responses.",
+        "tool": "RSpec · Model & request tests"
+      },
+      "app": {
+        "title": "Filtering & banners",
+        "body": "Unfiltered and grouped lists, multiple-group membership, missing group data and banner selection.",
+        "tool": "Jest · Component tests"
+      },
+      "links": {
+        "title": "App-link navigation",
+        "body": "The full Deals overview, a campaign-group link and the equivalent legacy highlighted link.",
+        "tool": "Maestro · App-link flow"
+      }
+    }
+  },
   "skills": {
     "title": "Technologies & tools",
     "context": "Used in my professional work at Valk Digital.",
