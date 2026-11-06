@@ -397,33 +397,6 @@
   aspect-ratio: auto;
   height: clamp(260px, 40vw, 460px);
 }
-.shared-backend {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  padding: 24px 26px;
-  margin-top: 24px;
-  border: 1px solid var(--art-line);
-  border-radius: 16px;
-  background: var(--subtle);
-}
-.shared-backend > svg {
-  color: var(--landing-blue);
-  margin-top: 3px;
-}
-.shared-backend h2 {
-  margin: 0 0 8px;
-  font-size: 16px;
-  font-weight: 550;
-  letter-spacing: -0.3px;
-}
-.shared-backend p {
-  margin: 0;
-  max-width: 760px;
-  color: var(--body-text);
-  font-size: 13px;
-  line-height: 1.8;
-}
 :root[data-motion='paused'] .work-card,
 :root[data-motion='paused'] .work-card .cover-composition,
 :root[data-motion='paused'] .work-card-arrow {
@@ -459,10 +432,6 @@
   }
   .work-card h2 {
     font-size: 23px;
-  }
-  .shared-backend {
-    padding: 20px;
-    gap: 12px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Check, ExternalLink, LockKeyhole, Server } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, ExternalLink, LockKeyhole } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Button } from './ui/button'
@@ -54,15 +54,6 @@ export function ProjectPage({ project }: { project: Project }) {
         )}
       </div>
       <ProjectDetailVisual project={project} />
-      {project.backend && (
-        <section className="shared-backend">
-          <Server size={22} strokeWidth={1.5} aria-hidden="true" />
-          <div>
-            <h2>{t('caseStudy.backend')}</h2>
-            <p>{project.backend}</p>
-          </div>
-        </section>
-      )}
       <div className="case-columns">
         <section>
           <h2>{t('caseStudy.involvement')}</h2>

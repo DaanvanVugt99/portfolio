@@ -127,8 +127,7 @@
     "links": "Project links",
     "privateSource": "Source code not publicly available",
     "other": "Other project",
-    "credits": "Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited to its contributors.",
-    "backend": "Shared backend · Roomserve"
+    "credits": "Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited to its contributors."
   },
   "links": {
     "appStore": "App Store",
@@ -147,7 +146,6 @@
         "Contributed to Roomserve APIs, database changes, and automated backend tests in Ruby on Rails.",
         "Contributed to app testing, deployments, and ongoing maintenance."
       ],
-      "backend": "Valk Exclusief and HKTD connect to Roomserve, a shared Ruby on Rails backend. It supports both the guest-facing app and the app used by hotel staff.",
       "overview": {
         "summary": "Hotel bookings, online check-in, digital room keys, and rewards.",
         "contribution": "Mobile app development and Ruby on Rails backend work."
@@ -194,7 +192,6 @@
         "Contributed to Roomserve APIs, database changes, and automated backend tests in Ruby on Rails.",
         "Investigated issues, maintained existing behaviour, and contributed to testing and delivery."
       ],
-      "backend": "HKTD and Valk Exclusief connect to Roomserve, a shared Ruby on Rails backend. It supports both the staff application and the guest-facing hotel app.",
       "overview": {
         "summary": "Mobile app for hotel staff and a web back office for planning and managing work.",
         "contribution": "React Native app, React back office, and shared Rails backend work."

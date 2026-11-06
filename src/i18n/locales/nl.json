@@ -127,8 +127,7 @@
     "links": "Projectlinks",
     "privateSource": "Source code niet openbaar",
     "other": "Ander project",
-    "credits": "Mijn Divergence-fork bouwt voort op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Credits voor het oorspronkelijke werk gaan naar de makers.",
-    "backend": "Gedeelde backend · Roomserve"
+    "credits": "Mijn Divergence-fork bouwt voort op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Credits voor het oorspronkelijke werk gaan naar de makers."
   },
   "links": {
     "appStore": "App Store",
@@ -147,7 +146,6 @@
         "Meegewerkt aan Roomserve-API’s, databasewijzigingen en geautomatiseerde backendtests in Ruby on Rails.",
         "Gewerkt aan tests, deployments en onderhoud van de app."
       ],
-      "backend": "Valk Exclusief en HKTD gebruiken Roomserve als gedeelde Ruby on Rails-backend. Die ondersteunt zowel de app voor hotelgasten als de app voor hotelmedewerkers.",
       "overview": {
         "summary": "Hotelboekingen, online inchecken, digitale kamersleutels en beloningen.",
         "contribution": "Gewerkt aan de mobiele app en Ruby on Rails-backend."
@@ -194,7 +192,6 @@
         "Meegewerkt aan Roomserve-API’s, databasewijzigingen en geautomatiseerde backendtests in Ruby on Rails.",
         "Bugs uitgezocht, bestaande functionaliteit onderhouden en bijgedragen aan tests en releases."
       ],
-      "backend": "HKTD en Valk Exclusief gebruiken Roomserve als gedeelde Ruby on Rails-backend. Die ondersteunt zowel de medewerkersapp als de hotelapp voor gasten.",
       "overview": {
         "summary": "Een mobiele app voor hotelmedewerkers en een webbackoffice voor planning en beheer.",
         "contribution": "Gewerkt aan de React Native-app, React-backoffice en gedeelde Rails-backend."
