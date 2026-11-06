@@ -15,16 +15,13 @@
   z-index: 2;
   border-radius: inherit;
 }
-.experience-card-arrow {
-  margin-left: auto;
-  color: var(--body-text);
-  transition:
-    color 160ms,
-    transform 160ms;
+.experience-card {
+  display: flex;
+  flex-direction: column;
 }
-.experience-card:hover .experience-card-arrow {
-  color: var(--timeline-ink);
-  transform: translate(2px, -2px);
+.experience-card > .text-link {
+  margin-top: auto;
+  padding-top: 18px;
 }
 .experience-card:has(a:focus-visible) {
   outline: 3px solid var(--primary);
@@ -144,14 +141,6 @@
 }
 .contact-card-heading-link:hover h2 {
   color: var(--landing-blue);
-}
-@media (prefers-reduced-motion: reduce) {
-  .experience-card-arrow {
-    transition: none;
-  }
-  .experience-card:hover .experience-card-arrow {
-    transform: none;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .about-card .about-card-arrow {

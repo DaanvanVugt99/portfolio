@@ -4,6 +4,22 @@ import tailwindcss from '@tailwindcss/vite'
 import { publicPaths, siteUrl } from './src/data/site.ts'
 
 export default defineConfig({
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          // Cache the reusable engine separately from the portfolio's scene code.
+          groups: [
+            { name: 'three-core', test: /node_modules[\\/]three[\\/]build[\\/]three\.core\.js$/ },
+            {
+              name: 'three-renderer',
+              test: /node_modules[\\/]three[\\/]build[\\/]three\.module\.js$/,
+            },
+          ],
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),

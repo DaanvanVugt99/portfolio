@@ -1,5 +1,5 @@
 import '../projects.css'
-import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { usePortfolio } from '../hooks/usePortfolio'
@@ -30,7 +30,7 @@ export function ProjectsPage() {
               <div className="work-card-copy">
                 <div className="work-card-category">
                   <span>{t(`work.categories.${project.category}`)}</span>
-                  <ArrowUpRight
+                  <ArrowRight
                     className="work-card-arrow"
                     size={20}
                     strokeWidth={1.5}

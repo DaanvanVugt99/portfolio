@@ -1,6 +1,7 @@
 import { useId } from 'react'
 import { Check, ChevronDown, Monitor, Moon, SlidersHorizontal, Sun, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { selectLanguage, type Language } from '../i18n'
 import { usePreferences, type ThemeChoice } from '../state/Preferences'
 import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from './ui/popover'
 import { RadioGroup, RadioGroupIndicator, RadioGroupItem } from './ui/radio-group'
@@ -67,9 +68,7 @@ export function Settings() {
             className="settings-languages"
             aria-labelledby={`${id}-language`}
             value={language}
-            onValueChange={(value) => {
-              void i18n.changeLanguage(value)
-            }}
+            onValueChange={(value) => selectLanguage(value as Language)}
           >
             {(
               [

@@ -54,8 +54,8 @@
     "mobile": "Native mobile applications",
     "database": "Database design",
     "delivery": "Testing & delivery",
-    "vexRead": "Read about the Valk Exclusief project",
-    "divergenceSummary": "Custom systems, tooling, and regression checks.",
+    "viewExperience": "View experience",
+    "divergenceSummary": "A Pokémon roguelike with a custom ability system, new battle mechanics, and items.",
     "explore": "Explore the project",
     "email": "Email",
     "github": "Daan van Vugt on GitHub"
@@ -127,8 +127,7 @@
     "links": "Project links",
     "privateSource": "Source code not publicly available",
     "other": "Other project",
-    "credits": "Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited to its contributors.",
-    "backend": "Shared backend · Roomserve"
+    "credits": "Built on pret’s pokeemerald, RHH’s pokeemerald-expansion, and Pokabbie’s pokeemerald-rogue. This page describes the Divergence fork; upstream work remains credited to its contributors."
   },
   "links": {
     "appStore": "App Store",
@@ -147,7 +146,6 @@
         "Contributed to Roomserve APIs, database changes, and automated backend tests in Ruby on Rails.",
         "Contributed to app testing, deployments, and ongoing maintenance."
       ],
-      "backend": "Valk Exclusief and HKTD connect to Roomserve, a shared Ruby on Rails backend. It supports both the guest-facing app and the app used by hotel staff.",
       "overview": {
         "summary": "Hotel bookings, online check-in, digital room keys, and rewards.",
         "contribution": "Mobile app development and Ruby on Rails backend work."
@@ -194,7 +192,6 @@
         "Contributed to Roomserve APIs, database changes, and automated backend tests in Ruby on Rails.",
         "Investigated issues, maintained existing behaviour, and contributed to testing and delivery."
       ],
-      "backend": "HKTD and Valk Exclusief connect to Roomserve, a shared Ruby on Rails backend. It supports both the staff application and the guest-facing hotel app.",
       "overview": {
         "summary": "Mobile app for hotel staff and a web back office for planning and managing work.",
         "contribution": "React Native app, React back office, and shared Rails backend work."
@@ -265,6 +262,254 @@
       "rejected": "Check this field and try again.",
       "failed": "Your message could not be sent. Please try again.",
       "checkFields": "Please check the highlighted fields."
+    }
+  },
+  "divergenceCaseStudy": {
+    "eyebrow": "Case study",
+    "title": "Ascension difficulty system",
+    "introduction": "I built an A0–A20 difficulty system in C. Each step adds rules on top of the previous ones, affecting opponents, progression and how runs are saved.",
+    "action": "Read case study",
+    "context": {
+      "title": "The problem",
+      "body": "The game already had difficulty presets and separate options. I wanted a single progression: move up a level, add a rule, keep the rules from earlier levels. Difficulty also affected rewards, records and replays, so replacing the settings meant updating those parts too."
+    },
+    "scope": {
+      "title": "The solution",
+      "body": "I put the rules in one resolver, used by both opponent generation and the rules shown to the player. When a run starts, it gets its own copy of the checked settings. The player can then change their setup for the next run without changing the current one."
+    },
+    "flow": {
+      "label": "Rule flow: selected level, rules resolver, opponent generation and run snapshot",
+      "setup": "Select level",
+      "resolver": "Resolve rules",
+      "generation": "Apply upgrades",
+      "snapshot": "Save run config"
+    },
+    "explore": "Ascension implementation details",
+    "stages": {
+      "rules": {
+        "label": "Rules",
+        "technology": "C · Rules resolver",
+        "title": "One place to define the rules",
+        "body": "RogueAscension_Resolve takes a level and returns a compact struct with its rules. For example, profile natures become available for boss aces at A2, then for more opponents at higher levels. Movesets, items and team size have their own thresholds.",
+        "detail": "The opponent generator and the rules screen both use this function. That way, I don’t have to update two sets of logic when a rule changes, and the player sees the rules the game actually uses."
+      },
+      "generation": {
+        "label": "Generation",
+        "technology": "C · Competitive profiles",
+        "title": "Use parts of an existing profile",
+        "body": "The engine already had competitive profiles: a nature, moves, ability and held item for a Pokémon. I wanted to reuse those, but applying a whole profile would give opponents several upgrades at once. Ascension needed those upgrades to unlock at different levels.",
+        "detail": "I separated choosing a profile from applying its properties. At A2, a boss ace can use the profile’s nature, while the moveset and held item upgrades wait until later levels. The generator still checks move legality and falls back to a basic setup if no profile is available."
+      },
+      "persistence": {
+        "label": "Saves & replays",
+        "technology": "C · Save data · Replay versions",
+        "title": "Keep a run’s settings fixed",
+        "body": "At the start of a run, I validate the setup and copy it into the active-run configuration. Later setup changes stay separate. The save tests check that saving and loading keeps both copies intact.",
+        "detail": "Replays need more than a seed: the same seed can behave differently if the rules change. I store the configuration and rules version with it, and reject a replay if its version is incompatible."
+      }
+    },
+    "tradeoff": {
+      "title": "Older saves",
+      "body": "I chose to replace the save format, so this update required a new save. Older incompatible replays are rejected too, rather than played back with a different set of rules."
+    },
+    "architecture": {
+      "title": "Architectural choices",
+      "resolver": {
+        "title": "Pure rules resolver",
+        "body": "The resolver takes a level and returns a fixed-size rules struct without changing global state. I can test that calculation directly and use it in both gameplay and the interface."
+      },
+      "composition": {
+        "title": "Independent upgrades",
+        "body": "Choosing a profile doesn’t apply all of it. Nature, moves and items are handled separately, so each can unlock at its own level."
+      },
+      "snapshots": {
+        "title": "Configuration snapshots",
+        "body": "Setup is editable; an active run needs fixed settings. I copy the validated configuration when the run starts and save it separately from the setup for the next run."
+      }
+    },
+    "testing": {
+      "title": "Tests",
+      "introduction": "I tested the level thresholds directly, then checked what the generator, saves and interface did with those rules.",
+      "thresholds": {
+        "title": "All 21 levels",
+        "body": "For each level from A0 to A20, I check the expected upgrades, stat caps and team-size limits. Higher levels must keep the earlier upgrades.",
+        "tool": "C test harness · Rule matrix"
+      },
+      "generation": {
+        "title": "Generated opponents",
+        "body": "Tests generate opponents with fixed seeds across boss types and run stages. They check which profile properties are applied, that the boss ace stays in place, and that service-generated teams stay excluded.",
+        "tool": "C test harness · Seeded generation"
+      },
+      "persistence": {
+        "title": "Saves, replays & UI",
+        "body": "I check settings after saving and loading, replay configuration and separate progression records. There are also checks that viewing active rules doesn’t change them and that the text fits the GBA screen.",
+        "tool": "C test harness · Integration checks"
+      }
+    },
+    "visual": {
+      "level": "Selected Ascension",
+      "chooseLevel": "Choose an example Ascension level",
+      "natures": "Nature upgrades",
+      "moves": "Profile movesets",
+      "items": "Profile held items",
+      "party": "Boss party size",
+      "random": "Random natures",
+      "neutral": "Neutral natures",
+      "effective": "Example rules at A{{level}}. Other modifiers aren’t shown here.",
+      "profile": "Applying the profile",
+      "selectedProfile": "Selected competitive profile",
+      "bossAce": "Boss ace · final member of a boss team",
+      "apply": "Use profile",
+      "keepBasic": "Keep basic",
+      "independent": "Each property unlocks at its own level.",
+      "snapshot": "Run & replay state",
+      "hub": "Setup for the next run",
+      "active": "Active run snapshot",
+      "replay": "Replay record",
+      "replayFields": "Seed · A{{level}} · version",
+      "separate": "Changing the next run’s setup doesn’t change this run.",
+      "versionCheck": "Replay rules version",
+      "current": "Matching version",
+      "older": "Older version",
+      "restore": "Restore recorded configuration",
+      "reject": "Reject incompatible replay",
+      "caption": "Simplified example of how the code works."
+    },
+    "scopes": {
+      "none": "No profile upgrade",
+      "aces": "Boss aces",
+      "bosses": "All boss Pokémon",
+      "trainers": "All trainer Pokémon"
+    },
+    "party": {
+      "baseline": "Base encounter size",
+      "expanded": "Base +1, maximum 6",
+      "full": "6, within party capacity"
+    },
+    "results": {
+      "title": "Results",
+      "implementationTitle": "What changed",
+      "implementation": "The separate difficulty options became one A0–A20 progression. Opponents and the rules screen use the same rules, and each run keeps its settings when saved, loaded or recorded for replay.",
+      "recorded": "Test results · {{date}}",
+      "validation": "At this revision, all {{count}} focused Ascension tests passed, along with an incremental build of the playable ROM.",
+      "limit": "Passing these tests doesn’t tell me whether every level feels balanced. That still needs playtesting."
+    },
+    "sources": {
+      "rules": "Rules resolver",
+      "tests": "Regression tests",
+      "validation": "Recorded test results"
+    }
+  },
+  "vexCaseStudy": {
+    "eyebrow": "Case study",
+    "title": "Grouping hotel offers",
+    "introduction": "I added offer groups to Roomserve and the React Native app, so campaign links could open a specific selection of hotel packages.",
+    "action": "Read case study",
+    "context": {
+      "title": "What was needed",
+      "body": "Marketing needed links to collections such as summer offers. The packages came from the web team’s XML feed, which Roomserve turned into data for the app. Roomserve already used the entries’ URLs to identify highlighted and last-minute offers, but there was no configurable way to add other groups."
+    },
+    "scope": {
+      "title": "Mapping in Roomserve",
+      "body": "Since Roomserve already processed the feed, I added the group mappings there. They use the existing URL paths, so we didn’t need a new field from the web team. The app only needs a group name to filter on; it doesn’t need to know about the XML or website paths."
+    },
+    "flow": {
+      "label": "Data flow: web team XML feed, Roomserve mapping, app API, React Native filtering",
+      "feed": "Web team · XML feed",
+      "mapping": "Roomserve · Mapping",
+      "api": "App API · Groups",
+      "filtering": "React Native · Filter"
+    },
+    "explore": "Implementation details",
+    "stages": {
+      "backend": {
+        "label": "Backend",
+        "technology": "Ruby on Rails · Feed mapping · Cache",
+        "title": "Configure groups in the backend",
+        "body": "I added an admin editor where group names can be linked to URL-path prefixes. The feed mapper already skipped entries outside its recognised paths. I extended that filter to include the configured paths, then assigned the matching groups to each package.",
+        "detail": "A new collection can then be added in the settings without writing another filter in the app. Changing the mappings clears the offers cache; saving unchanged settings leaves it alone."
+      },
+      "app": {
+        "label": "App",
+        "technology": "React Native · TypeScript · Redux",
+        "title": "Open a group from a campaign link",
+        "body": "I updated the app-link generator to accept a group name, including the link format used in Bloomreach actions. Opening that link takes the user to the existing Deals screen with the group selected.",
+        "detail": "The link handler passes the group through navigation. A Redux selector filters the packages already loaded in the app. With no group selected, it shows all deals. Packages can belong to more than one group, and the existing banner selection still works."
+      },
+      "compatibility": {
+        "label": "Compatibility",
+        "technology": "API compatibility · Deep links",
+        "title": "Keep older apps and links working",
+        "body": "Older app versions still use the highlighted and last-minute flags. I kept those fields in the API response alongside the new group data.",
+        "detail": "Published links with highlighted=true also needed to keep working. The app translates that parameter to the highlighted group. If the link also has an explicit group parameter, that takes priority."
+      }
+    },
+    "tradeoff": {
+      "title": "Dependency on website paths",
+      "body": "If a website path changes, its mapping needs updating. That dependency stays in Roomserve, rather than making the app interpret the same paths."
+    },
+    "architecture": {
+      "title": "Architectural choices",
+      "adapter": {
+        "title": "Data adapter",
+        "body": "Roomserve already translated the web team’s XML into package data for the app. I kept grouping in that mapper, so website-specific details stay out of the app."
+      },
+      "configuration": {
+        "title": "Configuration-driven mapping",
+        "body": "Group names and paths live in the backend settings. Adding a campaign group doesn’t mean adding another hard-coded filter to the app."
+      },
+      "selectors": {
+        "title": "Derived state · Redux selectors",
+        "body": "I extended the existing Redux selector to filter loaded packages using the route’s group parameter. The screen renders the result without doing the filtering itself."
+      }
+    },
+    "visual": {
+      "feed": "Web team’s XML feed",
+      "feedData": "Entry URL + package data",
+      "configuration": "Roomserve · Path mappings",
+      "mapping": "App API",
+      "membership": "Package data + group membership",
+      "cache": "Relevant settings change → invalidate offers cache",
+      "filter": "Marketing deep links",
+      "filterLabel": "Choose an example campaign link",
+      "exampleLink": "Example deep link",
+      "dealsOverview": "Deals overview · Matching packages",
+      "matchCount": "{{count}} of {{total}} example packages shown",
+      "linkInputs": "Two link formats",
+      "existing": "Existing link",
+      "groupLink": "Group link",
+      "sameFilter": "The same group selection",
+      "apiFlags": "Retained for older app versions",
+      "caption": "Simplified example with sample offers."
+    },
+    "groups": {
+      "all": "All",
+      "summer-sale": "Summer",
+      "last-minutes": "Last minute"
+    },
+    "offers": {
+      "summer": "Summer offer",
+      "lastMinute": "Last-minute offer",
+      "both": "Summer + last minute"
+    },
+    "testing": {
+      "title": "Tests",
+      "introduction": "I added tests for the backend and app, and updated the Maestro flow for opening app links.",
+      "backend": {
+        "title": "Settings & API",
+        "body": "These check the settings, cache invalidation and inclusion of configured feed paths. API tests check that responses contain the groups and still include the old flags.",
+        "tool": "RSpec · Model & request tests"
+      },
+      "app": {
+        "title": "Filtering & banners",
+        "body": "I covered all deals, filtered groups, packages in multiple groups and missing group data, as well as which banners are shown.",
+        "tool": "Jest · Component tests"
+      },
+      "links": {
+        "title": "App-link navigation",
+        "body": "The Maestro flow opens all deals, a campaign group and the same selection through an older highlighted link.",
+        "tool": "Maestro · App-link flow"
+      }
     }
   },
   "skills": {

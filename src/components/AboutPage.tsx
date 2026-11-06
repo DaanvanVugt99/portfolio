@@ -1,5 +1,5 @@
 import '../about.css'
-import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { aboutPortrait } from '../data/about'
@@ -55,7 +55,7 @@ export function AboutPage() {
               </Link>
             </Button>
             <Link className="about-contact-link" to="/contact">
-              {t('about.contact')} <ArrowUpRight size={16} aria-hidden="true" />
+              {t('about.contact')} <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </div>
         </div>

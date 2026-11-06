@@ -179,7 +179,7 @@ button:disabled {
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(6, 102px) auto;
+  grid-template-rows: repeat(6, minmax(102px, auto)) auto;
   gap: var(--gap);
 }
 .card {
@@ -546,14 +546,8 @@ p {
 .project-copy {
   padding: 22px 28px;
 }
-.project-title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin: 9px 0 6px;
-}
 .project-copy h2 {
+  margin: 9px 0 6px;
   font-size: 26px;
   font-weight: 550;
   line-height: 1.25;
@@ -564,19 +558,11 @@ p {
   font-size: 11px;
   margin-bottom: 16px;
 }
-.project-arrow {
-  width: 33px;
-  height: 33px;
-}
-.project-title-row h2 a::after {
+.vex-card-link::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 2;
-}
-.project-arrow {
-  z-index: 3;
-  position: relative;
 }
 .vex-card:has(a:focus-visible) {
   outline: 3px solid var(--primary);
@@ -1043,7 +1029,7 @@ p {
     margin-bottom: 25px;
   }
   .bento-grid {
-    grid-template-rows: repeat(6, 108px) auto;
+    grid-template-rows: repeat(6, minmax(108px, auto)) auto;
   }
   .intro-card {
     padding-top: 34px;

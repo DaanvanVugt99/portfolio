@@ -54,8 +54,8 @@
     "mobile": "Native apps",
     "database": "Database design",
     "delivery": "Testing & deployments",
-    "vexRead": "Lees over het Valk Exclusief-project",
-    "divergenceSummary": "Eigen game mechanics, tooling en regression checks.",
+    "viewExperience": "Bekijk mijn ervaring",
+    "divergenceSummary": "Een Pokémon-roguelike met een eigen ability system, nieuwe battle mechanics en items.",
     "explore": "Bekijk het project",
     "email": "E-mail",
     "github": "Daan van Vugt op GitHub"
@@ -127,8 +127,7 @@
     "links": "Projectlinks",
     "privateSource": "Source code niet openbaar",
     "other": "Ander project",
-    "credits": "Mijn Divergence-fork bouwt voort op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Credits voor het oorspronkelijke werk gaan naar de makers.",
-    "backend": "Gedeelde backend · Roomserve"
+    "credits": "Mijn Divergence-fork bouwt voort op pret’s pokeemerald, RHH’s pokeemerald-expansion en Pokabbie’s pokeemerald-rogue. Credits voor het oorspronkelijke werk gaan naar de makers."
   },
   "links": {
     "appStore": "App Store",
@@ -147,7 +146,6 @@
         "Meegewerkt aan Roomserve-API’s, databasewijzigingen en geautomatiseerde backendtests in Ruby on Rails.",
         "Gewerkt aan tests, deployments en onderhoud van de app."
       ],
-      "backend": "Valk Exclusief en HKTD gebruiken Roomserve als gedeelde Ruby on Rails-backend. Die ondersteunt zowel de app voor hotelgasten als de app voor hotelmedewerkers.",
       "overview": {
         "summary": "Hotelboekingen, online inchecken, digitale kamersleutels en beloningen.",
         "contribution": "Gewerkt aan de mobiele app en Ruby on Rails-backend."
@@ -194,7 +192,6 @@
         "Meegewerkt aan Roomserve-API’s, databasewijzigingen en geautomatiseerde backendtests in Ruby on Rails.",
         "Bugs uitgezocht, bestaande functionaliteit onderhouden en bijgedragen aan tests en releases."
       ],
-      "backend": "HKTD en Valk Exclusief gebruiken Roomserve als gedeelde Ruby on Rails-backend. Die ondersteunt zowel de medewerkersapp als de hotelapp voor gasten.",
       "overview": {
         "summary": "Een mobiele app voor hotelmedewerkers en een webbackoffice voor planning en beheer.",
         "contribution": "Gewerkt aan de React Native-app, React-backoffice en gedeelde Rails-backend."
@@ -265,6 +262,254 @@
       "rejected": "Controleer dit veld en probeer het opnieuw.",
       "failed": "Je bericht kon niet worden verstuurd. Probeer het opnieuw.",
       "checkFields": "Controleer de gemarkeerde velden."
+    }
+  },
+  "divergenceCaseStudy": {
+    "eyebrow": "Case study",
+    "title": "Ascension-systeem",
+    "introduction": "Ik bouwde een moeilijkheidssysteem met niveaus van A0 tot A20 in C. Bij elk niveau komen er regels bij, met gevolgen voor tegenstanders, progressie en het opslaan van runs.",
+    "action": "Bekijk case study",
+    "context": {
+      "title": "Het probleem",
+      "body": "De game had al moeilijkheidspresets en losse opties. Ik wilde daar één opbouw van maken: een niveau hoger, een regel erbij, en de eerdere regels blijven gelden. De moeilijkheid zat ook verwerkt in beloningen, records en replays, dus die onderdelen moesten mee veranderen."
+    },
+    "scope": {
+      "title": "De oplossing",
+      "body": "Eén resolver bepaalt de regels voor zowel de generator als het regeloverzicht. Bij de start krijgt een run een eigen kopie van de gecontroleerde instellingen. De speler kan daarna de setup voor een volgende run aanpassen zonder de lopende run te veranderen."
+    },
+    "flow": {
+      "label": "Verloop van de regels: gekozen niveau, resolver, tegenstanders genereren en run-snapshot",
+      "setup": "Niveau kiezen",
+      "resolver": "Regels bepalen",
+      "generation": "Upgrades toepassen",
+      "snapshot": "Runconfig opslaan"
+    },
+    "explore": "Implementatiedetails van Ascension",
+    "stages": {
+      "rules": {
+        "label": "Regels",
+        "technology": "C · Rules resolver",
+        "title": "De regels op één plek vastleggen",
+        "body": "RogueAscension_Resolve krijgt een niveau en geeft een compacte struct met de bijbehorende regels terug. Zo krijgen boss aces vanaf A2 de nature uit een profiel, en geldt dat op hogere niveaus voor meer tegenstanders. Movesets, items en teamgrootte hebben elk hun eigen drempels.",
+        "detail": "De generator en het regeloverzicht gebruiken allebei deze functie. Als ik een regel aanpas, hoef ik die logica dus niet op twee plekken bij te werken. De speler ziet dezelfde regels als waarmee de game werkt."
+      },
+      "generation": {
+        "label": "Tegenstanders",
+        "technology": "C · Competitive profiles",
+        "title": "Delen van een bestaand profiel gebruiken",
+        "body": "De engine had al competitive profiles: een combinatie van nature, moves, ability en held item voor een Pokémon. Die wilde ik hergebruiken, maar een volledig profiel geeft meerdere upgrades tegelijk. Voor Ascension moesten die juist op verschillende niveaus beschikbaar worden.",
+        "detail": "Ik heb het kiezen van een profiel losgetrokken van het toepassen ervan. Op A2 kan een boss ace bijvoorbeeld de nature uit het profiel krijgen. De moveset en het held item volgen pas op latere niveaus. De generator bewaakt geldige moves en gebruikt een basisconfiguratie als er geen profiel is."
+      },
+      "persistence": {
+        "label": "Saves & replays",
+        "technology": "C · Save data · Replayversies",
+        "title": "De instellingen van een run vasthouden",
+        "body": "Bij de start controleer ik de setup en kopieer ik die naar de actieve runconfiguratie. Latere aanpassingen aan de setup staan daar los van. De tests controleren of beide configuraties na opslaan en laden hetzelfde blijven.",
+        "detail": "Voor een replay is alleen een seed niet genoeg: als de regels veranderen, kan dezelfde seed anders uitpakken. Daarom sla ik ook de configuratie en regelversie op. Een replay met een incompatibele versie wordt geweigerd."
+      }
+    },
+    "tradeoff": {
+      "title": "Oudere saves",
+      "body": "Ik koos ervoor het saveformaat te vervangen. Voor deze update was dus een nieuwe save nodig. Ook oudere, incompatibele replays worden geweigerd, in plaats van ze met andere regels af te spelen."
+    },
+    "architecture": {
+      "title": "Architectuurkeuzes",
+      "resolver": {
+        "title": "Pure rules resolver",
+        "body": "De resolver krijgt een niveau en geeft een rules-struct met vaste grootte terug, zonder globale state aan te passen. Die berekening kan ik direct testen en gebruiken in zowel de gameplay als de interface."
+      },
+      "composition": {
+        "title": "Onafhankelijke upgrades",
+        "body": "Een profiel kiezen betekent niet dat alles eruit wordt toegepast. Nature, moves en items worden apart afgehandeld, zodat ze elk op hun eigen niveau beschikbaar kunnen worden."
+      },
+      "snapshots": {
+        "title": "Configuratie-snapshots",
+        "body": "De setup mag veranderen; de instellingen van een lopende run moeten vaststaan. Ik kopieer de gecontroleerde configuratie bij de start en sla die apart op van de setup voor de volgende run."
+      }
+    },
+    "testing": {
+      "title": "Tests",
+      "introduction": "Ik testte de drempels per niveau en controleerde vervolgens hoe de generator, saves en interface die regels gebruiken.",
+      "thresholds": {
+        "title": "Alle 21 niveaus",
+        "body": "Voor elk niveau van A0 tot A20 controleer ik de verwachte upgrades, statlimieten en teamgrootte. Op hogere niveaus moeten de eerdere upgrades blijven gelden.",
+        "tool": "C-testharness · Regelmatrix"
+      },
+      "generation": {
+        "title": "Gegenereerde tegenstanders",
+        "body": "Tests genereren tegenstanders met vaste seeds, voor verschillende soorten bosses en fases van een run. Ze controleren welke delen van een profiel worden toegepast, of de boss ace op zijn plek blijft en of teams van services worden overgeslagen.",
+        "tool": "C-testharness · Generatie met seed"
+      },
+      "persistence": {
+        "title": "Saves, replays & UI",
+        "body": "Ik controleer instellingen na opslaan en laden, replayconfiguraties en aparte progressierecords. Ook test ik of het bekijken van actieve regels ze niet verandert en of de tekst op het GBA-scherm past.",
+        "tool": "C-testharness · Integratiechecks"
+      }
+    },
+    "visual": {
+      "level": "Gekozen Ascension",
+      "chooseLevel": "Kies een voorbeeldniveau voor Ascension",
+      "natures": "Nature-upgrades",
+      "moves": "Profiel-movesets",
+      "items": "Profiel-held items",
+      "party": "Teamgrootte bosses",
+      "random": "Willekeurige natures",
+      "neutral": "Neutrale natures",
+      "effective": "Voorbeeldregels op A{{level}}. Andere aanpassingen staan hier niet bij.",
+      "profile": "Profiel toepassen",
+      "selectedProfile": "Gekozen competitive profile",
+      "bossAce": "Boss ace · laatste Pokémon van een bossteam",
+      "apply": "Profiel gebruiken",
+      "keepBasic": "Basis behouden",
+      "independent": "Elke eigenschap komt op een eigen niveau beschikbaar.",
+      "snapshot": "Run- en replay-state",
+      "hub": "Setup voor de volgende run",
+      "active": "Actieve run-snapshot",
+      "replay": "Replayrecord",
+      "replayFields": "Seed · A{{level}} · versie",
+      "separate": "De setup voor de volgende run aanpassen verandert deze run niet.",
+      "versionCheck": "Regelversie van de replay",
+      "current": "Gelijke versie",
+      "older": "Oudere versie",
+      "restore": "Opgeslagen configuratie herstellen",
+      "reject": "Incompatibele replay weigeren",
+      "caption": "Vereenvoudigd voorbeeld van hoe de code werkt."
+    },
+    "scopes": {
+      "none": "Geen profiel-upgrade",
+      "aces": "Boss aces",
+      "bosses": "Alle boss-Pokémon",
+      "trainers": "Alle trainer-Pokémon"
+    },
+    "party": {
+      "baseline": "Basisteam per gevecht",
+      "expanded": "Basis +1, maximaal 6",
+      "full": "6, binnen teamcapaciteit"
+    },
+    "results": {
+      "title": "Resultaten",
+      "implementationTitle": "Wat er veranderde",
+      "implementation": "De losse moeilijkheidsopties zijn vervangen door één opbouw van A0 tot A20. Tegenstanders en het regeloverzicht gebruiken dezelfde regels. Elke run houdt zijn eigen instellingen bij opslaan, laden en het vastleggen van een replay.",
+      "recorded": "Testresultaten · {{date}}",
+      "validation": "Op deze versie slaagden alle {{count}} gerichte Ascension-tests en een incrementele build van de speelbare ROM.",
+      "limit": "Dat deze tests slagen, zegt nog niet of elk niveau goed gebalanceerd is. Daarvoor blijven playtests nodig."
+    },
+    "sources": {
+      "rules": "Rules-resolver",
+      "tests": "Regressietests",
+      "validation": "Vastgelegde testresultaten"
+    }
+  },
+  "vexCaseStudy": {
+    "eyebrow": "Case study",
+    "title": "Arrangementen groeperen",
+    "introduction": "Ik voegde groepen toe aan Roomserve en de React Native-app, zodat campagnelinks een specifieke selectie hotelarrangementen konden openen.",
+    "action": "Bekijk case study",
+    "context": {
+      "title": "Wat er nodig was",
+      "body": "Marketing wilde links naar selecties zoals zomeraanbiedingen. De arrangementen kwamen uit de XML-feed van het webteam, die Roomserve omzette naar data voor de app. Roomserve bepaalde al aan de hand van URL’s welke aanbiedingen uitgelicht of last minute waren, maar andere groepen waren nog niet instelbaar."
+    },
+    "scope": {
+      "title": "Mapping in Roomserve",
+      "body": "Roomserve verwerkte de feed al, dus daar heb ik de groepsindeling toegevoegd. De mapping gebruikt de bestaande URL-paden, waardoor er geen nieuw veld vanuit het webteam nodig was. De app hoeft alleen de groepsnaam te kennen om te filteren, niet de XML of de websitepaden."
+    },
+    "flow": {
+      "label": "Dataverloop: XML-feed van het webteam, mapping in Roomserve, app-API en filtering in React Native",
+      "feed": "Webteam · XML-feed",
+      "mapping": "Roomserve · Mapping",
+      "api": "App-API · Groepen",
+      "filtering": "React Native · Filter"
+    },
+    "explore": "Implementatiedetails",
+    "stages": {
+      "backend": {
+        "label": "Backend",
+        "technology": "Ruby on Rails · Feed mapping · Cache",
+        "title": "Groepen instellen in de backend",
+        "body": "Ik maakte een admin-editor om groepsnamen aan URL-prefixes te koppelen. De feed-mapper sloeg items buiten de herkende paden al over. Ik breidde dat filter uit met de ingestelde paden en koppelde daarna de bijbehorende groepen aan elk arrangement.",
+        "detail": "Een nieuwe selectie kan zo via de instellingen worden toegevoegd, zonder een extra filter in de app te bouwen. Een aangepaste mapping leegt de aanbiedingen-cache. Als de instellingen niet veranderen, blijft de cache staan."
+      },
+      "app": {
+        "label": "App",
+        "technology": "React Native · TypeScript · Redux",
+        "title": "Een groep openen via een campagnelink",
+        "body": "Ik paste de app-linkgenerator aan zodat die een groepsnaam accepteert, ook in het linkformaat voor Bloomreach-acties. Zo opent een campagnelink het bestaande Deals-overzicht met de juiste groep geselecteerd.",
+        "detail": "De linkhandler geeft de groep mee aan de navigatie. Een Redux-selector filtert de arrangementen die al in de app geladen zijn. Zonder groep zie je alle deals. Een arrangement kan in meerdere groepen zitten, en de bestaande bannerselectie blijft werken."
+      },
+      "compatibility": {
+        "label": "Compatibiliteit",
+        "technology": "API-compatibiliteit · Deep links",
+        "title": "Oudere apps en links blijven werken",
+        "body": "Oudere appversies gebruiken nog de flags voor uitgelichte aanbiedingen en last minutes. Die velden heb ik in de API-response laten staan, naast de nieuwe groepsdata.",
+        "detail": "Gepubliceerde links met highlighted=true moesten ook blijven werken. De app vertaalt die parameter naar de groep highlighted. Staat er ook een expliciete group-parameter in de link, dan krijgt die voorrang."
+      }
+    },
+    "tradeoff": {
+      "title": "Afhankelijkheid van websitepaden",
+      "body": "Als een websitepad verandert, moet de mapping mee veranderen. Die afhankelijkheid blijft in Roomserve, zodat de app niet zelf dezelfde paden hoeft te verwerken."
+    },
+    "architecture": {
+      "title": "Architectuurkeuzes",
+      "adapter": {
+        "title": "Data adapter",
+        "body": "Roomserve zette de XML van het webteam al om naar arrangementdata voor de app. Ik hield de groepsindeling in die mapper, zodat de app niets over de websitepaden hoeft te weten."
+      },
+      "configuration": {
+        "title": "Configuration-driven mapping",
+        "body": "Groepsnamen en paden staan in de backend-instellingen. Een nieuwe campagnegroep vraagt dus niet om een extra hard-coded filter in de app."
+      },
+      "selectors": {
+        "title": "Derived state · Redux selectors",
+        "body": "Ik breidde de bestaande Redux-selector uit om geladen arrangementen te filteren op de groepsparameter van de route. Het scherm toont het resultaat, zonder zelf de filtering te doen."
+      }
+    },
+    "visual": {
+      "feed": "XML-feed van het webteam",
+      "feedData": "URL van het feed-item + arrangementdata",
+      "configuration": "Roomserve · Pad-mappings",
+      "mapping": "App-API",
+      "membership": "Arrangementdata + groepsinformatie",
+      "cache": "Relevante instellingen wijzigen → aanbiedingen-cache vervalt",
+      "filter": "Marketing-deeplinks",
+      "filterLabel": "Kies een voorbeeld van een campagnelink",
+      "exampleLink": "Voorbeeld-deeplink",
+      "dealsOverview": "Deals-overzicht · Bijbehorende arrangementen",
+      "matchCount": "{{count}} van {{total}} voorbeeldarrangementen zichtbaar",
+      "linkInputs": "Twee linkformaten",
+      "existing": "Bestaande link",
+      "groupLink": "Link met groep",
+      "sameFilter": "Dezelfde groepsselectie",
+      "apiFlags": "Behouden voor oudere appversies",
+      "caption": "Vereenvoudigd voorbeeld met fictieve aanbiedingen."
+    },
+    "groups": {
+      "all": "Alles",
+      "summer-sale": "Zomer",
+      "last-minutes": "Last minute"
+    },
+    "offers": {
+      "summer": "Zomeraanbieding",
+      "lastMinute": "Lastminuteaanbieding",
+      "both": "Zomer + last minute"
+    },
+    "testing": {
+      "title": "Tests",
+      "introduction": "Ik voegde tests toe voor de backend en de app en paste de Maestro-flow voor app-links aan.",
+      "backend": {
+        "title": "Instellingen & API",
+        "body": "Deze tests controleren de instellingen, cache-invalidatie en het meenemen van ingestelde feedpaden. API-tests controleren of de groepen en de oude flags in de responses staan.",
+        "tool": "RSpec · Model- en requesttests"
+      },
+      "app": {
+        "title": "Filtering & banners",
+        "body": "Ik testte alle deals, gefilterde groepen, arrangementen in meerdere groepen en ontbrekende groepsdata. Daarbij controleerde ik ook welke banners verschijnen.",
+        "tool": "Jest · Componenttests"
+      },
+      "links": {
+        "title": "Navigatie via app-links",
+        "body": "De Maestro-flow opent alle deals, een campagnegroep en dezelfde selectie via een oudere highlighted-link.",
+        "tool": "Maestro · App-link-flow"
+      }
     }
   },
   "skills": {

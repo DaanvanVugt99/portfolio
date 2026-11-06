@@ -8,7 +8,7 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom'
-import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react'
+import { ArrowRight, Mail } from 'lucide-react'
 import { lazy, Suspense, useEffect, useLayoutEffect, useRef } from 'react'
 import { Button } from './components/ui/button'
 import { profile } from './data/portfolio'
@@ -66,7 +66,7 @@ function Header() {
         {siteNavigation.map(({ id, href }) => (
           <NavLink key={id} to={href} end={id === 'home'}>
             {t(`navigation.${id}`)}{' '}
-            {id === 'contact' && <ArrowUpRight size={13} aria-hidden="true" />}
+            {id === 'contact' && <ArrowRight size={13} aria-hidden="true" />}
           </NavLink>
         ))}
       </nav>

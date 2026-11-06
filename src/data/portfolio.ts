@@ -18,7 +18,6 @@ export type Project = {
   eyebrow: string
   description: string
   role: string
-  backend?: string
   overview: { summary: string; contribution: string }
   technologies: string[]
   overviewTechnologies: string[]

@@ -21,13 +21,13 @@ test('The work catalogue contains four distinct projects in the agreed order', (
   }
 })
 
-test('VEX and HKTD both explain their shared Rails backend and show Rails in the overview', () => {
+test('VEX and HKTD retain Roomserve contributions and show Rails in the overview', () => {
   for (const slug of ['vex', 'hktd']) {
     const project = projectDefinitions.find((project) => project.slug === slug)
     assert.ok(project.overviewTechnologies.includes('Ruby on Rails'))
     for (const resource of [en, nl]) {
-      const copy = resource.projects[slug].backend
-      for (const name of ['Roomserve', 'Valk Exclusief', 'HKTD', 'Ruby on Rails']) {
+      const copy = resource.projects[slug].contributions.join(' ')
+      for (const name of ['Roomserve', 'Ruby on Rails']) {
         assert.ok(copy.includes(name), `${slug}: missing ${name}`)
       }
     }
