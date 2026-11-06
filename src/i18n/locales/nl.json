@@ -267,6 +267,142 @@
       "checkFields": "Controleer de gemarkeerde velden."
     }
   },
+  "divergenceCaseStudy": {
+    "eyebrow": "Case study",
+    "title": "Ascension-systeem",
+    "introduction": "Ik verving losse moeilijkheidsinstellingen door cumulatieve A0–A20-regels in C, inclusief het genereren van tegenstanders, het regeloverzicht, progressie en opgeslagen runs.",
+    "action": "Bekijk case study",
+    "context": {
+      "title": "Het probleem",
+      "body": "De bestaande game had moeilijkheidspresets en losse opties. Ik wilde een opbouw waarbij elk niveau een duidelijke regel toevoegt en eerdere regels actief blijven. Die wijziging raakte meer dan gevechten: ook de setup, beloningen, records en replays gebruikten de moeilijkheidsinstellingen."
+    },
+    "scope": {
+      "title": "De oplossing",
+      "body": "Ik introduceerde één resolver voor de geldende regels en koppelde die aan het genereren van tegenstanders en het regeloverzicht. Een run gebruikt een gevalideerde configuratie-snapshot, los van de bewerkbare setup. Zo gebruiken die onderdelen hetzelfde gekozen niveau."
+    },
+    "flow": {
+      "label": "Verloop van de regels: gekozen niveau, resolver, tegenstanders genereren en run-snapshot",
+      "setup": "Niveau kiezen",
+      "resolver": "Regels bepalen",
+      "generation": "Upgrades toepassen",
+      "snapshot": "Runconfig opslaan"
+    },
+    "explore": "Implementatiedetails van Ascension",
+    "stages": {
+      "rules": {
+        "label": "Regels",
+        "technology": "C · Rule resolution · Gedeeld regeloverzicht",
+        "title": "De cumulatieve regels op één plek bepalen",
+        "body": "RogueAscension_Resolve zet een niveau om in een compacte rules-struct. Drempelwaarden bepalen welke tegenstanders profiel-natures, movesets en items krijgen, naast teamgrootte en andere aanpassingen. Eerdere upgrades blijven op hogere niveaus actief.",
+        "detail": "Zowel het genereren van tegenstanders als het regeloverzicht gebruikt deze resolver. De interface hoeft de betekenis van een moeilijkheidsniveau dus niet apart te bepalen."
+      },
+      "generation": {
+        "label": "Generatie",
+        "technology": "C · Competitive profiles · Onafhankelijke upgrades",
+        "title": "Profielselectie en toepassing scheiden",
+        "body": "De bestaande engine koos competitive profiles met een nature, moves, ability en held item. Als dat hele profiel tegelijk wordt toegepast, worden upgrades eerder actief dan het bedoelde Ascension-niveau.",
+        "detail": "Ik maakte die eigenschappen afzonderlijk toepasbaar. Op A2 kan een boss ace de nature uit het gekozen profiel krijgen, met behoud van de gewone moves en zonder regulier profiel-item. De generator bewaakt ook legale moves en behoudt een basisconfiguratie als een profiel ontbreekt."
+      },
+      "persistence": {
+        "label": "Saves & replays",
+        "technology": "C · Configuratie-snapshots · Versiecontrole",
+        "title": "Actieve regels loshouden van de setup",
+        "body": "Gevalideerde instellingen worden naar de actieve runconfiguratie gekopieerd. Aanpassingen aan de onthouden setup mogen een lopend avontuur niet veranderen. Save round-trip-tests controleren dat beide configuraties gescheiden blijven.",
+        "detail": "Een replay bevat de seed, configuratie en regelversie. De loader weigert een incompatibele regelversie, zodat dezelfde seed niet onder een andere Ascension-ruleset wordt geïnterpreteerd."
+      }
+    },
+    "tradeoff": {
+      "title": "Afweging voor compatibiliteit",
+      "body": "Deze vervanging wijzigde bewust het saveformaat en vereiste een nieuwe save. Versiecontroles weigeren ook oudere incompatibele replays; alleen een seed bewaart niet de regels van een run."
+    },
+    "architecture": {
+      "title": "Architectuurkeuzes",
+      "resolver": {
+        "title": "Pure rules resolver",
+        "body": "De resolver bepaalt een rules-struct met vaste grootte op basis van een niveau, zonder globale state te wijzigen. Gameplay en presentatie gebruiken dezelfde berekening."
+      },
+      "composition": {
+        "title": "Onafhankelijke upgrades",
+        "body": "Profielselectie en het toepassen van eigenschappen zijn gescheiden. Elke upgrade heeft een eigen drempel, zodat het activeren van één eigenschap niet de rest meeneemt."
+      },
+      "snapshots": {
+        "title": "Configuratie-snapshots",
+        "body": "De bewerkbare setup, actieve runinstellingen en replayrecords hebben elk een eigen levensduur. Door gevalideerde instellingen bij de start te kopiëren, veranderen latere setupwijzigingen de actieve run niet."
+      }
+    },
+    "testing": {
+      "title": "Tests",
+      "introduction": "De tests controleren de regels zelf en de aansluiting op gegenereerde tegenstanders, de interface en opgeslagen state.",
+      "thresholds": {
+        "title": "Alle 21 niveaus",
+        "body": "Expliciete verwachte drempels, cumulatieve upgrades, statlimieten en teamcapaciteit voor A0–A20.",
+        "tool": "C-testharness · Regelmatrix"
+      },
+      "generation": {
+        "title": "Gegenereerde tegenstanders",
+        "body": "Onafhankelijke profieleigenschappen, verschillende soorten bosses en runfasen, vaste boss aces en uitgesloten teams van services.",
+        "tool": "C-testharness · Generatie met seed"
+      },
+      "persistence": {
+        "title": "State & presentatie",
+        "body": "Save round trips, replayconfiguratie, afzonderlijke progressierecords, read-only actieve regels en tekstbreedte in het GBA-regelvenster.",
+        "tool": "C-testharness · Integratiechecks"
+      }
+    },
+    "visual": {
+      "level": "Gekozen Ascension",
+      "chooseLevel": "Kies een voorbeeldniveau voor Ascension",
+      "natures": "Nature-upgrades",
+      "moves": "Profiel-movesets",
+      "items": "Profiel-held items",
+      "party": "Teamgrootte bosses",
+      "random": "Willekeurige natures",
+      "neutral": "Neutrale natures",
+      "effective": "Selectie van de geldende regels op A{{level}}; overige aanpassingen weggelaten.",
+      "profile": "Profiel toepassen",
+      "selectedProfile": "Eén gekozen profiel",
+      "bossAce": "Boss ace · laatste Pokémon van een bossteam",
+      "apply": "Profiel gebruiken",
+      "keepBasic": "Basis behouden",
+      "independent": "Nature, moves en items hebben elk eigen drempels.",
+      "snapshot": "Run- en replay-state",
+      "hub": "Bewerkbare hub-setup",
+      "active": "Actieve run-snapshot",
+      "replay": "Replayrecord",
+      "replayFields": "Seed · A{{level}} · versie",
+      "separate": "De onthouden setup kan afwijken van de actieve run.",
+      "versionCheck": "Regelversie van de replay",
+      "current": "Gelijke versie",
+      "older": "Oudere versie",
+      "restore": "Opgeslagen configuratie herstellen",
+      "reject": "Incompatibele replay weigeren",
+      "caption": "Vereenvoudigde illustratie van de implementatie."
+    },
+    "scopes": {
+      "none": "Geen profiel-upgrade",
+      "aces": "Boss aces",
+      "bosses": "Alle boss-Pokémon",
+      "trainers": "Alle trainer-Pokémon"
+    },
+    "party": {
+      "baseline": "Basisteam per gevecht",
+      "expanded": "Basis +1, maximaal 6",
+      "full": "6, binnen teamcapaciteit"
+    },
+    "results": {
+      "title": "Resultaten",
+      "implementationTitle": "Geïmplementeerd gedrag",
+      "implementation": "A0–A20 gebruiken een gedeelde rules-resolver. Upgrades voor tegenstanders en het regeloverzicht gebruiken dezelfde regels. Actieve configuratie, progressie en replays worden expliciet opgeslagen.",
+      "recorded": "Vastgelegde validatie · {{date}}",
+      "validation": "De gedocumenteerde versie slaagde voor {{count}} gerichte Ascension-tests en een incrementele build van de speelbare ROM.",
+      "limit": "Deze checks controleren de implementatie. De moeilijkheidsbalans blijft afhankelijk van playtests."
+    },
+    "sources": {
+      "rules": "Rules-resolver",
+      "tests": "Regressietests",
+      "validation": "Validatieverslag"
+    }
+  },
   "vexCaseStudy": {
     "eyebrow": "Case study",
     "title": "Configureerbare groepen voor aanbiedingen",

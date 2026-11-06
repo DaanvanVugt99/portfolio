@@ -9,6 +9,7 @@ import { VexProjectVisual } from './VexVisuals'
 import { DivergenceProjectVisual } from './DivergenceProjectVisual'
 import { ProjectThumbnail } from './ProjectThumbnail'
 import { VexCaseStudy } from './VexCaseStudy'
+import { DivergenceCaseStudy } from './DivergenceCaseStudy'
 import '../projects.css'
 
 function ProjectDetailVisual({ project }: { project: Project }) {
@@ -42,8 +43,13 @@ export function ProjectPage({ project }: { project: Project }) {
         <p>{project.description}</p>
         <Pills items={project.technologies} />
         {project.slug === 'vex' && (
-          <Link to="#offer-groups" className="offer-case-jump">
+          <Link to="#offer-groups" className="case-study-jump">
             {t('vexCaseStudy.action')} <ArrowRight size={16} aria-hidden="true" />
+          </Link>
+        )}
+        {project.slug === 'divergence' && (
+          <Link to="#ascension" className="case-study-jump">
+            {t('divergenceCaseStudy.action')} <ArrowRight size={16} aria-hidden="true" />
           </Link>
         )}
       </div>
@@ -91,6 +97,7 @@ export function ProjectPage({ project }: { project: Project }) {
         )}
       </div>
       {project.slug === 'vex' && <VexCaseStudy />}
+      {project.slug === 'divergence' && <DivergenceCaseStudy />}
       {project.slug === 'divergence' && <p className="credits">{t('caseStudy.credits')}</p>}
       <Link to={`/projects/${other.slug}`} className="next-project">
         <span>

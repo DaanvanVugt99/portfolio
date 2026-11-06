@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
   ArrowDown,
-  ArrowRight,
   Braces,
   CalendarDays,
   Database,
@@ -21,8 +20,7 @@ import {
   type OfferGroup,
 } from '../data/vexCaseStudy'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
-import '../vex-case-study.css'
+import { TechnicalCaseStudy } from './TechnicalCaseStudy'
 
 const stageIcons = { backend: Database, app: Smartphone, compatibility: GitBranch }
 
@@ -186,100 +184,58 @@ const diagrams = {
 export function VexCaseStudy() {
   const { t } = useTranslation()
   return (
-    <section id="offer-groups" className="vex-case-study" aria-labelledby="offer-case-title">
-      <header className="offer-case-heading">
-        <span className="eyebrow">{t('vexCaseStudy.eyebrow')}</span>
-        <h2 id="offer-case-title">{t('vexCaseStudy.title')}</h2>
-        <p>{t('vexCaseStudy.introduction')}</p>
-      </header>
-      <div className="offer-case-context">
-        <div>
-          <h3>{t('vexCaseStudy.context.title')}</h3>
-          <p>{t('vexCaseStudy.context.body')}</p>
-        </div>
-        <div>
-          <h3>{t('vexCaseStudy.scope.title')}</h3>
-          <p>{t('vexCaseStudy.scope.body')}</p>
-        </div>
-      </div>
-      <ol className="offer-system-flow" aria-label={t('vexCaseStudy.flow.label')}>
-        {(['feed', 'mapping', 'api', 'filtering'] as const).map((stage, index) => (
-          <li key={stage}>
-            <span className="offer-flow-number" aria-hidden="true">
-              {String(index + 1).padStart(2, '0')}
-            </span>
-            <span>{t(`vexCaseStudy.flow.${stage}`)}</span>
-            {index < 3 && <ArrowRight size={16} aria-hidden="true" />}
-          </li>
-        ))}
-      </ol>
-      <Tabs defaultValue="backend" className="offer-explorer">
-        <TabsList aria-label={t('vexCaseStudy.explore')} className="offer-stage-tabs">
-          {vexCaseStages.map((stage) => {
-            const Icon = stageIcons[stage]
-            return (
-              <TabsTrigger key={stage} value={stage}>
-                <Icon size={17} strokeWidth={1.6} aria-hidden="true" />
-                {t(`vexCaseStudy.stages.${stage}.label`)}
-              </TabsTrigger>
-            )
-          })}
-        </TabsList>
-        {vexCaseStages.map((stage) => {
-          const Diagram = diagrams[stage]
-          return (
-            <TabsContent key={stage} value={stage} className="offer-stage-panel">
-              <div className="offer-stage-copy">
-                <span className="offer-stage-tech">
-                  {t(`vexCaseStudy.stages.${stage}.technology`)}
-                </span>
-                <h3>{t(`vexCaseStudy.stages.${stage}.title`)}</h3>
-                <p>{t(`vexCaseStudy.stages.${stage}.body`)}</p>
-                <p>{t(`vexCaseStudy.stages.${stage}.detail`)}</p>
-                {stage === 'backend' && (
-                  <p className="offer-stage-tradeoff">
-                    <strong>{t('vexCaseStudy.tradeoff.title')}</strong>
-                    {t('vexCaseStudy.tradeoff.body')}
-                  </p>
-                )}
-              </div>
-              <figure className="offer-stage-visual">
-                <Diagram />
-                <figcaption>{t('vexCaseStudy.visual.caption')}</figcaption>
-              </figure>
-            </TabsContent>
-          )
-        })}
-      </Tabs>
-      <section className="offer-case-architecture" aria-labelledby="offer-architecture-title">
-        <h3 id="offer-architecture-title">{t('vexCaseStudy.architecture.title')}</h3>
-        <dl className="offer-pattern-list">
-          {offerArchitecturePatterns.map((pattern) => (
-            <div key={pattern}>
-              <dt>{t(`vexCaseStudy.architecture.${pattern}.title`)}</dt>
-              <dd>{t(`vexCaseStudy.architecture.${pattern}.body`)}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-      <section className="offer-case-tests" aria-labelledby="offer-tests-title">
-        <div className="offer-test-heading">
-          <h3 id="offer-tests-title">{t('vexCaseStudy.testing.title')}</h3>
-          <p>{t('vexCaseStudy.testing.introduction')}</p>
-        </div>
-        <div className="offer-test-grid">
-          {(['backend', 'app', 'links'] as const).map((area, index) => (
-            <div key={area}>
-              <span className="offer-test-number" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <h4>{t(`vexCaseStudy.testing.${area}.title`)}</h4>
-              <p>{t(`vexCaseStudy.testing.${area}.body`)}</p>
-              <span className="offer-test-tool">{t(`vexCaseStudy.testing.${area}.tool`)}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </section>
+    <TechnicalCaseStudy
+      id="offer-groups"
+      eyebrow={t('vexCaseStudy.eyebrow')}
+      title={t('vexCaseStudy.title')}
+      introduction={t('vexCaseStudy.introduction')}
+      context={(['context', 'scope'] as const).map((key) => ({
+        title: t(`vexCaseStudy.${key}.title`),
+        body: t(`vexCaseStudy.${key}.body`),
+      }))}
+      flow={{
+        label: t('vexCaseStudy.flow.label'),
+        steps: (['feed', 'mapping', 'api', 'filtering'] as const).map((key) =>
+          t(`vexCaseStudy.flow.${key}`),
+        ),
+      }}
+      explorerLabel={t('vexCaseStudy.explore')}
+      stages={vexCaseStages.map((stage) => {
+        const Diagram = diagrams[stage]
+        return {
+          id: stage,
+          label: t(`vexCaseStudy.stages.${stage}.label`),
+          Icon: stageIcons[stage],
+          technology: t(`vexCaseStudy.stages.${stage}.technology`),
+          title: t(`vexCaseStudy.stages.${stage}.title`),
+          paragraphs: [
+            t(`vexCaseStudy.stages.${stage}.body`),
+            t(`vexCaseStudy.stages.${stage}.detail`),
+          ],
+          note:
+            stage === 'backend'
+              ? { title: t('vexCaseStudy.tradeoff.title'), body: t('vexCaseStudy.tradeoff.body') }
+              : undefined,
+          visual: <Diagram />,
+          caption: t('vexCaseStudy.visual.caption'),
+        }
+      })}
+      architecture={{
+        title: t('vexCaseStudy.architecture.title'),
+        patterns: offerArchitecturePatterns.map((pattern) => ({
+          title: t(`vexCaseStudy.architecture.${pattern}.title`),
+          body: t(`vexCaseStudy.architecture.${pattern}.body`),
+        })),
+      }}
+      testing={{
+        title: t('vexCaseStudy.testing.title'),
+        introduction: t('vexCaseStudy.testing.introduction'),
+        areas: (['backend', 'app', 'links'] as const).map((area) => ({
+          title: t(`vexCaseStudy.testing.${area}.title`),
+          body: t(`vexCaseStudy.testing.${area}.body`),
+          tool: t(`vexCaseStudy.testing.${area}.tool`),
+        })),
+      }}
+    />
   )
 }

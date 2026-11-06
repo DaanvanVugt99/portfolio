@@ -267,6 +267,142 @@
       "checkFields": "Please check the highlighted fields."
     }
   },
+  "divergenceCaseStudy": {
+    "eyebrow": "Case study",
+    "title": "Ascension difficulty system",
+    "introduction": "I replaced separate difficulty settings with cumulative A0–A20 rules in C, covering opponent generation, the rules display, progression and saved runs.",
+    "action": "Read case study",
+    "context": {
+      "title": "The problem",
+      "body": "The inherited game exposed difficulty presets and individual options. I wanted a progression where each level added a clear rule and earlier rules stayed active. That change affected more than battles: setup, rewards, records and replays also depended on difficulty."
+    },
+    "scope": {
+      "title": "The solution",
+      "body": "I introduced one resolver for the effective rules and connected it to opponent generation and the rules summary. A run uses a validated configuration snapshot, separate from the player’s editable setup. This keeps the selected level consistent across those systems."
+    },
+    "flow": {
+      "label": "Rule flow: selected level, rules resolver, opponent generation and run snapshot",
+      "setup": "Select level",
+      "resolver": "Resolve rules",
+      "generation": "Apply upgrades",
+      "snapshot": "Save run config"
+    },
+    "explore": "Ascension implementation details",
+    "stages": {
+      "rules": {
+        "label": "Rules",
+        "technology": "C · Rule resolution · Shared rules display",
+        "title": "Resolve the cumulative rules once",
+        "body": "RogueAscension_Resolve turns a level into a compact rules structure. Thresholds determine which opponents receive profile natures, movesets and items, alongside party-size and other modifiers. Earlier upgrades remain active at higher levels.",
+        "detail": "Opponent generation and the displayed rule summary use this resolver. The interface can show the effective rules without maintaining another interpretation of the difficulty level."
+      },
+      "generation": {
+        "label": "Generation",
+        "technology": "C · Competitive profiles · Independent upgrades",
+        "title": "Separate profile selection from application",
+        "body": "The existing engine selected competitive profiles containing a nature, moves, ability and held item. Applying the whole profile at once would enable upgrades before their intended Ascension thresholds.",
+        "detail": "I separated those properties into independent gates. At A2, a boss ace can receive the selected profile’s nature while retaining basic moves and no ordinary profile item. The generator also preserves legal moves and a basic fallback when a profile is missing."
+      },
+      "persistence": {
+        "label": "Saves & replays",
+        "technology": "C · Configuration snapshots · Version checks",
+        "title": "Keep active rules separate from setup",
+        "body": "Validated setup is copied into the active-run configuration. Editing remembered setup must not change an adventure already in progress. Save round-trip tests check that both configurations remain separate.",
+        "detail": "A replay stores its seed, configuration and rules version. The loader rejects an incompatible rules version instead of interpreting that seed under a different Ascension ruleset."
+      }
+    },
+    "tradeoff": {
+      "title": "Compatibility trade-off",
+      "body": "The replacement deliberately changed the save format and required a new save. Version checks also reject older incompatible replays; a seed alone does not preserve the rules used by a run."
+    },
+    "architecture": {
+      "title": "Architectural choices",
+      "resolver": {
+        "title": "Pure rules resolver",
+        "body": "The resolver derives a fixed-size rules structure from a level without changing global state. Gameplay and presentation share the same calculation."
+      },
+      "composition": {
+        "title": "Independent upgrades",
+        "body": "Profile selection and property application are separate. Each upgrade has its own threshold, so enabling one does not silently enable the rest."
+      },
+      "snapshots": {
+        "title": "Configuration snapshots",
+        "body": "Editable setup, active-run settings and replay records have distinct lifetimes. Copying validated settings at run start keeps later setup edits out of the active run."
+      }
+    },
+    "testing": {
+      "title": "Tests",
+      "introduction": "The tests cover the rules themselves and their integration with generated opponents, the interface and saved state.",
+      "thresholds": {
+        "title": "All 21 levels",
+        "body": "Explicit expected thresholds, cumulative upgrades, stat caps and party-capacity limits across A0–A20.",
+        "tool": "C test harness · Rule matrix"
+      },
+      "generation": {
+        "title": "Generated opponents",
+        "body": "Independent profile properties, different boss categories and run stages, stable boss aces and excluded service-generated parties.",
+        "tool": "C test harness · Seeded generation"
+      },
+      "persistence": {
+        "title": "State & presentation",
+        "body": "Save round trips, replay configuration, separate progression records, read-only active rules and text fitting the GBA rules window.",
+        "tool": "C test harness · Integration checks"
+      }
+    },
+    "visual": {
+      "level": "Selected Ascension",
+      "chooseLevel": "Choose an example Ascension level",
+      "natures": "Nature upgrades",
+      "moves": "Profile movesets",
+      "items": "Profile held items",
+      "party": "Boss party size",
+      "random": "Random natures",
+      "neutral": "Neutral natures",
+      "effective": "Selected effective rules at A{{level}}; other modifiers omitted.",
+      "profile": "Profile application",
+      "selectedProfile": "One selected profile",
+      "bossAce": "Boss ace · final member of a boss team",
+      "apply": "Use profile",
+      "keepBasic": "Keep basic",
+      "independent": "Nature, moves and items have independent thresholds.",
+      "snapshot": "Run & replay state",
+      "hub": "Editable hub setup",
+      "active": "Active run snapshot",
+      "replay": "Replay record",
+      "replayFields": "Seed · A{{level}} · version",
+      "separate": "Remembered setup can differ from the active run.",
+      "versionCheck": "Replay rules version",
+      "current": "Matching version",
+      "older": "Older version",
+      "restore": "Restore recorded configuration",
+      "reject": "Reject incompatible replay",
+      "caption": "Simplified illustration of the implementation."
+    },
+    "scopes": {
+      "none": "No profile upgrade",
+      "aces": "Boss aces",
+      "bosses": "All boss Pokémon",
+      "trainers": "All trainer Pokémon"
+    },
+    "party": {
+      "baseline": "Base encounter size",
+      "expanded": "Base +1, maximum 6",
+      "full": "6, within party capacity"
+    },
+    "results": {
+      "title": "Results",
+      "implementationTitle": "Implemented behaviour",
+      "implementation": "A0–A20 use a shared rules resolver. Opponent upgrades and the rule summary read the same rules, while active configuration, progression and replays are stored explicitly.",
+      "recorded": "Recorded validation · {{date}}",
+      "validation": "The documented revision passed {{count}} focused Ascension tests and an incremental playable ROM build.",
+      "limit": "These checks validate the implementation. Difficulty balance remains subject to playtesting."
+    },
+    "sources": {
+      "rules": "Rules resolver",
+      "tests": "Regression tests",
+      "validation": "Validation record"
+    }
+  },
   "vexCaseStudy": {
     "eyebrow": "Case study",
     "title": "Configurable offer groups",
