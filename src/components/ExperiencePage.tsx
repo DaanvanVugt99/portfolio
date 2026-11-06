@@ -2,15 +2,7 @@ import '@fontsource/cormorant-garamond/latin-500-italic.css'
 import '@fontsource/cormorant-garamond/latin-600.css'
 import '../experience.css'
 import { useMemo } from 'react'
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Baby,
-  BriefcaseBusiness,
-  Check,
-  Code2,
-  Shapes,
-} from 'lucide-react'
+import { ArrowLeft, ArrowRight, Baby, BriefcaseBusiness, Check, Code2, Shapes } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { establishedYear, experience, formatExperienceDate } from '../data/experience'
@@ -86,7 +78,7 @@ export function ExperiencePage() {
             {entry.projectHref && (
               <Link className="timeline-project-link" to={entry.projectHref}>
                 {t('experience.vexLink')}
-                <ArrowUpRight size={16} strokeWidth={1.5} />
+                <ArrowRight size={16} strokeWidth={1.5} />
               </Link>
             )}
           </Card>
@@ -110,7 +102,7 @@ export function ExperiencePage() {
             <p className="timeline-description">{t('experience.opportunity.description')}</p>
             <Link className="timeline-project-link" to="/contact">
               {t('experience.opportunity.contact')}
-              <ArrowUpRight size={16} strokeWidth={1.5} />
+              <ArrowRight size={16} strokeWidth={1.5} />
             </Link>
           </Card>
         ),

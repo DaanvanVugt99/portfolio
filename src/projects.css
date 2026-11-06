@@ -193,7 +193,7 @@
 }
 .work-card-link:is(:hover, :focus-visible) .work-card-arrow {
   color: var(--landing-blue);
-  transform: translate(2px, -2px);
+  transform: translateX(3px);
 }
 .work-card h2 {
   margin: 0 0 12px;

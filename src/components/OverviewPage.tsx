@@ -72,21 +72,7 @@ function ExperienceCard() {
         <span className="icon-label">
           <Layers3 size={15} />
         </span>{' '}
-        <h2>
-          <Link
-            className="experience-card-link"
-            to="/experience"
-            aria-label={t('experience.cardLink')}
-          >
-            {t('overview.experience')}
-          </Link>
-        </h2>
-        <ArrowUpRight
-          className="experience-card-arrow"
-          size={17}
-          strokeWidth={1.5}
-          aria-hidden="true"
-        />
+        <h2>{t('overview.experience')}</h2>
       </div>
       <div className="experience-heading">
         <strong>
@@ -97,6 +83,9 @@ function ExperienceCard() {
       <div className="experience-rule" />
       <SkillGroups compact />
       <p className="experience-summary">{t('skills.summary')}</p>
+      <Link className="text-link experience-card-link" to="/experience">
+        {t('overview.viewExperience')} <ArrowRight size={15} aria-hidden="true" />
+      </Link>
     </Card>
   )
 }
@@ -110,20 +99,12 @@ function VexCard() {
       <VexVisual />
       <div className="project-copy">
         <div className="eyebrow">{project.eyebrow}</div>
-        <div className="project-title-row">
-          <h2>
-            <Link to="/projects/vex">{project.title}</Link>
-          </h2>
-          <Link
-            className="round-link project-arrow"
-            to="/projects/vex"
-            aria-label={t('overview.vexRead')}
-          >
-            <ArrowUpRight size={20} />
-          </Link>
-        </div>
+        <h2>{project.title}</h2>
         <p>{project.description}</p>
         <Pills items={project.technologies} />
+        <Link className="text-link vex-card-link" to="/projects/vex">
+          {t('overview.explore')} <ArrowRight size={15} aria-hidden="true" />
+        </Link>
       </div>
     </Card>
   )
@@ -170,7 +151,7 @@ function DivergenceCard() {
         </h2>
         <p>{t('overview.divergenceSummary')}</p>
         <Link className="text-link" to="/projects/divergence">
-          {t('overview.explore')} <ArrowUpRight size={15} />
+          {t('overview.explore')} <ArrowRight size={15} aria-hidden="true" />
         </Link>
       </div>
     </Card>
@@ -215,7 +196,7 @@ function ContactCard() {
     <Card className="contact-card" id="contact">
       <Link className="contact-card-heading-link" to="/contact">
         <h2>{t('navigation.contact')}</h2>
-        <ArrowUpRight size={28} strokeWidth={1.2} aria-hidden="true" />
+        <ArrowRight size={28} strokeWidth={1.2} aria-hidden="true" />
       </Link>
       <div className="contact-links">
         <a href={`mailto:${profile.email}`}>
