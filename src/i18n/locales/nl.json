@@ -138,7 +138,7 @@
   },
   "projects": {
     "vex": {
-      "eyebrow": "Professioneel werk · iOS & Android",
+      "eyebrow": "Professioneel werk",
       "description": "Met de Valk Exclusief-app kunnen hotelgasten boekingen beheren, online inchecken, digitale kamersleutels gebruiken en beloningen sparen. De app is beschikbaar voor iOS en Android.",
       "role": "Bij Valk Digital werkte ik aan zowel de React Native-app als de gedeelde Ruby on Rails-backend. Mijn werk liep van features en integraties tot tests en releases.",
       "contributions": [
@@ -154,7 +154,7 @@
       }
     },
     "divergence": {
-      "eyebrow": "Persoonlijk project · GBA / C",
+      "eyebrow": "Persoonlijk project",
       "description": "Divergence is mijn eigen Game Boy Advance-project in C. Ik bouw voort op de bestaande codebase van Pokémon Emerald Rogue en voeg daar mijn eigen game mechanics aan toe.",
       "role": "Ik ontwikkel Divergence als mijn eigen fork van Pokémon Emerald Rogue. Ik bouw verder op een grote bestaande C-codebase en onderhoud de tooling voor builds en tests.",
       "contributions": [
@@ -170,7 +170,7 @@
       }
     },
     "valk-to-go": {
-      "eyebrow": "Professioneel werk · Fullstack",
+      "eyebrow": "Professioneel werk",
       "description": "Valk to Go biedt selfservicewinkels in Valk Exclusief-hotels. De software bestaat uit een checkout waarmee gasten afrekenen en een backoffice voor het winkelbeheer.",
       "role": "Bij Valk Digital werkte ik fullstack aan Valk to Go: de React-frontends en de backend in Elixir/Phoenix.",
       "contributions": [
@@ -185,7 +185,7 @@
     },
     "hktd": {
       "title": "HKTD — Housekeeping & technische dienst",
-      "eyebrow": "Professioneel werk · Mobiel, web & backend",
+      "eyebrow": "Professioneel werk",
       "description": "HKTD heeft een mobiele app en een webapplicatie voor housekeeping en de technische dienst in Valk Exclusief-hotels. Medewerkers bekijken kamerstatussen en taken in de app. Supervisors gebruiken de backoffice om het werk te plannen en te beheren.",
       "role": "Bij Valk Digital werkte ik aan de React Native-app, de React-backoffice en de backend die HKTD deelt met Valk Exclusief.",
       "contributions": [
