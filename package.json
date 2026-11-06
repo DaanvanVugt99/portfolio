@@ -6,6 +6,9 @@
   "engines": {
     "node": "24.x"
   },
+  "overrides": {
+    "minimatch": "11.0.1"
+  },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "check": "tsc --noEmit",
@@ -56,5 +59,8 @@
     "typescript": "latest",
     "typescript-eslint": "^8.72.1",
     "vite": "latest"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }
