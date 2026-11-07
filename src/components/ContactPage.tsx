@@ -10,7 +10,7 @@ import { Card } from './ui/card'
 export function ContactPage() {
   const { t } = useTranslation()
   return (
-    <main id="main" className="contact-page">
+    <main id="main" tabIndex={-1} className="contact-page">
       <header className="contact-heading">
         <h1>{t('navigation.contact')}</h1>
         <Link to="/portfolio" className="back-link">

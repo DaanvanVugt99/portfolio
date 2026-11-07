@@ -10,6 +10,7 @@
     "minimatch": "11.0.1"
   },
   "scripts": {
+    "social:image": "node scripts/create-social-image.mjs",
     "dev": "vite --host 127.0.0.1",
     "check": "tsc --noEmit",
     "build": "tsc --noEmit && vite build",
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@resvg/resvg-js": "2.6.2",
     "@tailwindcss/vite": "latest",
     "@types/node": "latest",
     "@types/react": "latest",

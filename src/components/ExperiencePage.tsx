@@ -126,7 +126,7 @@ export function ExperiencePage() {
   }, [t, language])
 
   return (
-    <main id="main" className="experience-page">
+    <main id="main" tabIndex={-1} className="experience-page">
       <Link to="/portfolio#experience" className="back-link">
         <ArrowLeft size={16} />
         {t('experience.back')}

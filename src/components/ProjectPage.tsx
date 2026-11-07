@@ -33,7 +33,7 @@ export function ProjectPage({ project }: { project: Project }) {
   const { projects } = usePortfolio()
   const other = projects.find((p) => p.slug !== project.slug)!
   return (
-    <main id="main" className="project-page">
+    <main id="main" tabIndex={-1} className="project-page">
       <Link to={`/projects#${project.slug}`} className="back-link">
         <ArrowLeft size={16} /> {t('navigation.back')}
       </Link>

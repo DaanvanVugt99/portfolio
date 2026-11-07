@@ -9,7 +9,7 @@ import { Card } from './ui/card'
 export function AboutPage() {
   const { t } = useTranslation()
   return (
-    <main id="main" className="about-page">
+    <main id="main" tabIndex={-1} className="about-page">
       <header className="about-heading">
         <h1>{t('about.title')}</h1>
         <Link to="/portfolio" className="back-link">

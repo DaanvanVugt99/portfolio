@@ -4,5 +4,43 @@
   "installCommand": "env -u npm_config_cache_dir -u NPM_CONFIG_CACHE_DIR npm ci",
   "buildCommand": "env -u npm_config_cache_dir -u NPM_CONFIG_CACHE_DIR sh -c 'npm exec -- prettier vercel.json --write && npm run verify'",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/portfolio",
+      "destination": "/portfolio.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/projects.html"
+    },
+    {
+      "source": "/projects/vex",
+      "destination": "/projects/vex.html"
+    },
+    {
+      "source": "/projects/valk-to-go",
+      "destination": "/projects/valk-to-go.html"
+    },
+    {
+      "source": "/projects/hktd",
+      "destination": "/projects/hktd.html"
+    },
+    {
+      "source": "/projects/divergence",
+      "destination": "/projects/divergence.html"
+    },
+    {
+      "source": "/experience",
+      "destination": "/experience.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    }
+  ]
 }

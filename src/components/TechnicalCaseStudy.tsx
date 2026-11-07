@@ -77,7 +77,7 @@ export function TechnicalCaseStudy({
           ))}
         </TabsList>
         {stages.map((stage) => (
-          <TabsContent value={stage.id} key={stage.id} className="case-study-panel">
+          <TabsContent forceMount value={stage.id} key={stage.id} className="case-study-panel">
             <div className="case-study-copy">
               <span className="case-study-tech">{stage.technology}</span>
               <h3>{stage.title}</h3>

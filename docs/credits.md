@@ -19,5 +19,6 @@
 - Inter is provided by Fontsource, with its OFL license in the dependency.
 - Cormorant Garamond is provided by Fontsource, with its OFL license in the dependency.
 - Space Grotesk comes from Google Fonts. Its OFL notice accompanies the derived landing-page font in `public/fonts/`.
+- The social sharing image uses the same Space Grotesk outlines and brand mark. Its editable SVG is in `public/social/`; `scripts/create-social-image.mjs` generates the source artwork.
 
 - Experience logos: [Valk Digital's official LinkedIn profile](https://www.linkedin.com/company/valkdigital/), [HAN's official website](https://www.han.nl/images/logo/han_university.svg), and [Titus Brandsmalyceum's official website](https://tbl.hethooghuis.nl/wp-content/uploads/sites/6/2018/07/logo.png). Logos belong to their respective organisations; original artwork and colours are retained.

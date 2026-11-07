@@ -204,6 +204,7 @@
     "back": "Terug naar Home"
   },
   "meta": {
+    "socialImageAlt": "Daan van Vugt in blauwe letters. Software developer — fullstack en backend development. daanvanvugt.com.",
     "home": "Daan van Vugt — Software developer",
     "description": "Daan van Vugt. Software developer met 3 jaar professionele ervaring in webapps, mobiele apps, backend services en testing."
   },
@@ -262,7 +263,8 @@
       "rejected": "Controleer dit veld en probeer het opnieuw.",
       "failed": "Je bericht kon niet worden verstuurd. Probeer het opnieuw.",
       "checkFields": "Controleer de gemarkeerde velden."
-    }
+    },
+    "javascriptRequired": "Voor het formulier is JavaScript nodig. Je kunt me ook rechtstreeks mailen."
   },
   "divergenceCaseStudy": {
     "eyebrow": "Case study",
