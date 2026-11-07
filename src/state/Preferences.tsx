@@ -1,3 +1,4 @@
+import { useHydrated } from '../hooks/useHydrated'
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 
 export type ThemeChoice = 'light' | 'dark' | 'system'
@@ -14,7 +15,8 @@ type Preferences = {
 const PreferenceContext = createContext<Preferences | null>(null)
 
 export function PreferencesProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<ThemeChoice>(() => {
+  const hydrated = useHydrated()
+  const [selectedTheme, setTheme] = useState<ThemeChoice>(() => {
     try {
       const saved = localStorage.getItem('portfolio-theme')
       return saved === 'light' || saved === 'dark' ? saved : 'system'
@@ -23,13 +25,16 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     }
   })
   const [systemDark, setSystemDark] = useState(
-    () => matchMedia('(prefers-color-scheme: dark)').matches,
+    () => typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches,
   )
-  const [reducedMotion, setReducedMotion] = useState(
-    () => matchMedia('(prefers-reduced-motion: reduce)').matches,
+  const [systemReducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
   const [paused, setPaused] = useState(false)
-  const resolvedTheme = theme === 'system' ? (systemDark ? 'dark' : 'light') : theme
+  const theme = hydrated ? selectedTheme : 'system'
+  const reducedMotion = !hydrated || systemReducedMotion
+  const resolvedTheme = theme === 'system' ? (hydrated && systemDark ? 'dark' : 'light') : theme
 
   useEffect(() => {
     const colour = matchMedia('(prefers-color-scheme: dark)')
@@ -45,6 +50,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
+    if (!hydrated) return
     document.documentElement.dataset.theme = resolvedTheme
     document
       .querySelector<HTMLLinkElement>('link[rel="icon"]')
@@ -61,7 +67,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     } catch {
       /* Preferences work in memory when storage is unavailable. */
     }
-  }, [theme, resolvedTheme])
+  }, [theme, resolvedTheme, hydrated])
 
   useEffect(() => {
     document.documentElement.dataset.motion = paused || reducedMotion ? 'paused' : 'playing'

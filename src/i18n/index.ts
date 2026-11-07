@@ -9,7 +9,8 @@ export type { Language } from './language'
 // Keep both languages in step, including nested keys and translated lists.
 const dutch: typeof en = nl
 
-function savedLanguage(): Language {
+export function savedLanguage(): Language {
+  if (typeof navigator === 'undefined') return 'en'
   let saved: string | null = null
   try {
     saved = localStorage.getItem('portfolio-language')
@@ -23,6 +24,7 @@ function savedLanguage(): Language {
 }
 
 function syncLanguage(language: string) {
+  if (typeof document === 'undefined') return
   document.documentElement.lang = language === 'nl' ? 'nl' : 'en'
 }
 
@@ -39,7 +41,12 @@ i18n.on('languageChanged', syncLanguage)
 
 void i18n.use(initReactI18next).init({
   resources: { en: { translation: en }, nl: { translation: dutch } },
-  lng: savedLanguage(),
+  // Match the build-time HTML on the first hydration render.
+  lng:
+    typeof document !== 'undefined' &&
+    !document.getElementById('root')?.hasAttribute('data-prerendered')
+      ? savedLanguage()
+      : 'en',
   fallbackLng: 'en',
   supportedLngs: ['en', 'nl'],
   initAsync: false,

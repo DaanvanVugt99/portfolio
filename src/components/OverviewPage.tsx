@@ -221,7 +221,7 @@ export function OverviewPage() {
       <div className="page-intro">
         <span>{t('overview.title')}</span>
       </div>
-      <main id="main" className="bento-grid">
+      <main id="main" tabIndex={-1} className="bento-grid">
         <IntroCard />
         <VexCard />
         <ExperienceCard />

@@ -263,7 +263,8 @@
       "rejected": "Controleer dit veld en probeer het opnieuw.",
       "failed": "Je bericht kon niet worden verstuurd. Probeer het opnieuw.",
       "checkFields": "Controleer de gemarkeerde velden."
-    }
+    },
+    "javascriptRequired": "Voor het formulier is JavaScript nodig. Je kunt me ook rechtstreeks mailen."
   },
   "divergenceCaseStudy": {
     "eyebrow": "Case study",

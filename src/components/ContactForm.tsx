@@ -1,3 +1,4 @@
+import { useHydrated } from '../hooks/useHydrated'
 import { useForm } from '@formspree/react'
 import { ArrowRight, Check } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
@@ -21,6 +22,7 @@ type ContactFormProps = { formId?: string }
 export function ContactForm({ formId }: ContactFormProps) {
   // The hook requires an ID even when sending is unavailable. The submit guard
   // prevents this placeholder from ever making a request.
+  const hydrated = useHydrated()
   const [state, submit, reset] = useForm(formId || 'unconfigured')
   const { t } = useTranslation()
   const [errors, setErrors] = useState<ContactErrors>({})
@@ -107,6 +109,12 @@ export function ContactForm({ formId }: ContactFormProps) {
       aria-busy={state.submitting}
       aria-label={t('contact.formLabel')}
     >
+      <noscript>
+        <p className="contact-notice">
+          {t('contact.javascriptRequired')}{' '}
+          <a href={`mailto:${profile.email}`}>{t('contact.emailDirectly')}</a>
+        </p>
+      </noscript>
       <div className="contact-form-fields">
         {contactFields.map((field) => {
           const error = fieldErrors[field]
@@ -163,7 +171,7 @@ export function ContactForm({ formId }: ContactFormProps) {
       <Button
         className="contact-submit"
         type="submit"
-        disabled={!formId || state.submitting}
+        disabled={!hydrated || !formId || state.submitting}
         aria-describedby={!formId ? 'contact-unavailable' : undefined}
       >
         {state.submitting ? t('contact.sending') : failed ? t('contact.retry') : t('contact.send')}{' '}

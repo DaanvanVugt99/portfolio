@@ -263,7 +263,8 @@
       "rejected": "Check this field and try again.",
       "failed": "Your message could not be sent. Please try again.",
       "checkFields": "Please check the highlighted fields."
-    }
+    },
+    "javascriptRequired": "The form requires JavaScript. You can also email me directly."
   },
   "divergenceCaseStudy": {
     "eyebrow": "Case study",

@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite'
+import { createServer, defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { publicPaths, siteUrl } from './src/data/site.ts'
+import { publicPages, publicPaths, siteUrl } from './src/data/site.ts'
 import { pageMetadata, renderPageMetadata } from './src/lib/pageMetadata.ts'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   build: {
     rolldownOptions: {
       output: {
@@ -25,7 +25,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     {
-      name: 'site-metadata',
+      name: 'static-pages',
       transformIndexHtml(html, context) {
         const source = context.originalUrl ?? (context.path === '/index.html' ? '/' : context.path)
         const path = new URL(source, 'http://localhost').pathname
@@ -33,17 +33,73 @@ export default defineConfig({
       },
       generateBundle: {
         order: 'post',
-        handler(_options, bundle) {
+        async handler(_options, bundle) {
           const index = bundle['index.html']
           if (!index || index.type !== 'asset' || typeof index.source !== 'string') {
             throw new Error('Missing compiled index.html for page metadata')
           }
-          for (const path of publicPaths.filter((path) => path !== '/')) {
+          const renderer = await createServer({
+            configFile: false,
+            mode,
+            logLevel: 'error',
+            optimizeDeps: { noDiscovery: true },
+            plugins: [react()],
+            server: { middlewareMode: true, hmr: false, ws: false },
+            appType: 'custom',
+          })
+          try {
+            const { render } = await renderer.ssrLoadModule('/src/entry-server.tsx')
+            const shell = index.source
+            const renderHtml = async (path: string, template: string) => {
+              const markup = render(path)
+              if (markup.includes('data-route-loading') || markup.includes('<!--$!-->')) {
+                throw new Error(`Incomplete prerender: ${path}`)
+              }
+              return renderPageMetadata(template, pageMetadata(path))
+                .replace('<div id="root">', '<div id="root" data-prerendered>')
+                .replace('<!--app-html-->', () => markup)
+            }
+            for (const { path, component } of publicPages) {
+              const styles = new Set<string>()
+              const visited = new Set<string>()
+              const collectStyles = (name: string) => {
+                if (visited.has(name)) return
+                visited.add(name)
+                const chunk = bundle[name]
+                if (chunk?.type !== 'chunk') return
+                const metadata = chunk as typeof chunk & {
+                  viteMetadata?: { importedCss: Set<string> }
+                }
+                metadata.viteMetadata?.importedCss.forEach((css) => styles.add(css))
+                chunk.imports.forEach(collectStyles)
+              }
+              const pageChunk = Object.values(bundle).find(
+                (chunk) =>
+                  chunk.type === 'chunk' &&
+                  Object.keys(chunk.modules).some((id) =>
+                    id.replaceAll('\\', '/').endsWith(`/components/${component}.tsx`),
+                  ),
+              )
+              if (!pageChunk) throw new Error(`Missing page chunk: ${path}`)
+              collectStyles(pageChunk.fileName)
+              const pageShell = shell.replace(
+                '</head>',
+                `${[...styles]
+                  .filter((css) => !shell.includes(`/${css}`))
+                  .map((css) => `<link rel="stylesheet" href="/${css}">`)
+                  .join('\n')}\n</head>`,
+              )
+              const html = await renderHtml(path, pageShell)
+              if (path === '/') index.source = html
+              else this.emitFile({ type: 'asset', fileName: `${path.slice(1)}.html`, source: html })
+            }
             this.emitFile({
               type: 'asset',
-              fileName: `${path.slice(1)}.html`,
-              source: renderPageMetadata(index.source, pageMetadata(path)),
+              fileName: '404.html',
+              source: await renderHtml('/404', shell),
             })
+          } finally {
+            await renderer.close()
           }
           this.emitFile({
             type: 'asset',
@@ -59,4 +115,4 @@ export default defineConfig({
       },
     },
   ],
-})
+}))

@@ -6,15 +6,41 @@
   "outputDirectory": "dist",
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/portfolio", "destination": "/portfolio.html" },
-    { "source": "/projects", "destination": "/projects.html" },
-    { "source": "/projects/vex", "destination": "/projects/vex.html" },
-    { "source": "/projects/valk-to-go", "destination": "/projects/valk-to-go.html" },
-    { "source": "/projects/hktd", "destination": "/projects/hktd.html" },
-    { "source": "/projects/divergence", "destination": "/projects/divergence.html" },
-    { "source": "/experience", "destination": "/experience.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/portfolio",
+      "destination": "/portfolio.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/projects.html"
+    },
+    {
+      "source": "/projects/vex",
+      "destination": "/projects/vex.html"
+    },
+    {
+      "source": "/projects/valk-to-go",
+      "destination": "/projects/valk-to-go.html"
+    },
+    {
+      "source": "/projects/hktd",
+      "destination": "/projects/hktd.html"
+    },
+    {
+      "source": "/projects/divergence",
+      "destination": "/projects/divergence.html"
+    },
+    {
+      "source": "/experience",
+      "destination": "/experience.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    }
   ]
 }

@@ -1,17 +1,16 @@
-import {
-  BrowserRouter,
-  Link,
-  Navigate,
-  NavLink,
-  Outlet,
-  Route,
-  Routes,
-  useLocation,
-} from 'react-router-dom'
+import { Link, Navigate, NavLink, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { ArrowRight, Mail } from 'lucide-react'
-import { lazy, Suspense, useEffect, useLayoutEffect, useRef } from 'react'
+import {
+  lazy,
+  startTransition,
+  Suspense,
+  type ComponentType,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from 'react'
 import { Button } from './components/ui/button'
-import { profile } from './data/portfolio'
+import { profile, type Project } from './data/portfolio'
 import { usePortfolio } from './hooks/usePortfolio'
 import { useTranslation } from 'react-i18next'
 import { PreferencesProvider } from './state/Preferences'
@@ -25,25 +24,45 @@ import { siteNavigation } from './data/navigation'
 import { MobileNavigation } from './components/MobileNavigation'
 import { whenRouteContentReady } from './lib/routeContent'
 import { pageMetadata, updateDocumentMetadata } from './lib/pageMetadata'
+import { publicPages } from './data/site'
+import { savedLanguage } from './i18n'
 
-const OverviewPage = lazy(() =>
-  import('./components/OverviewPage').then((module) => ({ default: module.OverviewPage })),
-)
-const ProjectPage = lazy(() =>
-  import('./components/ProjectPage').then((module) => ({ default: module.ProjectPage })),
-)
-const ProjectsPage = lazy(() =>
-  import('./components/ProjectsPage').then((module) => ({ default: module.ProjectsPage })),
-)
-const ExperiencePage = lazy(() =>
-  import('./components/ExperiencePage').then((module) => ({ default: module.ExperiencePage })),
-)
-const AboutPage = lazy(() =>
-  import('./components/AboutPage').then((module) => ({ default: module.AboutPage })),
-)
-const ContactPage = lazy(() =>
-  import('./components/ContactPage').then((module) => ({ default: module.ContactPage })),
-)
+type Pages = {
+  OverviewPage: ComponentType
+  ProjectPage: ComponentType<{ project: Project }>
+  ProjectsPage: ComponentType
+  ExperiencePage: ComponentType
+  AboutPage: ComponentType
+  ContactPage: ComponentType
+}
+const pageLoaders = {
+  OverviewPage: () =>
+    import('./components/OverviewPage').then((m) => ({ default: m.OverviewPage })),
+  ProjectPage: () => import('./components/ProjectPage').then((m) => ({ default: m.ProjectPage })),
+  ProjectsPage: () =>
+    import('./components/ProjectsPage').then((m) => ({ default: m.ProjectsPage })),
+  ExperiencePage: () =>
+    import('./components/ExperiencePage').then((m) => ({ default: m.ExperiencePage })),
+  AboutPage: () => import('./components/AboutPage').then((m) => ({ default: m.AboutPage })),
+  ContactPage: () => import('./components/ContactPage').then((m) => ({ default: m.ContactPage })),
+}
+const lazyPages: Pages = {
+  OverviewPage: lazy(pageLoaders.OverviewPage),
+  ProjectPage: lazy(pageLoaders.ProjectPage),
+  ProjectsPage: lazy(pageLoaders.ProjectsPage),
+  ExperiencePage: lazy(pageLoaders.ExperiencePage),
+  AboutPage: lazy(pageLoaders.AboutPage),
+  ContactPage: lazy(pageLoaders.ContactPage),
+}
+
+// Keep the static page visible while its code loads, then hydrate without a loading shell.
+export async function initialPages(pathname: string): Promise<Pages> {
+  const component = publicPages.find(
+    ({ path }) => path === pathname.replace(/\/+$/, '') || path === pathname,
+  )?.component
+  if (!component || component === 'LandingPage') return lazyPages
+  return { ...lazyPages, [component]: (await pageLoaders[component]()).default }
+}
 
 function Header() {
   const { t } = useTranslation()
@@ -78,6 +97,16 @@ function Header() {
   )
 }
 
+function LanguagePreference() {
+  const { i18n } = useTranslation()
+  useEffect(() => {
+    startTransition(() => {
+      void i18n.changeLanguage(savedLanguage())
+    })
+  }, [i18n])
+  return null
+}
+
 function PageEffects() {
   const { i18n } = useTranslation()
   const { pathname, hash } = useLocation()
@@ -91,7 +120,6 @@ function PageEffects() {
     const shouldFocus = Boolean(previousLocation.current && changedPage)
     previousLocation.current = { pathname, hash }
     return whenRouteContentReady((main) => {
-      main.setAttribute('tabindex', '-1')
       if (shouldFocus) main.focus({ preventScroll: true })
       if (hash) {
         document.getElementById(hash.slice(1))?.scrollIntoView({
@@ -148,7 +176,7 @@ function Footer() {
 function NotFound() {
   const { t } = useTranslation()
   return (
-    <main id="main" className="not-found">
+    <main id="main" tabIndex={-1} className="not-found">
       <span className="eyebrow">404</span>
       <h1>{t('notFound.title')}</h1>
       <p>{t('notFound.description')}</p>
@@ -165,10 +193,17 @@ function LandingGate() {
   const { hash } = useLocation()
   if (hash === '#work') return <Navigate replace to="/projects" />
   if (hash === '#about') return <Navigate replace to="/about" />
-  return hash === '#contact' ? <Navigate replace to="/contact" /> : <LandingPage />
+  return hash === '#contact' ? (
+    <Navigate replace to="/contact" />
+  ) : (
+    <>
+      <LandingPage />
+      <LanguagePreference />
+    </>
+  )
 }
 
-function PortfolioGate() {
+function PortfolioGate({ OverviewPage }: Pick<Pages, 'OverviewPage'>) {
   const { hash } = useLocation()
   if (hash === '#about') return <Navigate replace to="/about" />
   if (hash === '#contact') return <Navigate replace to="/contact" />
@@ -182,47 +217,53 @@ function SiteLayout() {
       <Header />
       <Suspense
         fallback={
-          <main id="main" className="route-loading" data-route-loading aria-busy="true">
+          <main
+            id="main"
+            tabIndex={-1}
+            className="route-loading"
+            data-route-loading
+            aria-busy="true"
+          >
             <p role="status">{t('navigation.loading')}</p>
           </main>
         }
       >
         <Outlet />
+        <LanguagePreference />
       </Suspense>
       <Footer />
     </div>
   )
 }
 
-function App() {
+export function App({ pages = lazyPages }: { pages?: Pages }) {
+  const { OverviewPage, ProjectPage, ProjectsPage, ExperiencePage, AboutPage, ContactPage } = pages
   const { t } = useTranslation()
   const { projects } = usePortfolio()
   return (
     <PreferencesProvider>
-      <BrowserRouter>
-        <PageEffects />
-        <a className="skip-link" href="#main">
-          {t('navigation.skip')}
-        </a>
-        <Routes>
-          <Route path="/" element={<LandingGate />} />
-          <Route element={<SiteLayout />}>
-            <Route path="/portfolio" element={<PortfolioGate />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/experience" element={<ExperiencePage />} />
-            {projects.map((project) => (
-              <Route
-                key={project.slug}
-                path={`/projects/${project.slug}`}
-                element={<ProjectPage project={project} />}
-              />
-            ))}
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <PageEffects />
+      <a className="skip-link" href="#main">
+        {t('navigation.skip')}
+      </a>
+      <Routes>
+        <Route path="/" element={<LandingGate />} />
+        <Route element={<SiteLayout />}>
+          <Route path="/portfolio" element={<PortfolioGate OverviewPage={OverviewPage} />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          {projects.map((project) => (
+            <Route
+              key={project.slug}
+              path={`/projects/${project.slug}`}
+              element={<ProjectPage project={project} />}
+            />
+          ))}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </PreferencesProvider>
   )
 }

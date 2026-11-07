@@ -16,6 +16,10 @@ npm run dev
 ```
 
 Run `npm run verify` for formatting, lint, tests, TypeScript and the production build.
+Public pages are prerendered to static HTML during the build, then hydrated by React.
+The initial content is English; saved or device language preferences apply in the browser.
+Vercel serves the generated pages directly, with a static 404 for unknown URLs.
+
 Use `npm run format` or `npm run lint:fix` to apply fixes.
 
 Regenerate the sharing image with `npm run social:image` after editing its generator in `scripts/`.

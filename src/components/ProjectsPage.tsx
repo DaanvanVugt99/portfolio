@@ -10,7 +10,7 @@ export function ProjectsPage() {
   const { t } = useTranslation()
   const { projects } = usePortfolio()
   return (
-    <main id="main" className="projects-page">
+    <main id="main" tabIndex={-1} className="projects-page">
       <header className="projects-heading">
         <h1>{t('work.title')}</h1>
         <Link to="/portfolio" className="back-link">

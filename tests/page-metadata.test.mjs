@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { test } from 'node:test'
 import { Window } from 'happy-dom'
 import { build } from 'vite'
-import { publicPaths, siteUrl } from '../src/data/site.ts'
+import { publicPages, publicPaths, siteUrl } from '../src/data/site.ts'
 import {
   pageMetadata,
   renderPageMetadata,
@@ -17,7 +17,7 @@ function parse(html) {
   return document
 }
 
-test('Every public URL builds with readable sharing metadata before JavaScript runs', async () => {
+test('Every public URL builds with readable content, route styles and sharing metadata before JavaScript runs', async () => {
   const config = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'))
   const result = await build({ write: false, logLevel: 'silent' })
   const output = (Array.isArray(result) ? result : [result]).flatMap((result) => result.output)
@@ -51,12 +51,49 @@ test('Every public URL builds with readable sharing metadata before JavaScript r
     assert.equal(document.querySelectorAll('meta[property="og:image"]').length, 1)
     assert.equal(document.querySelectorAll('title').length, 1)
     assert.ok(document.querySelector('script[type="module"][src^="/assets/"]'))
-    assert.equal(
-      document.querySelector('#root').children.length,
-      0,
-      'Content remains client-rendered',
+    assert.ok(document.querySelector('#root[data-prerendered]'))
+    assert.equal(document.querySelectorAll('main').length, 1)
+    assert.equal(document.querySelectorAll('h1').length, 1)
+    assert.ok(document.querySelector('h1').textContent.trim())
+    assert.ok(document.querySelector('main a[href]'), `No usable navigation on ${path}`)
+    assert.equal(document.querySelector('[data-route-loading]'), null)
+    assert.ok(!file.source.includes('<!--app-html-->'))
+    if (path === '/about') {
+      assert.match(document.querySelector('main').textContent, /Ableton Live/)
+      assert.ok(document.querySelector('main img[src$=".webp"]'))
+    }
+    if (path === '/projects/vex' || path === '/projects/divergence') {
+      assert.ok(document.querySelectorAll('.case-study-panel').length >= 3)
+      for (const panel of document.querySelectorAll('.case-study-panel')) {
+        assert.ok(panel.querySelector('h3')?.textContent)
+        assert.ok(panel.querySelector('p')?.textContent)
+      }
+    }
+    if (path === '/contact') {
+      assert.ok(document.querySelector('a[href^="mailto:"]'))
+      assert.ok(document.querySelector('button[type="submit"]').disabled)
+      assert.equal(document.querySelector('form').getAttribute('action'), null)
+    }
+    const pageName = publicPages.find((page) => page.path === path).component
+    const pageCss = output.find(
+      (asset) =>
+        asset.fileName.startsWith(`assets/${pageName}-`) && asset.fileName.endsWith('.css'),
+    )
+    if (pageCss)
+      assert.ok(document.querySelector(`link[rel="stylesheet"][href="/${pageCss.fileName}"]`))
+    assert.ok(
+      document.querySelectorAll('link[rel="stylesheet"]').length <
+        output.filter((asset) => asset.fileName.endsWith('.css')).length,
     )
   }
+  const notFound = parse(output.find(({ fileName }) => fileName === '404.html').source)
+  assert.equal(notFound.querySelector('meta[name="robots"]').content, 'noindex')
+  assert.equal(notFound.querySelector('link[rel="canonical"]'), null)
+  assert.equal(notFound.querySelectorAll('main h1').length, 1)
+  assert.ok(
+    !config.rewrites.some(({ source }) => source === '/(.*)'),
+    'Unknown URLs must reach Vercel�s static 404, not the landing page',
+  )
 })
 
 test('Navigation and language changes update all metadata without accumulating tags', () => {
