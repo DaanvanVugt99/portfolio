@@ -18,6 +18,8 @@ npm run dev
 Run `npm run verify` for formatting, lint, tests, TypeScript and the production build.
 Use `npm run format` or `npm run lint:fix` to apply fixes.
 
+Regenerate the sharing image with `npm run social:image` after editing its generator in `scripts/`.
+
 ## Releases
 
 `dev` and pull requests get Vercel previews. Merge `dev` into protected `main`

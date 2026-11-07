@@ -24,7 +24,7 @@ import { Github, Linkedin } from './components/SocialIcons'
 import { siteNavigation } from './data/navigation'
 import { MobileNavigation } from './components/MobileNavigation'
 import { whenRouteContentReady } from './lib/routeContent'
-import { canonicalUrl } from './data/site'
+import { pageMetadata, updateDocumentMetadata } from './lib/pageMetadata'
 
 const OverviewPage = lazy(() =>
   import('./components/OverviewPage').then((module) => ({ default: module.OverviewPage })),
@@ -79,62 +79,12 @@ function Header() {
 }
 
 function PageEffects() {
-  const { t } = useTranslation()
-  const { projects } = usePortfolio()
+  const { i18n } = useTranslation()
   const { pathname, hash } = useLocation()
   const previousLocation = useRef<{ pathname: string; hash: string } | null>(null)
   useEffect(() => {
-    const project = projects.find((p) => pathname === `/projects/${p.slug}`)
-    const canonical = canonicalUrl(pathname)
-    let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
-    let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
-    if (canonical) {
-      if (!link) {
-        link = document.createElement('link')
-        link.rel = 'canonical'
-        document.head.append(link)
-      }
-      link.href = canonical
-      robots?.remove()
-    } else {
-      link?.remove()
-      if (!robots) {
-        robots = document.createElement('meta')
-        robots.name = 'robots'
-        document.head.append(robots)
-      }
-      robots.content = 'noindex'
-    }
-    document.title = project
-      ? `${project.title} — Daan van Vugt`
-      : pathname === '/projects'
-        ? `${t('work.title')} — Daan van Vugt`
-        : pathname === '/about'
-          ? `${t('about.title')} — Daan van Vugt`
-          : pathname === '/contact'
-            ? `${t('navigation.contact')} — Daan van Vugt`
-            : pathname === '/portfolio'
-              ? `${t('overview.title')} — Daan van Vugt`
-              : pathname === '/experience'
-                ? `${t('experience.title')} — Daan van Vugt`
-                : t('meta.home')
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute(
-        'content',
-        project
-          ? `${project.title} — ${project.description} ${project.role}`
-          : pathname === '/projects'
-            ? t('work.metaDescription')
-            : pathname === '/about'
-              ? t('about.metaDescription')
-              : pathname === '/contact'
-                ? t('contact.metaDescription')
-                : pathname === '/experience'
-                  ? t('experience.metaDescription')
-                  : t('meta.description'),
-      )
-  }, [pathname, t, projects])
+    updateDocumentMetadata(document, pageMetadata(pathname, i18n.resolvedLanguage))
+  }, [pathname, i18n.resolvedLanguage])
 
   useLayoutEffect(() => {
     const changedPage = previousLocation.current?.pathname !== pathname
