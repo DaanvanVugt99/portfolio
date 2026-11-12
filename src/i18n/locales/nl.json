@@ -132,7 +132,8 @@
   "links": {
     "appStore": "App Store",
     "googlePlay": "Google Play",
-    "code": "Bekijk de code",
+    "code": "Bekijk de gamecode",
+    "launcherCode": "Bekijk de launchercode",
     "product": "Productwebsite"
   },
   "projects": {
@@ -158,7 +159,8 @@
       "contributions": [
         "Eigen game mechanics ontwerpen en implementeren in C, binnen de bestaande decompilation-codebase.",
         "Python tooling en build tools onderhouden naast de gamecode.",
-        "Wijzigingen debuggen in mGBA en gerichte regression checks toevoegen."
+        "Wijzigingen debuggen in mGBA en gerichte regression checks toevoegen.",
+        "Een desktoplauncher bouwen in TypeScript en Electron die een ROM controleert, de patch toepast, het resultaat verifieert en de game start in mGBA."
       ],
       "tooling": "Python tooling",
       "testing": "Regression testing",

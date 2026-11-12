@@ -43,7 +43,7 @@ type ProjectDefinition = Pick<
   | 'overviewTechnologies'
   | 'sourceVisibility'
 > & {
-  links: { label: 'appStore' | 'googlePlay' | 'code' | 'product'; href: string }[]
+  links: { label: 'appStore' | 'googlePlay' | 'code' | 'launcherCode' | 'product'; href: string }[]
 }
 
 export const projectDefinitions: ProjectDefinition[] = [
@@ -119,8 +119,11 @@ export const projectDefinitions: ProjectDefinition[] = [
       ],
       altKey: 'visuals.divergenceThumbnail',
     },
-    technologies: ['C', 'Python', 'mGBA'],
+    technologies: ['C', 'Python', 'mGBA', 'TypeScript', 'Electron'],
     overviewTechnologies: ['C', 'Python', 'mGBA'],
-    links: [{ label: 'code', href: 'https://github.com/DaanvanVugt99/pokeemerald-rogue' }],
+    links: [
+      { label: 'code', href: 'https://github.com/DaanvanVugt99/pokeemerald-rogue' },
+      { label: 'launcherCode', href: 'https://github.com/DaanvanVugt99/divergence-launcher' },
+    ],
   },
 ]

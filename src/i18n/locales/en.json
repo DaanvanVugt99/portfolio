@@ -132,7 +132,8 @@
   "links": {
     "appStore": "App Store",
     "googlePlay": "Google Play",
-    "code": "Explore the code",
+    "code": "Explore the game code",
+    "launcherCode": "Explore the launcher code",
     "product": "Product website"
   },
   "projects": {
@@ -158,7 +159,8 @@
       "contributions": [
         "Design and implement custom gameplay systems in C within the existing decompilation-based engine.",
         "Maintain Python development and build tools alongside the game code.",
-        "Debug changes in mGBA and add focused regression checks."
+        "Debug changes in mGBA and add focused regression checks.",
+        "Build a TypeScript and Electron desktop launcher that verifies a ROM, applies the patch, verifies the result, and starts the game in mGBA."
       ],
       "tooling": "Python tooling",
       "testing": "Regression testing",
